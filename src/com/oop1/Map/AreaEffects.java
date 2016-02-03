@@ -5,7 +5,7 @@
 public abstract class AreaEffects{
 
    //Tile[] affectedTiles;
-   int[] affectedTiles;
+   protected int[] affectedTiles;
 
    //public void affectEntity(Entity entity);
    public abstract void affectEntity();

@@ -1,10 +1,12 @@
+package com.oop1.entity;
+
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         Occupation o = new Sneak();
-        Stats s = new Stats (o);
+        Stats s = new Stats(o);
         s.printEverything();
 
         Scanner sc = new Scanner(System.in);

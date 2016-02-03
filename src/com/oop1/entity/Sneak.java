@@ -1,3 +1,5 @@
+package com.oop1.entity;
+
 public class Sneak extends Occupation {
 
     public Sneak() {

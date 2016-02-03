@@ -1,3 +1,5 @@
+package com.oop1.entity;
+
 public class Smasher extends Occupation {
 
     public Smasher() {

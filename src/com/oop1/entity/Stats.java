@@ -131,14 +131,14 @@ public class Stats {
     public void expendMana(int amount) {
         currentMana -= amount;
         if (currentMana < 0) {
-            currentLife = 0;
+            currentMana = 0;
         }
     }
 
     public void gainMana(int amount) {
         currentMana += amount;
-        if (currentMana > getMaxLife()) {
-            currentLife = getMaxLife();
+        if (currentMana > getMaxMana()) {
+            currentMana = getMaxMana();
         }
     }
 

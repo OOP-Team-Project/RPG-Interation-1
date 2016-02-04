@@ -10,9 +10,6 @@ SW   S   SE
 
 package com.oop1.entity;
 
-import com.oop1.entity.Inventory;
-import com.oop1.entity.Occupation;
-import com.oop1.entity.Stats;
 import com.oop1.items.Item;
 import com.oop1.map.Tile;
 
@@ -40,27 +37,13 @@ public class Entity {
     //Constructor for initial creation of entity
     public Entity(Occupation o, Tile loc) {
       occupation = o;
-      stats = new Stats(o);
+      stats = Stats.builder().occupation(o).build();
       inventory = new Inventory();
       orientation = 0;
       location = loc;
     }
 
-    public Entity() {}
-
-    public void move(int orientation) {
-      //still need a way to check if already moving
-      this.orientation = orientation;
-      checkMovement();
-    }
-
-    private void checkMovement() {
-      Tile nextTile = location.getTile(orientation);
-      if (nextTile.terrainType.canEntityPass()) {
-        location = nextTile;
-      }
-    }
-
+    public Entity() { }
 
     public void useItem(Item item) {
         // TODO: implement this

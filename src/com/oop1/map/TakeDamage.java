@@ -4,6 +4,10 @@
 
 package com.oop1.map;
 
+import com.oop1.entity.Entity;
+
+import java.util.Set;
+
 public class TakeDamage extends AreaEffect {
 
     private int damageTaken;
@@ -17,16 +21,13 @@ public class TakeDamage extends AreaEffect {
         this.damageTaken = 10;
     }
 
-    public TakeDamage(Tile[] tiles, int damageAmount){
+    public TakeDamage(Set<Tile> tiles, int damageAmount){
         this.affectedTiles = tiles;
         this.damageTaken = damageAmount;
     }
 
     public void affectEntity(Entity entity){
-      int currentHealth = entity.getCurrentLife();
-      entity.setCurrentHealth(currentHealth-damageTaken);
-
-      return;
+        entity.getBaseStats().takeDamage(damageTaken);
     }
 
     public String toString() {
@@ -38,4 +39,5 @@ public class TakeDamage extends AreaEffect {
 
         return str.toString();
     }
+
 }

@@ -4,6 +4,9 @@
 
 package com.oop1.map;
 
+import com.oop1.entity.Entity;
+
+import java.util.Set;
 
 public class HealDamage extends AreaEffect {
 
@@ -24,8 +27,8 @@ public class HealDamage extends AreaEffect {
     }
 
     public void affectEntity(Entity entity){
-      int currentHealth = entity.getCurrentLife();
-      entity.setCurrentHealth(currentHealth-damageHealed);
+      int currentHealth = entity.getBaseStats().getCurrentLife();
+      entity.getBaseStats().healDamage(damageHealed);
       return;
     }
 
@@ -38,4 +41,5 @@ public class HealDamage extends AreaEffect {
 
         return str.toString();
     }
+
 }

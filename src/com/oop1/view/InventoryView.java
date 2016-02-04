@@ -2,9 +2,9 @@ package com.oop1.view;
 
 import com.oop1.entity.Inventory;
 
-import java.awt.*;
+import javax.swing.*;
 
-public class InventoryView extends View {
+public class InventoryView extends JPanel {
 
     private Inventory inventory;
 
@@ -12,8 +12,4 @@ public class InventoryView extends View {
         this.inventory = inventory;
     }
 
-    @Override
-    public void draw(Graphics g) {
-        // TODO: implement
-    }
 }

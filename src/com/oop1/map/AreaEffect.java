@@ -3,7 +3,11 @@
  */
 
 package com.oop1.map;
-import java.util.*;
+
+import com.oop1.entity.Entity;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 

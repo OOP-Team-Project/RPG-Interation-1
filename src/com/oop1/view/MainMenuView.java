@@ -1,10 +1,6 @@
 package com.oop1.view;
 
-import java.awt.*;
+import javax.swing.*;
 
-public class MainMenuView extends View {
-    @Override
-    public void draw(Graphics g) {
-        // TODO: implement
-    }
+public class MainMenuView extends JPanel {
 }

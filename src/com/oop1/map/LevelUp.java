@@ -4,6 +4,10 @@
 
 package com.oop1.map;
 
+import com.oop1.entity.Entity;
+
+import java.util.Set;
+
 public class LevelUp extends AreaEffect {
 
     public LevelUp() {
@@ -14,10 +18,7 @@ public class LevelUp extends AreaEffect {
     }
 
     public void affectEntity(Entity entity){
-      int currLevel = entity.getLevel();
-      entity.setLevel(currLevel);
-      entity.setExperience(0);
-
+      entity.getBaseStats().immediatelyGainLevel();
       return;
     }
 

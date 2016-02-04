@@ -2,9 +2,9 @@ package com.oop1.view;
 
 import com.oop1.entity.Entity;
 
-import java.awt.*;
+import javax.swing.*;
 
-public class EntityView extends View {
+public class EntityView extends JPanel {
 
     private Entity entity;
 
@@ -12,8 +12,4 @@ public class EntityView extends View {
         this.entity = entity;
     }
 
-    @Override
-    public void draw(Graphics g) {
-        // TODO: implement this
-    }
 }

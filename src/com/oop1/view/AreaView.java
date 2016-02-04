@@ -1,11 +1,13 @@
+package com.oop1.view;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 
+/**
+ * Displays the subset of visible tiles to the player
+ */
+public class AreaView extends JPanel {
 
-public class AreaView extends JPanel{ //displays the subset of visible tiles to the player
-	//viewableTiles defined here
-	
-	
 	String[] areaEffect = {"grass", "water", "road"}; //using list of areaEffect for testing purposes
 	
 	

@@ -1,12 +1,6 @@
 package com.oop1.view;
 
-import java.awt.*;
+import javax.swing.*;
 
-public class StringStatusView extends View {
-
-    @Override
-    public void draw(Graphics g) {
-        // TODO: implement this
-    }
-
+public class StringStatusView extends JPanel {
 }

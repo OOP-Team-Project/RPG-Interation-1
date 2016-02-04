@@ -1,10 +1,6 @@
 package com.oop1.view;
 
-import java.awt.*;
+import javax.swing.*;
 
-public class CharacterCreationView extends View {
-    @Override
-    public void draw(Graphics g) {
-        // TODO: implement
-    }
+public class CharacterCreationView extends JPanel {
 }

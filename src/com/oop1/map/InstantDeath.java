@@ -4,6 +4,10 @@
 
 package com.oop1.map;
 
+import com.oop1.entity.Entity;
+
+import java.util.Set;
+
 public class InstantDeath extends AreaEffect {
 
     public InstantDeath() {
@@ -14,7 +18,7 @@ public class InstantDeath extends AreaEffect {
     }
 
     public void affectEntity(Entity entity){
-      entity.setCurrentLife(0);
+      entity.getBaseStats().takeDamage(entity.getBaseStats().getCurrentLife());
       return;
     }
 

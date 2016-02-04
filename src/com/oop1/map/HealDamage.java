@@ -13,47 +13,29 @@ public class HealDamage extends AreaEffect {
         this.damageHealed = 10;
     }
 
-    //public HealDamage(Tile[] tiles){
-    public HealDamage(int[] tiles) {
+    public HealDamage(Set<Tile> tiles){
         this.affectedTiles = tiles;
         this.damageHealed = 10;
     }
 
-    //public HealDamage(Tile[] tiles, int damageAmount){
-    public HealDamage(int[] tiles, int damageAmount) {
+    public HealDamage(Set<Tile> tiles, int damageAmount){
         this.affectedTiles = tiles;
         this.damageHealed = damageAmount;
     }
 
-    //public void affectEntity(Entity entity){
-    public void affectEntity() {
-      /*
+    public void affectEntity(Entity entity){
       int currentHealth = entity.getCurrentLife();
       entity.setCurrentHealth(currentHealth-damageHealed);
-      */
-
-        return;
+      return;
     }
 
     public String toString() {
-        String retString;
-        retString = "This HealDamage heals " + damageHealed + " damage and affects tiles: \n";
+        StringBuilder str = new StringBuilder();
+        str.append("This HealDamage heals ");
+        str.append(damageHealed);
+        str.append(" damage and affects tiles: ");
+        str.append(affectedTiles);
 
-        //for(Tile tile : affectedTiles){
-        for (int tile : affectedTiles) {
-            retString += tile + "\n";
-        }
-
-        return retString;
-    }
-
-
-    //Little bit of test code
-    public static void main(String args[]) {
-        AreaEffect x = new HealDamage();
-
-        int[] yTiles = new int[]{1, 2, 3};
-        AreaEffect y = new HealDamage(yTiles);
-        System.out.println(y);
+        return str.toString();
     }
 }

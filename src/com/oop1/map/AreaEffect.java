@@ -3,38 +3,28 @@
  */
 
 package com.oop1.map;
+import java.util.*;
+
+
 
 public abstract class AreaEffect {
 
-    //Tile[] affectedTiles;
-    protected int[] affectedTiles;
+    Set<Tile> affectedTiles = new HashSet<Tile>();
 
-    //public void affectEntity(Entity entity);
-    public abstract void affectEntity();
+    public abstract void affectEntity(Entity entity);
 
-    //public boolean canAffectEntity(Entity entity){
-    public boolean canAffectEntity(int location) {
-      /*
-      for(Tile tile : affectedTiles){
-         if(tile == entity.getLocation())
-            return true;
-      }
-      */
-        for (int tile : affectedTiles) {
-            if (tile == location)
-                return true;
-        }
-
-        return false;
+    public boolean canAffectEntity(Entity entity){
+      if(affectedTiles.contains(entity.getLocation()))
+         return true;
+      else
+         return false;
     }
 
-    //public Tile[] getAffectedTiles(){
-    public int[] getAffectedTiles() {
+    public Set<Tile> getAffectedTiles(){
         return affectedTiles;
     }
 
-    //public void setAffectedTiles(Tile[] newTiles){
-    public void setAffectedTiles(int[] newTiles) {
+    public void setAffectedTiles(Set<Tile> newTiles){
         affectedTiles = newTiles;
     }
 }

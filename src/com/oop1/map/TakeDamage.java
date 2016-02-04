@@ -12,47 +12,30 @@ public class TakeDamage extends AreaEffect {
         this.damageTaken = 10;
     }
 
-    //public TakeDamage(Tile[] tiles){
-    public TakeDamage(int[] tiles) {
+    public TakeDamage(Set<Tile> tiles){
         this.affectedTiles = tiles;
         this.damageTaken = 10;
     }
 
-    //public TakeDamage(Tile[] tiles, int damageAmount){
-    public TakeDamage(int[] tiles, int damageAmount) {
+    public TakeDamage(Tile[] tiles, int damageAmount){
         this.affectedTiles = tiles;
         this.damageTaken = damageAmount;
     }
 
-    //public void affectEntity(Entity entity){
-    public void affectEntity() {
-      /*
+    public void affectEntity(Entity entity){
       int currentHealth = entity.getCurrentLife();
       entity.setCurrentHealth(currentHealth-damageTaken);
-      */
 
-        return;
+      return;
     }
 
     public String toString() {
-        String retString;
-        retString = "This TakeDamage deals " + damageTaken + " damage and affects tiles: \n";
+        StringBuilder str = new StringBuilder();
+        str.append("This TakeDamage deals ");
+        str.append(damageTaken);
+        str.append(" damage and affects tiles: ");
+        str.append(affectedTiles);
 
-        //for(Tile tile : affectedTiles){
-        for (int tile : affectedTiles) {
-            retString += tile + "\n";
-        }
-
-        return retString;
-    }
-
-
-    //Little bit of test code
-    public static void main(String args[]) {
-        AreaEffect x = new TakeDamage();
-
-        int[] yTiles = new int[]{1, 2, 3};
-        AreaEffect y = new TakeDamage(yTiles);
-        System.out.println(y);
+        return str.toString();
     }
 }

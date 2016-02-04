@@ -4,7 +4,11 @@
 
 public class NumericStatusView{
 
+	private Stats stats;
+
 	public void drawNumericStats(){
-		
+
 	}
+
+
 }

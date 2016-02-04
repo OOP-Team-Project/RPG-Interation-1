@@ -2,9 +2,17 @@
 
 // Created on 2/3/2016 by Nicole Kulakowski
 
-public class StringStatusView{
+package com.oop1.View;
+import java.awt.*;
 
-	public void drawStringStats(){
-		
+public class StringStatusView extends View{
+
+	private Stats stats;
+
+	@override
+	public void draw( Graphics g ){
+		//TODO
 	}
+
+
 }

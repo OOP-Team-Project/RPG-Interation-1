@@ -26,6 +26,6 @@ public class LevelUp extends AreaEffect {
         str.append("This LevelUp affects tiles: ");
         str.append(affectedTiles);
 
-        return str;
+        return str.toString();
     }
 }

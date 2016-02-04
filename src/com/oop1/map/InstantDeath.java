@@ -23,6 +23,6 @@ public class InstantDeath extends AreaEffect {
         str.append("This InstantDeath affects tiles: ");
         str.append(affectedTiles);
 
-        return str;
+        return str.toString();
     }
 }

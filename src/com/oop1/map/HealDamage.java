@@ -36,6 +36,6 @@ public class HealDamage extends AreaEffect {
         str.append(" damage and affects tiles: ");
         str.append(affectedTiles);
 
-        return str;
+        return str.toString();
     }
 }

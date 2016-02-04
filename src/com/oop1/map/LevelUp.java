@@ -9,41 +9,26 @@ public class LevelUp extends AreaEffect {
     public LevelUp() {
     }
 
-    //public LevelUp(Tile[] tiles){
-    public LevelUp(int[] tiles) {
+    public LevelUp(Set<Tile> tiles){
         this.affectedTiles = tiles;
     }
 
-    //public void affectEntity(Entity entity){
-    public void affectEntity() {
-      /*
+    public void affectEntity(Entity entity){
       int currLevel = entity.getLevel();
       entity.setLevel(currLevel);
       entity.setExperience(0);
-      */
 
-        return;
+      return;
     }
 
     public String toString() {
         String retString;
         retString = "This Level Up affects tiles: \n";
 
-        //for(Tile tile : affectedTiles){
-        for (int tile : affectedTiles) {
+        for(Tile tile : affectedTiles){
             retString += tile + "\n";
         }
 
         return retString;
-    }
-
-
-    //Little bit of test code
-    public static void main(String args[]) {
-        AreaEffect x = new LevelUp();
-
-        int[] yTiles = new int[]{1, 2, 3};
-        AreaEffect y = new LevelUp(yTiles);
-        System.out.println(y);
     }
 }

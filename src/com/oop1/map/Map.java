@@ -11,12 +11,12 @@ public class Map {
         return new Map();
     }
 
-    public Tile getTileAtCoordinates(int x, int y) {
-        try{
-            return tiles[x][y];
-        }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("No tile exists at (" + x + ", " + y + "). Returning (0, 0)");
-            throw e;
+    public Tile getTileAtCoordinates(int x, int y){
+
+        if (x >= 0 && x < tiles.length) {
+            if (y >= 0 && y < tiles[x].length)
+                return tiles[x][y];
         }
+        return null;
     }
 }

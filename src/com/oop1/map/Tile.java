@@ -12,20 +12,12 @@ public class Tile {
         this.terrainType = t;
     }
 
-    public Tile(TerrainType t, Decal d){
-        this.terrainType = t;
-        this.decal = d;
+    public void setItem(Item newItem){
+        item = newItem;
     }
 
-    public Tile(TerrainType t, Item i){
-        this.terrainType = t;
-        this.item = i;
-    }
-
-    public Tile(TerrainType t, Item i, Decal d){
-        this.terrainType = t;
-        this.item = i;
-        this.decal = d;
+    public void setDecal(Decal newDecal){
+        decal = newDecal;
     }
 
     public boolean hasItem(){

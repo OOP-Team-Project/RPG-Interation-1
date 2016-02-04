@@ -30,13 +30,12 @@ public class TakeDamage extends AreaEffect {
     }
 
     public String toString() {
-        String retString;
-        retString = "This TakeDamage deals " + damageTaken + " damage and affects tiles: \n";
+        StringBuilder str = new StringBuilder();
+        str.append("This TakeDamage deals ");
+        str.append(damageTaken);
+        str.append(" damage and affects tiles: ");
+        str.append(affectedTiles);
 
-        for(Tile tile : affectedTiles){
-            retString += tile + "\n";
-        }
-
-        return retString;
+        return str;
     }
 }

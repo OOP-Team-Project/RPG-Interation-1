@@ -30,13 +30,12 @@ public class HealDamage extends AreaEffect {
     }
 
     public String toString() {
-        String retString;
-        retString = "This HealDamage heals " + damageHealed + " damage and affects tiles: \n";
+        StringBuilder str = new StringBuilder();
+        str.append("This HealDamage heals ");
+        str.append(damageHealed);
+        str.append(" damage and affects tiles: ");
+        str.append(affectedTiles);
 
-        for(Tile tile : affectedTiles){
-            retString += tile + "\n";
-        }
-
-        return retString;
+        return str;
     }
 }

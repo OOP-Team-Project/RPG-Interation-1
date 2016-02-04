@@ -22,13 +22,10 @@ public class LevelUp extends AreaEffect {
     }
 
     public String toString() {
-        String retString;
-        retString = "This Level Up affects tiles: \n";
+        StringBuilder str = new StringBuilder();
+        str.append("This LevelUp affects tiles: ");
+        str.append(affectedTiles);
 
-        for(Tile tile : affectedTiles){
-            retString += tile + "\n";
-        }
-
-        return retString;
+        return str;
     }
 }

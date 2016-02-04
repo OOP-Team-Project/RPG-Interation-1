@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TakeableItem extends Item {
 
-    private List<StatModifiers> statModifiers;
+    private List<StatModifier> statModifiers;
 
     @Override
     public void interact(Entity entity) {

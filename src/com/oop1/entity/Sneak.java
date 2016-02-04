@@ -12,7 +12,12 @@ public class Sneak extends Occupation {
         movementSpeed = 3;
     }
 
-    public void PerformAbility() {
+    public void performAbility() {
         System.out.println("Hi I'm Sneak");
+    }
+
+    @Override
+    public int getBaseHardiness() {
+        return 15;
     }
 }

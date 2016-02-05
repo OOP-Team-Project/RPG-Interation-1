@@ -1,3 +1,5 @@
+package com.oop1.view;
+
 import javax.swing.JPanel;
 import java.awt.Graphics;
 

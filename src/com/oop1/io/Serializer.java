@@ -64,7 +64,7 @@ public class Serializer {
             int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
             int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
             if(itemType == "oneShot")
-                item = new OneShotItem();
+                item = new OneShotItem(map.getTileAtCoordinates(x, y));
             else if(itemType == "takeable")
                 item = new TakeableItem();
             else

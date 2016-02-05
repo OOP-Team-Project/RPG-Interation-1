@@ -6,14 +6,19 @@ import java.util.Scanner;
 
 public class RunGame {
 
-      //private AreaView displayArea = new AreaView();
-
-      public static void main(String[] args) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    AreaView displayArea = new AreaView();
-                    (displayArea.gameFrame).setVisible(true);
-                }
-            });
+    public static void main(String[] args) {
+        JFrame gameFrame = new JFrame();
+        gameFrame.setSize(1200, 600);
+        gameFrame.setTitle("Game");
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                AreaView displayArea = new AreaView();
+                gameFrame.add(displayArea);
+                gameFrame.setVisible(true);
+            }
+        });
     }
+
+
 }

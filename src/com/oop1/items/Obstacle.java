@@ -6,5 +6,6 @@ public class Obstacle extends Item {
     @Override
     public void interact(Entity entity) {
         // TODO: make this do something
+
     }
 }

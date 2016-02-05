@@ -1,11 +1,12 @@
 package com.oop1.map;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
 
     private Tile[][] tiles;
-    private List<AreaEffect> areaEffects;
+    private List<AreaEffect> areaEffects = new ArrayList<AreaEffect>();
 
     public void setTiles(Tile[][] newTiles){
         tiles = newTiles;
@@ -22,6 +23,10 @@ public class Map {
                 return tiles[x][y];
         }
         return null;
+    }
+
+    public void addAreaEffect(AreaEffect effect){
+        areaEffects.add(effect);
     }
 
     public String toString(){

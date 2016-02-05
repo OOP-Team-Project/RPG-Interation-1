@@ -38,8 +38,10 @@ public class Inventory {
 
     public void equipItem(TakeableItem item) {
         if (items.contains(item)) {
-            items.remove(item);
-            equipment.add(item);
+            if (item.isEquippable()) {
+                items.remove(item);
+                equipment.add(item);
+            }
         }
     }
 

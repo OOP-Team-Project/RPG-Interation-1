@@ -18,13 +18,13 @@ import java.util.Scanner;
  */
 public class SaveManager {
 
-    public static SaveManager instance;
+    private static SaveManager instance;
 
     static {
         instance = new SaveManager();
     }
 
-    public SaveManager() {
+    private SaveManager() {
     }
 
     public static SaveManager getInstance() {

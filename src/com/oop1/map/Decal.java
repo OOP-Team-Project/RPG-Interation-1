@@ -1,5 +1,5 @@
 package com.oop1.map;
 
 public enum Decal {
-    // TODO: enumerate instances
+    RED_CROSS, SKULL_AND_CROSSBONES, GOLD_STAR
 }

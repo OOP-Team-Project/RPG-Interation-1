@@ -35,11 +35,12 @@ public class AreaView extends JPanel {
 				//Check the player position??
 				//Calculate which coordinates we need to display.
 
-				int xIndex = playerTile.getXLocation();
-				int yIndex = playerTile.getYLocation();
+				//TODO these next few lines were causing errors so i commented them out
+				//int xIndex = playerTile.getXLocation();
+				//int yIndex = playerTile.getYLocation();
 
-				if(xIndex > 0 && xIndex < map)
-				add(new TileView(map.getTileAtCoordinates(, 1)));//tiles[i] = new TileView();
+				//if(xIndex > 0 && xIndex < map)
+				//add(new TileView(map.getTileAtCoordinates(, 1)));//tiles[i] = new TileView();
 			}
 		}
 		isInitialized = true;

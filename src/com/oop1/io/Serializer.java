@@ -1,6 +1,7 @@
 package com.oop1.io;
 
 import com.oop1.engine.GameState;
+import com.oop1.map.Decal;
 import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
@@ -34,6 +35,24 @@ public class Serializer {
         return mapReturn;
     }
 
+    private static void deserializeDecals(String decalData, Map map){
+        String[] decals = decalData.split("%");
+        for(String str : decals){
+            Decal decal;
+            String decalType = str.substring(0, str.indexOf(';'));
+            int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
+            int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
+            System.out.println(decalType + "  " + x + ", " + y);
+            if(decalType == "RED_CROSS")
+                decal = Decal.RED_CROSS;
+            else if(decalType == "GOLD_STAR")
+                decal = Decal.GOLD_STAR;
+            else
+                decal = Decal.SKULL_AND_CROSSBONES;
+            map.getTileAtCoordinates(x, y).setDecal(decal);
+        }
+    }
+
     public String serialize(GameState state) {
         // TODO: implement this
         return "";
@@ -49,6 +68,9 @@ public class Serializer {
 
         // Deal with the map data
         loadedMap = deserializeMap(data[1]);
+        deserializeDecals(data[2], loadedMap);
+
+
 
 
 

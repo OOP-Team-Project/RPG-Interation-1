@@ -28,7 +28,7 @@ public class Entity {
     /**
      * this character's base stats, i.e. stats before item modifiers
      */
-    private Stats stats;
+    private Stats baseStats;
 
     private Inventory inventory;
 
@@ -37,7 +37,7 @@ public class Entity {
     //Constructor for initial creation of entity
     public Entity(Occupation o, Tile loc) {
       occupation = o;
-      stats = Stats.builder().occupation(o).build();
+      baseStats = Stats.builder().occupation(o).build();
       inventory = new Inventory();
       orientation = 0;
       location = loc;
@@ -45,16 +45,12 @@ public class Entity {
 
     public Entity() { }
 
-    public void useItem(Item item) {
-        // TODO: implement this
-    }
-
     /**
      * @return this entity's actual current stats, including modifications from equipped items
      */
     public Stats getModifiedStats() {
         // TODO: implement this
-        return stats;
+        return baseStats;
     }
 
     public int getOrientation() {
@@ -74,11 +70,11 @@ public class Entity {
     }
 
     public Stats getBaseStats() {
-        return stats;
+        return baseStats;
     }
 
     public void setBaseStats(Stats baseStats) {
-        this.stats = baseStats;
+        this.baseStats = baseStats;
     }
 
     public Inventory getInventory() {

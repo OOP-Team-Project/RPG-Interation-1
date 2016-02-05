@@ -17,6 +17,7 @@ import com.oop1.engine.Rules;
  * To create the base stats for a new character, all one needs to supply is
  * the occupation: <pre>Stats.builder().occupation(foo).build()</pre>
  */
+
 public class Stats {
 
     static final int LIFE_PER_STRENGTH = 25;

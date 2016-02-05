@@ -10,8 +10,9 @@ SW   S   SE
 
 package com.oop1.entity;
 
-import com.oop1.items.Item;
+import com.oop1.items.TakeableItem;
 import com.oop1.map.Tile;
+
 
 public class Entity {
 
@@ -53,6 +54,10 @@ public class Entity {
         return baseStats;
     }
 
+    public void addToInventory(TakeableItem item) {
+        inventory.addItem(item);
+    }
+
     public int getOrientation() {
         return orientation;
     }
@@ -92,4 +97,7 @@ public class Entity {
     public void setOccupation(Occupation occupation) {
         this.occupation = occupation;
     }
+
+
 }
+

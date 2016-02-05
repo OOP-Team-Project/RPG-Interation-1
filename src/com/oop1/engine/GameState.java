@@ -7,15 +7,24 @@ import java.util.List;
 
 public class GameState {
 
-    private List<Map> map;
+    private List<Map> maps;
     private List<Entity> entities;
 
-    public List<Map> getMap() {
-        return map;
+    public GameState(){
+        //does nothing
     }
 
-    public void setMap(List<Map> map) {
-        this.map = map;
+    public GameState(List<Map> newMaps, List<Entity> newEntities){
+            maps = newMaps;
+            entities = newEntities;
+    }
+
+    public List<Map> getMaps() {
+        return maps;
+    }
+
+    public void setMaps(List<Map> maps) {
+        this.maps = maps;
     }
 
     public List<Entity> getEntities() {

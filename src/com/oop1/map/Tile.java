@@ -8,6 +8,7 @@ public class Tile {
     private Item item;
     private TerrainType terrainType;
 
+
     public Tile(TerrainType t){
         this.terrainType = t;
     }
@@ -31,6 +32,17 @@ public class Tile {
             return true;
     }
 
+    public Decal getDecal(){
+        return decal;
+    }
+
+    public boolean hasDecal(){
+        if(decal != null)
+            return true;
+        else
+            return false;
+    }
+
     public void removeItem(){
         item = null;
     }
@@ -47,4 +59,9 @@ public class Tile {
         else
             return "W";
     }
+
+    public Item getItem(){
+        return item;
+    }
+
 }

@@ -171,7 +171,7 @@ public class Serializer {
         Inventory newInventory = new Inventory();
         int i = 0;
         for(String str : items){
-            Item item = new TakeableItem();
+            TakeableItem item = new TakeableItem();
             String[] itemStats = str.split(";");
             String itemName = itemStats[0];
             int strength = Integer.parseInt(itemStats[1]);
@@ -192,7 +192,7 @@ public class Serializer {
         String[] items = inventory.split("%");
         int i = 0;
         for(String str : items){
-            Item item = new TakeableItem();
+            TakeableItem item = new TakeableItem();
             String[] itemStats = str.split(";");
             String itemName = itemStats[0];
             int strength = Integer.parseInt(itemStats[1]);

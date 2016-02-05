@@ -6,6 +6,7 @@ import java.awt.Graphics;
 public class TileView extends JPanel {
 	
 	//method to draw a tile called by drawAreaView in AreaView class
+
 	public void drawTile() { //pass Tile tile to this method
 		
 		

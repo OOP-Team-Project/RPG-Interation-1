@@ -1,5 +1,7 @@
 package com.oop1.view;
 
+import com.oop1.engine.Engine;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +12,12 @@ public class MainMenuView extends JPanel {
     private JLabel headerLabel;
     private JLabel statusLabel;
 
+    private JButton okButton;
+    private JButton submitButton;
+    private JButton cancelButton;
+
     private boolean testVariable = false;
+    private boolean shouldHide = false;
 
     private void MainMenuView(){
 
@@ -32,17 +39,17 @@ public class MainMenuView extends JPanel {
 
             statusLabel.setSize(350,100);
 
-            headerLabel.setText("Control in action: Button");
+            //headerLabel.setText("Control in action: Button");
 
             this.setLayout(new FlowLayout());
 
-            JButton okButton = new JButton("OK");
-            JButton submitButton = new JButton("Submit");
-            JButton cancelButton = new JButton("Cancel");
+            okButton = new JButton("New Game");
+            submitButton = new JButton("Load Game");
+            cancelButton = new JButton("Quit");
 
-            okButton.setActionCommand("OK");
-            submitButton.setActionCommand("Submit");
-            cancelButton.setActionCommand("Cancel");
+            okButton.setActionCommand("New Game");
+            submitButton.setActionCommand("Load Game");
+            cancelButton.setActionCommand("Quit");
 
             okButton.addActionListener(new ButtonClickListener());
             submitButton.addActionListener(new ButtonClickListener());
@@ -67,39 +74,28 @@ public class MainMenuView extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        showEventDemo();
-
-        //if dead, this will give you three seconds to get ready for your next life
-        // paint ball, paddle, and brick configuration
-        /*ball.paint(g2);
-        paddle.paint(g2);
-        bconfig.paint(g2);
-        gameMenu.paint(g2);
-        won.paint(g2);
-        //if dead, paints version two of stats.
-        if (dead == true && stats.checkIfGameOver() == true) {
-            stats.paintV3(g2);
-
+        if(shouldHide == true){
+            this.remove(headerLabel);
+            this.remove(okButton);
+            this.remove(submitButton);
+            this.remove(cancelButton);
+            this.remove(statusLabel);
+        } else{
+            showEventDemo();
         }
-        else if (dead) {
-            stats.paintV2(g2);
-
-        }
-        else {
-            stats.paint(g2);
-        }
-        */
 
     }
 
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
-            if( command.equals( "OK" ))  {
-                statusLabel.setText("Ok Button clicked.");
+            if( command.equals( "New Game" ))  {
+                //statusLabel.setText("New Game Button clicked.");
+                Engine.addView(new CharacterCreationView());
+                shouldHide = true;
             }
-            else if( command.equals( "Submit" ) )  {
-                statusLabel.setText("Submit Button clicked.");
+            else if( command.equals( "Load Game" ) )  {
+                statusLabel.setText("Load Game Button clicked.");
             }
             else  {
                 statusLabel.setText("Cancel Button clicked.");

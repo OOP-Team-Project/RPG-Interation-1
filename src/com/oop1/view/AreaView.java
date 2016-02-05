@@ -12,7 +12,9 @@ public class AreaView extends JPanel {
 	
 	
 	public AreaView() {
+
 		setLayout(new GridLayout(0, 10)); //lays the tiles from left to right
+
 	}
 	
 	public void drawAreaView() {

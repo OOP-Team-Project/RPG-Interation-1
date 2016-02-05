@@ -12,79 +12,18 @@ import com.oop1.view.*;
 
 public class RunGame implements Runnable {
 
-    //static Thread runner;
-    static Engine engine;
+    static Engine engine;   //The game engine that is running the program.
 
-    private JFrame mainFrame;
+    private JFrame mainFrame;   //This is the main Java Swing frame. It holds a whooole bunch of JPanels that comprise
+                                // of the multitude of views.
 
     public RunGame(){   //Constructor for this class.
-        //prepareGUI();
+
     }
 
-    private void prepareGUI(){
-        //mainFrame = new JFrame("Team TigerTiger Cat's Awesome RPG Game!");
-        //mainFrame.setSize(windowSizeX,windowSizeY);
 
-        /*
-        headerLabel = new JLabel("",JLabel.CENTER );
-        statusLabel = new JLabel("",JLabel.CENTER);
+    public static void main(String[] args) {    //This is the main function. It all starts here, folks!
 
-        statusLabel.setSize(350,100);
-        mainFrame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent){
-                System.exit(0);
-            }
-        });
-        controlPanel = new JPanel();
-        controlPanel.setLayout(new FlowLayout());
-
-        mainFrame.add(headerLabel);
-        mainFrame.add(controlPanel);
-        mainFrame.add(statusLabel);
-        */
-
-        mainFrame.setVisible(true);
-    }
-    /*
-    private void showEventDemo(){
-        headerLabel.setText("Control in action: Button");
-
-        JButton okButton = new JButton("OK");
-        JButton submitButton = new JButton("Submit");
-        JButton cancelButton = new JButton("Cancel");
-
-        okButton.setActionCommand("OK");
-        submitButton.setActionCommand("Submit");
-        cancelButton.setActionCommand("Cancel");
-
-        okButton.addActionListener(new ButtonClickListener());
-        submitButton.addActionListener(new ButtonClickListener());
-        cancelButton.addActionListener(new ButtonClickListener());
-
-        controlPanel.add(okButton);
-        controlPanel.add(submitButton);
-        controlPanel.add(cancelButton);
-
-        mainFrame.setVisible(true);
-    }
-
-    private class ButtonClickListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            String command = e.getActionCommand();
-            if( command.equals( "OK" ))  {
-                statusLabel.setText("Ok Button clicked.");
-            }
-            else if( command.equals( "Submit" ) )  {
-                statusLabel.setText("Submit Button clicked.");
-            }
-            else  {
-                statusLabel.setText("Cancel Button clicked.");
-            }
-        }
-    }
-    */
-
-    public static void main(String[] args) {
         //Initially, we have a blank gameState (one that will likely be overridden by a load or new game operation.
         GameState initialGameState = new GameState();
 
@@ -96,12 +35,12 @@ public class RunGame implements Runnable {
 
         engine = new Engine(initialGameState, initialList);   //Assign gameState and views to this engine.
 
-        Thread runner = new Thread(new RunGame(), "Main Thread");
+        Thread runner = new Thread(new RunGame(), "Main Thread");   //We then spin a thread that updates the game every so often.
 
-        runner.start();
+        runner.start(); //And we start it!
 
         try{
-            runner.join();
+            runner.join();  //We keep the main() function running until this thread is finished.
         } catch(Exception e){
 
         }
@@ -112,11 +51,12 @@ public class RunGame implements Runnable {
         //Display info about this particular thread
         while(true) {
             try {
-                Thread.sleep(15);   //We draw at run at approximately 66 Frames Per Second
+                Thread.sleep(15);   //We update at approximately 66 Frames Per Second
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-            engine.update();    //We let the engine do its thing.
+
+            engine.update();    //We let the engine do its thing, whatever that may be.
         }
     }
 }

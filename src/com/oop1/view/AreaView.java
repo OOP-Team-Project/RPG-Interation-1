@@ -32,6 +32,7 @@ public class AreaView extends JPanel {
 	}
 
 
+
 	public AreaView() {
 		setTestArea();
 		setLayout(new GridLayout(0, 20)); //lays the tiles from left to right
@@ -39,7 +40,6 @@ public class AreaView extends JPanel {
 			add(new TileView(testAreaView[i]));
 		}
 	}
-
 
 
     

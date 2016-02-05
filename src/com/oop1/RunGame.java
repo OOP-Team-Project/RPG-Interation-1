@@ -1,10 +1,12 @@
 package com.oop1;
 import com.oop1.view.AreaView;
-
+import com.oop1.view.DecalView;
 import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 public class RunGame {
+
 
     public static void main(String[] args) {
         JFrame gameFrame = new JFrame();
@@ -18,6 +20,8 @@ public class RunGame {
                 gameFrame.setVisible(true);
             }
         });
+
+
     }
 
 

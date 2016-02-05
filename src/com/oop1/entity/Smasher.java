@@ -1,3 +1,5 @@
+package com.oop1.entity;
+
 public class Smasher extends Occupation {
 
     public Smasher() {
@@ -10,7 +12,12 @@ public class Smasher extends Occupation {
         movementSpeed = 2.5;
     }
 
-    public void PerformAbility() {
+    public void performAbility() {
         System.out.println("Hi I'm Smasher");
+    }
+
+    @Override
+    public int getBaseHardiness() {
+        return 30;
     }
 }

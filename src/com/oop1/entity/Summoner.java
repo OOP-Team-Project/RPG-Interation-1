@@ -1,3 +1,5 @@
+package com.oop1.entity;
+
 public class Summoner extends Occupation {
 
     public Summoner() {
@@ -10,7 +12,12 @@ public class Summoner extends Occupation {
         movementSpeed = 2;
     }
 
-    public void PerformAbility() {
+    public void performAbility() {
         System.out.println("Hi I'm Summoner");
+    }
+
+    @Override
+    public int getBaseHardiness() {
+        return 10;
     }
 }

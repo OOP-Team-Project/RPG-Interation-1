@@ -20,6 +20,10 @@ public class Tile {
         decal = newDecal;
     }
 
+    public TerrainType getTerrainType(){
+        return terrainType;
+    }
+
     public boolean hasItem(){
         if(item == null)
             return false;
@@ -33,5 +37,14 @@ public class Tile {
 
     public void addItem(Item newItem){
         item = newItem;
+    }
+
+    public String toString(){
+        if(terrainType == TerrainType.MOUNTAIN)
+            return "M";
+        else if(terrainType == TerrainType.GRASS)
+            return "G";
+        else
+            return "W";
     }
 }

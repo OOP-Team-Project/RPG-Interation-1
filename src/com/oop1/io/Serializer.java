@@ -156,7 +156,7 @@ public class Serializer {
             sb.movementSpeed(Double.parseDouble(stats[7]));
             sb.currentMana(Integer.parseInt(stats[8]));
             sb.currentLife(Integer.parseInt(stats[9]));
-            //sb.livesLeft(Integer.parseInt(stats[10]));
+            sb.livesLeft(Integer.parseInt(stats[10]));
             sb.experience(Integer.parseInt(stats[11]));
             entity.setBaseStats(sb.build());
 
@@ -235,8 +235,6 @@ public class Serializer {
         entityList = deserializeEntity(data[6], loadedMap);
         deserializeInventory(data[7], entityList);
         deserializeEquipment(data[8], entityList);
-
-
 
         GameState gs = new GameState();
         gs.setMap(mapList);

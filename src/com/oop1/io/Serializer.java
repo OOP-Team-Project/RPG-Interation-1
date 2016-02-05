@@ -63,14 +63,32 @@ public class Serializer {
             String itemType = str.substring(0, str.indexOf(';'));
             int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
             int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
-            if(itemType == "interactive")
-                item = new InteractiveItem();
-            else if(itemType == "oneShot")
+            if(itemType == "oneShot")
                 item = new OneShotItem();
             else if(itemType == "takeable")
                 item = new TakeableItem();
             else
                 item = new Obstacle();
+            map.getTileAtCoordinates(x, y).setItem(item);
+        }
+    }
+
+    private static void deserializeTakeableItems(String itemData, Map map){
+        String[] items = itemData.split("%");
+        for(String str : items){
+            Item item = new TakeableItem();
+            String[] itemStats = str.split(";");
+            int x = Integer.parseInt(itemStats[0].substring(0, str.indexOf(',')));
+            int y = Integer.parseInt(itemStats[0].substring(str.indexOf(',')+1));
+            String itemName = itemStats[1];
+            int strength = Integer.parseInt(itemStats[2]);
+            int agility = Integer.parseInt(itemStats[3]);
+            int intellect = Integer.parseInt(itemStats[4]);
+            int hardiness = Integer.parseInt(itemStats[5]);
+            int movementSpeed = Integer.parseInt(itemStats[6]);
+            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
+
+            //item.addSetModifier(statMod);
             map.getTileAtCoordinates(x, y).setItem(item);
         }
     }
@@ -131,7 +149,6 @@ public class Serializer {
             else
                 sb.occupation(new Sneak());
 
-            // Fill in the stats somehow
             sb.strength(Integer.parseInt(stats[3]));
             sb.agility(Integer.parseInt(stats[4]));
             sb.intellect(Integer.parseInt(stats[5]));
@@ -147,6 +164,48 @@ public class Serializer {
         }
 
         return entityList;
+    }
+
+    private static void deserializeInventory(String inventory, List<Entity> entityList){
+        String[] items = inventory.split("%");
+        Inventory newInventory = new Inventory();
+        int i = 0;
+        for(String str : items){
+            Item item = new TakeableItem();
+            String[] itemStats = str.split(";");
+            String itemName = itemStats[0];
+            int strength = Integer.parseInt(itemStats[1]);
+            int agility = Integer.parseInt(itemStats[2]);
+            int intellect = Integer.parseInt(itemStats[3]);
+            int hardiness = Integer.parseInt(itemStats[4]);
+            int movementSpeed = Integer.parseInt(itemStats[5]);
+            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
+
+            // Needs this method
+            //item.addStatModifier(statMod);
+            newInventory.addItem(item);
+        }
+        entityList.get(0).setInventory(newInventory);
+    }
+
+    private static void deserializeEquipment(String inventory, List<Entity> entityList){
+        String[] items = inventory.split("%");
+        int i = 0;
+        for(String str : items){
+            Item item = new TakeableItem();
+            String[] itemStats = str.split(";");
+            String itemName = itemStats[0];
+            int strength = Integer.parseInt(itemStats[1]);
+            int agility = Integer.parseInt(itemStats[2]);
+            int intellect = Integer.parseInt(itemStats[3]);
+            int hardiness = Integer.parseInt(itemStats[4]);
+            int movementSpeed = Integer.parseInt(itemStats[5]);
+            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
+
+            // Needs this method
+            //item.addStatModifier(statMod);
+            entityList.get(0).getInventory().equipItem(item);
+        }
     }
 
     public String serialize(GameState state) {
@@ -167,10 +226,13 @@ public class Serializer {
         loadedMap = deserializeMap(data[1]);
         deserializeDecals(data[2], loadedMap);
         deserializeItems(data[3], loadedMap);
-        deserializeAreaEffects(data[4], loadedMap);
+        deserializeTakeableItems(data[4], loadedMap);
+        deserializeAreaEffects(data[5], loadedMap);
 
         // Deal with entity data
-        entityList = deserializeEntity(data[5], loadedMap);
+        entityList = deserializeEntity(data[6], loadedMap);
+        deserializeInventory(data[7], entityList);
+        deserializeEquipment(data[8], entityList);
 
 
 

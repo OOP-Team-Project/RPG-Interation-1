@@ -1,10 +1,13 @@
 package com.oop1.io;
 
 import com.oop1.engine.GameState;
+import com.oop1.entity.*;
 import com.oop1.items.*;
 import com.oop1.map.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Serializer {
@@ -107,6 +110,45 @@ public class Serializer {
         }
     }
 
+    private static List<Entity> deserializeEntity(String entityData, Map map){
+        List<Entity> entityList = new ArrayList<Entity>();
+        String[] entities = entityData.split("%");
+        for(String str : entities){
+            Entity entity = new Entity();
+            String[] stats = str.split(";");
+            entity.setOrientation(Integer.parseInt(stats[0]));
+
+            int x = Integer.parseInt(stats[1].substring(0, stats[1].indexOf(',')));
+            int y = Integer.parseInt(stats[1].substring(stats[1].indexOf(',')+1));
+            entity.setLocation(map.getTileAtCoordinates(x,y));
+
+            Occupation o;
+            Stats.StatsBuilder sb = new Stats.StatsBuilder();
+            if(stats[2] == "SMASHER")
+                sb.occupation(new Smasher());
+            else if(stats[2] == "SUMMONER")
+                sb.occupation(new Summoner());
+            else
+                sb.occupation(new Sneak());
+
+            // Fill in the stats somehow
+            sb.strength(Integer.parseInt(stats[3]));
+            sb.agility(Integer.parseInt(stats[4]));
+            sb.intellect(Integer.parseInt(stats[5]));
+            sb.hardiness(Integer.parseInt(stats[6]));
+            sb.movementSpeed(Double.parseDouble(stats[7]));
+            sb.currentMana(Integer.parseInt(stats[8]));
+            sb.currentLife(Integer.parseInt(stats[9]));
+            //sb.livesLeft(Integer.parseInt(stats[10]));
+            sb.experience(Integer.parseInt(stats[11]));
+            entity.setBaseStats(sb.build());
+
+            entityList.add(entity);
+        }
+
+        return entityList;
+    }
+
     public String serialize(GameState state) {
         // TODO: implement this
         return "";
@@ -116,15 +158,21 @@ public class Serializer {
         // TODO: implement this
         // Objects that go into the GameState
         Map loadedMap;
+        List<Entity> entityList = new ArrayList<Entity>();
 
         // Split up the map, decals, items, area effects, entities, and inventory
         String[] data = loadData.split("!");
 
-        // Deal with the map data
+        // Deal with the map data (map, decals, items, areaEffects)
         loadedMap = deserializeMap(data[1]);
         deserializeDecals(data[2], loadedMap);
         deserializeItems(data[3], loadedMap);
         deserializeAreaEffects(data[4], loadedMap);
+
+        // Deal with entity data
+        entityList = deserializeEntity(data[5], loadedMap);
+
+
 
         return new GameState();
     }

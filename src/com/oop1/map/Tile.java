@@ -8,7 +8,6 @@ public class Tile {
     private Item item;
     private TerrainType terrainType;
 
-    private xLocation, yLocation;
 
     public Tile(TerrainType t){
         this.terrainType = t;
@@ -60,4 +59,9 @@ public class Tile {
         else
             return "W";
     }
+
+    public Item getItem(){
+        return item;
+    }
+
 }

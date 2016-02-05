@@ -34,4 +34,12 @@ public class Map {
         }
         return str.toString();
     }
+
+    public int getXBoundary(){
+        return tiles.length;
+    }
+
+    public int getYBoundary(){
+        return tiles[0].length;
+    }
 }

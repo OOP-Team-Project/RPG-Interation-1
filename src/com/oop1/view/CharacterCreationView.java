@@ -101,6 +101,8 @@ public class CharacterCreationView extends JPanel {
                 for(int j = 0; j < 50; j++){
                     defaultTiles[i][j] = new Tile(TerrainType.GRASS);
                     defaultTiles[i][j].setDecal(new Decal());
+                    defaultTiles[i][j].setXLocation(i);
+                    defaultTiles[i][j].setYLocation(j);
                 }
             }
             defaultMap.setTiles(defaultTiles);

@@ -19,6 +19,10 @@ public class TileView extends JPanel {
 	public TileView(Tile newTile){
 		theTile = newTile;
 
+		if(theTile.hasItem()){
+			add(new ItemView(theTile.getItem()));
+		}
+
 		if(theTile.hasDecal()){
 			add(new DecalView());
 		}
@@ -34,12 +38,7 @@ public class TileView extends JPanel {
 		super.paintComponent(g);
 		setLayout(new GridLayout(0, 1));
 
-		//BufferedImage duck = Decal.DUCK[0][0];
-		//BufferedImage duck;
-
-		//g.drawImage(duck, 0, 0, null);
-
-		g.drawRect(0, 0, 120, 120);
+		g.drawRect(0, 0, 60, 60);
 	}
 	
 }

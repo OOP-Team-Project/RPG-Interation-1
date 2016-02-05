@@ -59,6 +59,10 @@ public class Engine {
         // TODO: implement this
     }
 
+    public Entity getPlayer(){
+        return state.getEntities().get(0);
+    }
+
 
     public static void addView(JPanel newView){
         views.add(newView);

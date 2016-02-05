@@ -12,7 +12,6 @@ import com.oop1.view.*;
 public class RunGame implements Runnable {
 
     static Engine engine;   //The game engine that is running the program.
-
     private JFrame mainFrame;   //This is the main Java Swing frame. It holds a whooole bunch of JPanels that comprise
                                 // of the multitude of views.
 

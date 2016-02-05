@@ -1,0 +1,15 @@
+!
+GGMM%					<-- Map grid
+GGWM%
+GWWG%
+GWGG%
+!
+decal_type;x,y%		<-- Decals on map
+!
+item_type;x,y%			<-- Items on map; not sure how to split up the statModifiers in it yet
+!
+effect_type;x,y-amount(if HealDamage or TakeDamage)%			<-- Area Effects on map
+!
+orientation;location;occupation;strength;agility;intellect;hardiness;movementSpeed;currentMana;currentHealth;livesLeft;experience%			<-- Entities
+!
+item%					<-- Items in inventory; not sure how to split up the statModifiers in it yet

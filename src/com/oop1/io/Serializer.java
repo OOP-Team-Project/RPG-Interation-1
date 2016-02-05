@@ -218,6 +218,7 @@ public class Serializer {
         // Objects that go into the GameState
         Map loadedMap;
         List<Entity> entityList = new ArrayList<Entity>();
+        List<Map> mapList = new ArrayList<Map>();
 
         // Split up the map, decals, items, area effects, entities, and inventory
         String[] data = loadData.split("!");
@@ -228,6 +229,7 @@ public class Serializer {
         deserializeItems(data[3], loadedMap);
         deserializeTakeableItems(data[4], loadedMap);
         deserializeAreaEffects(data[5], loadedMap);
+        mapList.add(loadedMap);
 
         // Deal with entity data
         entityList = deserializeEntity(data[6], loadedMap);
@@ -236,6 +238,10 @@ public class Serializer {
 
 
 
-        return new GameState();
+        GameState gs = new GameState();
+        gs.setMap(mapList);
+        gs.setEntities(entityList);
+
+        return gs;
     }
 }

@@ -11,25 +11,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class TileView extends JPanel {
-	
-	//method to draw a tile called by drawAreaView in AreaView class
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
 
-	private BufferedImage duck;
 
 	public TileView(Tile newTile){
 		theTile = newTile;
 
 		if(theTile.hasDecal()){
 			add(new DecalView());
-		}
-
-		try{
-			duck = ImageIO.read(new File(getClass().getResource("banana-duck.jpg").toURI()));
-		} catch (Exception ex){
-			int i = 0;
 		}
 	}
 
@@ -41,14 +32,14 @@ public class TileView extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setLayout(new GridLayout(0, 10));
+		setLayout(new GridLayout(0, 1));
 
 		//BufferedImage duck = Decal.DUCK[0][0];
 		//BufferedImage duck;
 
-		g.drawImage(duck, 0, 0, null);
+		//g.drawImage(duck, 0, 0, null);
 
-		//g.drawRect(0, 0, 120, 120);
+		g.drawRect(0, 0, 120, 120);
 	}
 	
 }

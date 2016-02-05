@@ -20,7 +20,7 @@ public class DecalView extends JPanel {
     public DecalView() {
 
         duck = Decal.DUCK[0][0];
-        //skull = Decal.SKULL_AND_CROSSBONES[0][0];
+        skull = Decal.SKULL_AND_CROSSBONES[0][0];
 
     }
 
@@ -38,7 +38,7 @@ public class DecalView extends JPanel {
 
         duck = Decal.DUCK[0][0];
 
-        g.drawImage(duck, 50, 50, null);
+        g.drawImage(duck, 0, 0, null);
 
         //for(int i = 0; i < 50; i++){
         //	tiles[i].paintComponent(g);

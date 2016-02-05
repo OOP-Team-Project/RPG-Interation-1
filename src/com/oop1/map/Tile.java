@@ -8,6 +8,8 @@ public class Tile {
     private Item item;
     private TerrainType terrainType;
 
+    private xLocation, yLocation;
+
     public Tile(TerrainType t){
         this.terrainType = t;
     }

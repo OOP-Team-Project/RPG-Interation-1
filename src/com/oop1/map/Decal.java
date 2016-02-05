@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class Decal {
    // RED_CROSS, SKULL_AND_CROSSBONES, GOLD_STAR
 
-    //public static BufferedImage[][] SKULL_AND_CROSSBONES = load("skull.png", 16, 16);
+    public static BufferedImage[][] SKULL_AND_CROSSBONES = load("skull.png", 16, 16);
     public static BufferedImage[][] DUCK = load("duck.gif", 16, 16);
 
     public static BufferedImage[][] load(String s, int w, int h) {

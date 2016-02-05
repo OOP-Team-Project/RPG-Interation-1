@@ -30,7 +30,13 @@ public class AreaView extends JPanel {
 	private void initializeView(){
 		setLayout(new GridLayout(0, 10));
 		for(int i = 0; i < 50; i++){
-			add(new TileView(map.getTileAtCoordinates(1,1)));//tiles[i] = new TileView();
+			for(int j = 0; j < 25; j++) {
+				//Check the player position??
+				//Calculate which coordinates we need to display.
+
+
+				add(new TileView(map.getTileAtCoordinates(1, 1)));//tiles[i] = new TileView();
+			}
 		}
 		isInitialized = true;
 	}

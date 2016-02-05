@@ -8,16 +8,11 @@ import java.awt.GridLayout;
  */
 public class AreaView extends JPanel {
 
-	String[] areaEffect = {"grass", "water", "road"}; //using list of areaEffect for testing purposes
-	
-	
 	public AreaView() {
-		setLayout(new GridLayout(0, 10)); //lays the tiles from left to right
-	}
-	
-	public void drawAreaView() {
-		for (int i = 0; i < 50; i++) {
+		setLayout(new GridLayout(0, 20)); //lays the tiles from left to right
+		for (int i = 0; i < 200; i++) {
 			add(new TileView());
 		}
 	}
+
 }

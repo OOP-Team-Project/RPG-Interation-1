@@ -1,22 +1,15 @@
-// InventoryView.java
-
-// Created on 2/3/2016 by Nicole Kulakowski
-
 package com.oop1.view;
-import com.oop1.Entity.Inventory;
-import java.awt.*;
 
+import com.oop1.entity.Inventory;
 
-public class InventoryView extends View {
+import javax.swing.*;
 
-	private Inventory inventory;
+public class InventoryView extends JPanel {
 
-	public InventoryView(Inventory inventory){
-		this.inventory = inventory;
-	}
+    private Inventory inventory;
 
-	@override
-	public void draw(Graphics g){
-		// TODO
-	}
+    public InventoryView(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
 }

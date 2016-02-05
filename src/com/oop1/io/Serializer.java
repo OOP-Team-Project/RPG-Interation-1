@@ -181,8 +181,7 @@ public class Serializer {
             int movementSpeed = Integer.parseInt(itemStats[5]);
             StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
 
-            // Needs this method
-            //item.addStatModifier(statMod);
+            item.addStatModifier(statMod);
             newInventory.addItem(item);
         }
         entityList.get(0).setInventory(newInventory);
@@ -202,8 +201,7 @@ public class Serializer {
             int movementSpeed = Integer.parseInt(itemStats[5]);
             StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
 
-            // Needs this method
-            //item.addStatModifier(statMod);
+            item.addStatModifier(statMod);
             entityList.get(0).getInventory().equipItem(item);
         }
     }

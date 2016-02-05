@@ -1,6 +1,7 @@
 package com.oop1.io;
 
 import com.oop1.engine.GameState;
+import com.oop1.items.*;
 import com.oop1.map.Decal;
 import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
@@ -53,6 +54,26 @@ public class Serializer {
         }
     }
 
+    private static void deserializeItems(String itemData, Map map){
+        String[] items = itemData.split("%");
+        for(String str : items){
+            Item item;
+            String itemType = str.substring(0, str.indexOf(';'));
+            int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
+            int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
+            System.out.println(itemType + "  " + x + ", " + y);
+            if(itemType == "interactive")
+                item = new InteractiveItem();
+            else if(itemType == "oneShot")
+                item = new OneShotItem();
+            else if(itemType == "takeable")
+                item = new TakeableItem();
+            else
+                item = new Obstacle();
+            map.getTileAtCoordinates(x, y).setItem(item);
+        }
+    }
+
     public String serialize(GameState state) {
         // TODO: implement this
         return "";
@@ -69,11 +90,7 @@ public class Serializer {
         // Deal with the map data
         loadedMap = deserializeMap(data[1]);
         deserializeDecals(data[2], loadedMap);
-
-
-
-
-
+        deserializeItems(data[3], loadedMap);
 
         System.out.println(loadedMap);
 

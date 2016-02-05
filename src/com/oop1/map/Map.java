@@ -11,9 +11,12 @@ public class Map {
         return new Map();
     }
 
-    // TODO: check bounds
-    public Tile getTileAtCoordinates(int x, int y) {
-        return tiles[x][y];
-    }
+    public Tile getTileAtCoordinates(int x, int y){
 
+        if (x >= 0 && x < tiles.length) {
+            if (y >= 0 && y < tiles[x].length)
+                return tiles[x][y];
+        }
+        return null;
+    }
 }

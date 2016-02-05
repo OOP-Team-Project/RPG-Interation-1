@@ -1,5 +1,7 @@
 package com.oop1.view;
 
+import com.oop1.map.Map;
+
 import javax.swing.JPanel;
 import java.awt.*;
 
@@ -9,9 +11,11 @@ import java.awt.*;
 public class AreaView extends JPanel {
 
 	private boolean isInitialized = false; //Doing this because, for some reason, constructors aren't working right...
+	private Map map;
 
-	public AreaView() {
+	public AreaView(Map newMap) {
 
+		map = newMap;
 		setLayout(new GridLayout(10, 10)); //lays the tiles from left to right
 
 	}
@@ -26,7 +30,7 @@ public class AreaView extends JPanel {
 	private void initializeView(){
 		setLayout(new GridLayout(0, 10));
 		for(int i = 0; i < 50; i++){
-			add(new TileView());//tiles[i] = new TileView();
+			add(new TileView(map.getTileAtCoordinates(1,1)));//tiles[i] = new TileView();
 		}
 		isInitialized = true;
 	}

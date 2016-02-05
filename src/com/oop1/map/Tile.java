@@ -31,6 +31,17 @@ public class Tile {
             return true;
     }
 
+    public Decal getDecal(){
+        return decal;
+    }
+
+    public boolean hasDecal(){
+        if(decal != null)
+            return true;
+        else
+            return false;
+    }
+
     public void removeItem(){
         item = null;
     }

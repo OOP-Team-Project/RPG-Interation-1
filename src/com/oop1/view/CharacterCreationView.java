@@ -5,6 +5,7 @@ import com.oop1.entity.Entity;
 import com.oop1.entity.Smasher;
 import com.oop1.entity.Sneak;
 import com.oop1.entity.Summoner;
+import com.oop1.map.Decal;
 import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
@@ -99,6 +100,7 @@ public class CharacterCreationView extends JPanel {
             for(int i = 0; i < 50; i++){
                 for(int j = 0; j < 50; j++){
                     defaultTiles[i][j] = new Tile(TerrainType.GRASS);
+                    defaultTiles[i][j].setDecal(new Decal());
                 }
             }
             defaultMap.setTiles(defaultTiles);
@@ -117,7 +119,7 @@ public class CharacterCreationView extends JPanel {
             //--    -   -   -   -   -   -   -   -
             ArrayList<JPanel> defaultViews = new ArrayList<JPanel>();
 
-            defaultViews.add(new AreaView());
+            defaultViews.add(new AreaView(defaultMap));
             //defaultViews.add(new EntityView(newEntity)); //I'm guessing that, actually, the AreaView() will have these, right?
             //--    -   -   -   -   -   -   -   -
 

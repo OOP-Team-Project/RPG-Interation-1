@@ -9,7 +9,6 @@ import javax.swing.*;
 import com.oop1.engine.*;
 import com.oop1.view.*;
 
-
 public class RunGame implements Runnable {
 
     static Engine engine;   //The game engine that is running the program.

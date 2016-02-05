@@ -85,6 +85,8 @@ public class CharacterCreationView extends JPanel {
             this.remove(statusLabel);
         }
 
+        //g.drawRect(0, 0, 120, 120);
+
     }
 
     private class ButtonClickListener implements ActionListener {
@@ -116,7 +118,7 @@ public class CharacterCreationView extends JPanel {
             ArrayList<JPanel> defaultViews = new ArrayList<JPanel>();
 
             defaultViews.add(new AreaView());
-            defaultViews.add(new EntityView(newEntity)); //I'm guessing that, actually, the AreaView() will have these, right?
+            //defaultViews.add(new EntityView(newEntity)); //I'm guessing that, actually, the AreaView() will have these, right?
             //--    -   -   -   -   -   -   -   -
 
 

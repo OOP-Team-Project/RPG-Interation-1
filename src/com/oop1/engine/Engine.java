@@ -48,6 +48,7 @@ public class Engine {
         // TODO: implement this better
         for(int i = 0; i < viewsToAdd.size(); i++){
             views.add(viewsToAdd.get(i));   //We add in any views that the game should start with (AreaView, etc)
+            mainFrame.add(viewsToAdd.get(i));   //And assign them to the main frame (otherwise they won't get drawn!)
         }
         state.setMaps(mapsToAdd);       //We add in the maps that comprise this game.
         state.setEntities(entitiesToAdd);   //We add in the entities that are in the game.

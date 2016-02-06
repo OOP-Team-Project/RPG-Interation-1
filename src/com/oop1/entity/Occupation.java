@@ -12,6 +12,7 @@ public abstract class Occupation {
     protected int intellectBase;
 
     protected double movementSpeed;
+    protected int baseHardiness;
 
     public abstract void performAbility();
 
@@ -43,5 +44,7 @@ public abstract class Occupation {
         return movementSpeed;
     }
 
-    public abstract int getBaseHardiness();
+    public int getBaseHardiness() {
+        return baseHardiness;
+    }
 }

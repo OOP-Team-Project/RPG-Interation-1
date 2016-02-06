@@ -2,7 +2,6 @@ package com.oop1.entity;
 
 import com.oop1.items.TakeableItem;
 
-
 import java.util.*;
 
 public class Inventory {
@@ -17,6 +16,7 @@ public class Inventory {
         items = new ArrayList<TakeableItem>();
         equipment = new HashSet<TakeableItem>();
     }
+
     /**
      * Get all the items in this inventory
      *
@@ -24,7 +24,9 @@ public class Inventory {
      * modifications to the inventory should be performed
      * via the other methods on this class.
      */
-    public Collection<TakeableItem> getAllItems() { return Collections.unmodifiableCollection(items); }
+    public Collection<TakeableItem> getAllItems() {
+        return Collections.unmodifiableCollection(items);
+    }
 
     /**
      * Get all the equipped items
@@ -34,7 +36,9 @@ public class Inventory {
      * via the other methods on this class.
      */
 
-    public Collection<TakeableItem> getEquippedItems() { return Collections.unmodifiableCollection(equipment); }
+    public Collection<TakeableItem> getEquippedItems() {
+        return Collections.unmodifiableCollection(equipment);
+    }
 
     public void equipItem(TakeableItem item) {
         if (items.contains(item)) {

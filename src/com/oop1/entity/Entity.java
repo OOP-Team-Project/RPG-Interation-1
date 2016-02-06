@@ -36,15 +36,22 @@ public class Entity {
     private Occupation occupation;
 
     //Constructor for initial creation of entity
+    public Entity(Occupation o) {
+        occupation = o;
+        baseStats = Stats.builder().occupation(o).build();
+        inventory = new Inventory();
+        orientation = 0;
+    }
     public Entity(Occupation o, Tile loc) {
-      occupation = o;
-      baseStats = Stats.builder().occupation(o).build();
-      inventory = new Inventory();
-      orientation = 0;
-      location = loc;
+        occupation = o;
+        baseStats = Stats.builder().occupation(o).build();
+        inventory = new Inventory();
+        orientation = 0;
+        location = loc;
     }
 
-    public Entity() { }
+    public Entity() {
+    }
 
     /**
      * @return this entity's actual current stats, including modifications from equipped items

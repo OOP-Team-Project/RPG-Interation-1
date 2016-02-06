@@ -46,6 +46,11 @@ public class TileView extends JPanel {
 		
 	}
 
+	public void addLabel(JLabel newLabel){
+		//theLabel = newLabel;
+		//add(theLabel);
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -5,7 +5,7 @@ import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -34,19 +34,22 @@ public class AreaView extends JPanel {
 		centerTileXIndex = map.findXLocation(playerTile);
 		centerTileYIndex = map.findYLocation(playerTile);
 
-		for(int i = centerTileXIndex - 10; i < centerTileXIndex + 10; i++){
-			if(i < 0 || i >= map.getXBoundary()){
-				for(int j = centerTileYIndex - 5; j <= centerTileYIndex + 5; j++){
+		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
+			if(i < 0 || i >= map.getYBoundary()){
+				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
 					add(new TileView(false));
 				}
 			}
 			else{
-				for(int j = centerTileYIndex - 5; j <= centerTileYIndex + 5; j++){
-					if(j < 0 || j >= map.getYBoundary()){
+				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
+					if(j < 0 || j >= map.getXBoundary()){
 						add(new TileView(false));
 					}
 					else{
-						add(new TileView(map.getTileAtCoordinates(i, j)));
+						TileView newTile = new TileView(map.getTileAtCoordinates(j, i));
+						newTile.theLabel.setText((new Integer(j).toString() + " " + new Integer(i).toString()));
+						//add(new TileView(map.getTileAtCoordinates(i, j)));
+						add(newTile);
 					}
 				}
 			}

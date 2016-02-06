@@ -11,6 +11,6 @@ public class Serializer {
 
     public GameState deserialize(String string) {
         // TODO: implement this
-        return new GameState();
+        return new GameState(null, null, null);
     }
 }

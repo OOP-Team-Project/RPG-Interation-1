@@ -9,6 +9,13 @@ public class GameState {
 
     private List<Map> map;
     private List<Entity> entities;
+    private Entity avatar;
+
+    public GameState(Entity avatar, List<Map> map, List<Entity> entities) {
+        this.map = map;
+        this.entities = entities;
+        this.avatar = avatar;
+    }
 
     public List<Map> getMap() {
         return map;
@@ -17,6 +24,8 @@ public class GameState {
     public void setMap(List<Map> map) {
         this.map = map;
     }
+
+    public Entity getAvatar() { return avatar; }
 
     public List<Entity> getEntities() {
         return entities;

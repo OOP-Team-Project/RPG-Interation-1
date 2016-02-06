@@ -25,7 +25,7 @@ public class SaveManager {
 
     public GameState loadGame(String saveName) {
         // TODO: implement this
-        return new GameState();
+        return new GameState(null, null, null);
     }
 
     public void saveGame(GameState state, String saveName) {

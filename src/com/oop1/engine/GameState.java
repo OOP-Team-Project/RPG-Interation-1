@@ -9,7 +9,6 @@ public class GameState {
 
     private List<Map> maps;
     private List<Entity> entities;
-    private Entity avatar;
 
     public GameState(){
         //does nothing
@@ -28,7 +27,7 @@ public class GameState {
         this.maps = maps;
     }
 
-    public Entity getAvatar() { return avatar; }
+    public Entity getAvatar() { return entities.get(0); }
 
     public List<Entity> getEntities() {
         return entities;

@@ -46,13 +46,13 @@ public class Serializer {
             String decalType = str.substring(0, str.indexOf(';'));
             int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
             int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
-            if(decalType == "RED_CROSS")
-                decal = Decal.RED_CROSS;
-            else if(decalType == "GOLD_STAR")
-                decal = Decal.GOLD_STAR;
-            else
-                decal = Decal.SKULL_AND_CROSSBONES;
-            map.getTileAtCoordinates(x, y).setDecal(decal);
+            //if(decalType == "RED_CROSS")
+            //    decal = Decal.RED_CROSS;
+            //else if(decalType == "GOLD_STAR")
+            //    decal = Decal.GOLD_STAR;
+            //else
+            //    decal = Decal.SKULL_AND_CROSSBONES;
+            //map.getTileAtCoordinates(x, y).setDecal(decal);
         }
     }
 
@@ -66,7 +66,7 @@ public class Serializer {
             if(itemType == "oneShot")
                 item = new OneShotItem(map.getTileAtCoordinates(x, y));
             else if(itemType == "takeable")
-                item = new TakeableItem();
+                item = new TakeableItem(map.getTileAtCoordinates(x, y));
             else
                 item = new Obstacle();
             map.getTileAtCoordinates(x, y).setItem(item);
@@ -76,7 +76,7 @@ public class Serializer {
     private static void deserializeTakeableItems(String itemData, Map map){
         String[] items = itemData.split("%");
         for(String str : items){
-            Item item = new TakeableItem();
+            Item item = new TakeableItem(map.getTileAtCoordinates(0, 0));
             String[] itemStats = str.split(";");
             int x = Integer.parseInt(itemStats[0].substring(0, str.indexOf(',')));
             int y = Integer.parseInt(itemStats[0].substring(str.indexOf(',')+1));
@@ -171,7 +171,7 @@ public class Serializer {
         Inventory newInventory = new Inventory();
         int i = 0;
         for(String str : items){
-            TakeableItem item = new TakeableItem();
+            TakeableItem item = new TakeableItem(new Tile(TerrainType.GRASS));
             String[] itemStats = str.split(";");
             String itemName = itemStats[0];
             int strength = Integer.parseInt(itemStats[1]);
@@ -191,7 +191,7 @@ public class Serializer {
         String[] items = inventory.split("%");
         int i = 0;
         for(String str : items){
-            TakeableItem item = new TakeableItem();
+            TakeableItem item = new TakeableItem(new Tile(TerrainType.GRASS));
             String[] itemStats = str.split(";");
             String itemName = itemStats[0];
             int strength = Integer.parseInt(itemStats[1]);
@@ -235,7 +235,7 @@ public class Serializer {
         deserializeEquipment(data[8], entityList);
 
         GameState gs = new GameState();
-        gs.setMap(mapList);
+        gs.setMaps(mapList);
         gs.setEntities(entityList);
 
         return gs;

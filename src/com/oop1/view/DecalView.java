@@ -27,11 +27,23 @@ public class DecalView extends JPanel {
     public void draw(Graphics graphics) {
         // TODO: implement this
 
-        graphics.drawImage(skull, 50, 50, null);
+        graphics.drawImage(duck, 50, 50, null);
 
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D)g;
 
+        duck = Decal.DUCK[0][0];
+
+        g.drawImage(duck, 0, 0, null);
+
+        //for(int i = 0; i < 50; i++){
+        //	tiles[i].paintComponent(g);
+        //}
+    }
 
 
 }

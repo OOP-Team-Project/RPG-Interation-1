@@ -1,35 +1,74 @@
 package com.oop1.view;
 
-import com.oop1.map.TerrainType;
-import com.oop1.map.Tile;
-import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Color;
+import java.awt.*;
 
-/**
- * Draws the Tile to the View
- */
+import com.oop1.map.Decal;
+import com.oop1.map.Tile;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class TileView extends JPanel {
 
-	String tileTerrain;
-	Tile currentTile;
+	private Tile theTile;	//This is the tile that this view is responsible for viewing
+	private DecalView decalView;
+	public JLabel theLabel;
 
-	public TileView(Tile currentTile) { //passed the current Tile to be drawn from AreaView
-		this.currentTile = currentTile;
+	private String tileTerrain;
+
+	public TileView(Tile newTile){
+		theTile = newTile;
+
+		if(theTile.hasItem()){
+			//add(new ItemView(theTile.getItem()));
+			int i = 0;
+		}
+
+		if(theTile.hasDecal()){
+			add(new DecalView());
+		}
+
+		theLabel = new JLabel("!!!");
+		add(theLabel);
 	}
-	
+
+	public TileView(boolean thing){	//Used to do blank tils.
+		tileTerrain = "Blank";
+
+		theLabel = new JLabel("!!!");
+		add(theLabel);
+	}
+
+	public void drawTile() { //pass Tile tile to this method
+
+	}
+
+	public void addLabel(JLabel newLabel){
+		//theLabel = newLabel;
+		//add(theLabel);
+	}
+
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		//based off tileTerrain set color
-		tileTerrain = currentTile.toString();
+		if(theTile != null)
+			tileTerrain = theTile.toString();
 		if (tileTerrain == "M") {
 			g.setColor(Color.gray);
 		} else if (tileTerrain == "G") {
 			g.setColor(Color.green);
-		} else {
+		} else if (tileTerrain == "W"){
 			g.setColor(Color.blue);
+		} else{
+			g.setColor(Color.black);
 		}
+
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		g.fillRect(0, 0, 60, 60);
 	}
 	

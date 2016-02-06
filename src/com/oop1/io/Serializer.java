@@ -203,13 +203,13 @@ public class Serializer {
             String decalType = str.substring(0, str.indexOf(';'));
             int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
             int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
-            //if(decalType == "RED_CROSS")
-            //    decal = Decal.RED_CROSS;
-            //else if(decalType == "GOLD_STAR")
-            //    decal = Decal.GOLD_STAR;
-            //else
-            //    decal = Decal.SKULL_AND_CROSSBONES;
-            //map.getTileAtCoordinates(x, y).setDecal(decal);
+            if(decalType == "RED_CROSS")
+                decal = new Decal("RED_CROSS");
+            else if(decalType == "GOLD_STAR")
+                decal = new Decal("GOLD_STAR");
+            else
+                decal = new Decal("SKULL_AND_CROSSBONES");
+            map.getTileAtCoordinates(x, y).setDecal(decal);
         }
     }
 

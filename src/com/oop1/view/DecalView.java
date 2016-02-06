@@ -7,7 +7,9 @@ import java.awt.*;
 
 import java.awt.Color;
 
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 
@@ -37,8 +39,25 @@ public class DecalView extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
 
         //duck = Decal.DUCK[0][0];
-
-        g.drawImage(decal.getImage()[0][0], 0, 0, null);
+        //ImageIcon imageIcon = new ImageIcon(image);
+        BufferedImage image = null;
+        try
+        {
+            //image = ImageIO.read(new File("src/com/oop1/resources/SKULL_AND_CROSSBONES.png"));
+            image = decal.getImage()[0][0];
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        //ImageIcon imageIcon = new ImageIcon(decal.getImage()[0][0]);
+        ImageIcon imageIcon = new ImageIcon(image);
+        JLabel jLabel = new JLabel(imageIcon);
+        add(jLabel);
+        //jLabel.setIcon(imageIcon);
+        //jLabel.setDisabledIcon(imageIcon);
+        //g2.drawImage(decal.getImage()[0][0], 0, 0, null);
 
         //for(int i = 0; i < 50; i++){
         //	tiles[i].paintComponent(g);

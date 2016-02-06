@@ -6,6 +6,7 @@ import com.oop1.view.DecalView;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import java.awt.*;
@@ -26,18 +27,22 @@ public class RunGame implements Runnable {
     }
 
 
-    public static void main(String[] args) {    //This is the main function. It all starts here, folks!
+    public static void main(String[] args) throws IOException {    //This is the main function. It all starts here, folks!
 
         //Initially, we have a blank gameState (one that will likely be overridden by a load or new game operation.
         GameState initialGameState = new GameState();
 
+        SaveManager sm = new SaveManager();
+        GameState game = sm.loadGame("map1.txt");
+        sm.saveGame(game, "savedGame.txt");
+
         //Initially, we have only one view when the game boots up: a main menu view. The player can select a bunch of
         //  choices from here that will (probably) add in new views to be displayed.
-        ArrayList<JPanel> initialList = new ArrayList<JPanel>();
-        MainMenuView initialMenu = new MainMenuView();
+        List<JPanel> initialList = new ArrayList<JPanel>();
+        MainMenuView initialMenu = new MainMenuView(game);
         initialList.add(initialMenu);
 
-        engine = new Engine(initialGameState, initialList);   //Assign gameState and views to this engine.
+        engine = new Engine(game, initialList);   //Assign gameState and views to this engine.
 
         Thread runner = new Thread(new RunGame(), "Main Thread");   //We then spin a thread that updates the game every so often.
 

@@ -1,9 +1,10 @@
-package com.oop1.view;
+package com.oop1.View;
 
 import java.awt.*;
 
 import com.oop1.map.Decal;
 import com.oop1.map.Tile;
+import com.oop1.view.DecalView;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -58,11 +59,11 @@ public class TileView extends JPanel {
 		//based off tileTerrain set color
 		if(theTile != null)
 			tileTerrain = theTile.toString();
-		if (tileTerrain == "M") {
+		if (tileTerrain.equals("^")) {
 			g.setColor(Color.gray);
-		} else if (tileTerrain == "G") {
+		} else if (tileTerrain.equals("_")) {
 			g.setColor(Color.green);
-		} else if (tileTerrain == "W"){
+		} else if (tileTerrain.equals("~")){
 			g.setColor(Color.blue);
 		} else{
 			g.setColor(Color.black);

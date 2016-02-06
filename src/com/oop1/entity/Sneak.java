@@ -22,6 +22,10 @@ public class Sneak extends Occupation {
         return 15;
     }
 
+    public String toString() {
+        return "Sneak";
+	}
+
     public String printOccupation(){
         return "SNEAK";
     }

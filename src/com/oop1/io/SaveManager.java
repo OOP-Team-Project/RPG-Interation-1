@@ -1,6 +1,7 @@
 package com.oop1.io;
 
 import com.oop1.engine.GameState;
+import com.oop1.entity.Occupation;
 import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
@@ -52,5 +53,17 @@ public class SaveManager {
     public List<String> getAllSaveNames() {
         // TODO: implement this
         return Collections.emptyList();
+    }
+
+    /**
+     * Loads the default GameState and sets the Avatar's occupation
+     * @param o  the occupation of the new Avatar
+     * @return   the new GameState
+     * @throws IOException  when the default state file can't be read for any reason
+     */
+    public GameState createNewGameState(Occupation o) throws IOException {
+        GameState state = instance.loadGame("map1.txt");
+        state.getAvatar().setOccupation(o);
+        return state;
     }
 }

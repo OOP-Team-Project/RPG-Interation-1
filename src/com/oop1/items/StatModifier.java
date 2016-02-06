@@ -1,4 +1,4 @@
-package com.oop1.entity;
+package com.oop1.items;
 
 import com.oop1.entity.Stats;
 
@@ -39,6 +39,10 @@ public class StatModifier {
 
     public int getMovementModifier(){
         return movementModifier;
+    }
+
+    public int getLivesLeftModifier(){
+        return livesLeftModifier;
     }
 
     public StatModifier(int strengthModifier,

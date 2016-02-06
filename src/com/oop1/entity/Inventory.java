@@ -100,6 +100,8 @@ public class Inventory {
             str.append(item.getStatModifiers().get(0).getHardinessModifier());
             str.append(";");
             str.append(item.getStatModifiers().get(0).getMovementModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getLivesLeftModifier());
             str.append("%\n");
         }
         for (TakeableItem item : equipment) {
@@ -113,6 +115,8 @@ public class Inventory {
             str.append(item.getStatModifiers().get(0).getHardinessModifier());
             str.append(";");
             str.append(item.getStatModifiers().get(0).getMovementModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getLivesLeftModifier());
             str.append("%\n");
         }
 

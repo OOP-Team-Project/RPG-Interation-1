@@ -57,10 +57,10 @@ public class Tile {
 
     public String toString(){
         if(terrainType == TerrainType.MOUNTAIN)
-            return "M";
+            return "^";
         else if(terrainType == TerrainType.GRASS)
-            return "G";
+            return "_";
         else
-            return "W";
+            return "~";
     }
 }

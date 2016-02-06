@@ -1,17 +1,17 @@
 !Map!
-GGMM%					<-- Map grid
-GGWM%
-GWWG%
-GWGG%
+__^^%					<-- Map grid
+__~^%
+_~~_%
+_~__%
 !Decals!
 decal_type;x,y%		<-- Decals on map
 !Items on map!
 item_type;x,y%			<-- Obstacle, interactive, one-shot items
 !Takeable items on map!
-x,y;strength;agility;intellect;hardiness;movementSpeed%            <-- Takeable items on map
+x,y;strength;agility;intellect;hardiness;movementSpeed;livesLeft%            <-- Takeable items on map
 !Area effects!
 effect_type;x,y-amount(if HealDamage or TakeDamage)%			            <-- Area Effects on map
 !Entities!
 orientation;location;occupation;strength;agility;intellect;hardiness;movementSpeed;currentMana;currentHealth;livesLeft;experience%			<-- Entities
 !Items in inventory!
-<E<E>>strength;agility;intellect;hardiness;movementSpeed%			<-- Items in inventory;1st E denotes it's equippable;2nd E denotes it is equipped
+<E<E>>strength;agility;intellect;hardiness;movementSpeed;livesLeft%			<-- Items in inventory;1st E denotes it's equippable;2nd E denotes it is equipped

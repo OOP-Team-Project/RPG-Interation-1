@@ -64,6 +64,8 @@ public class Serializer {
                         takeableStr.append(sm.getHardinessModifier());
                         takeableStr.append(";");
                         takeableStr.append(sm.getMovementModifier());
+                        takeableStr.append(";");
+                        takeableStr.append(sm.getLivesLeftModifier());
                         takeableStr.append("%\n");
                     }
                     else {
@@ -159,11 +161,11 @@ public class Serializer {
         Tile[][] tiles = new Tile[numRows][numCols];
         int i = 0, j = 0;
         for(char c : mapCharArray){
-            if(c == 'G')
+            if(c == '_')
                 tiles[i][j++] = new Tile(TerrainType.GRASS);
-            else if(c == 'W')
+            else if(c == '~')
                 tiles[i][j++] = new Tile(TerrainType.WATER);
-            else if(c == 'M')
+            else if(c == '^')
                 tiles[i][j++] = new Tile(TerrainType.MOUNTAIN);
             else if(c == '%'){
                 ++i;
@@ -221,7 +223,8 @@ public class Serializer {
             int intellect = Integer.parseInt(itemStats[3]);
             int hardiness = Integer.parseInt(itemStats[4]);
             int movementSpeed = Integer.parseInt(itemStats[5]);
-            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
+            int livesLeft = Integer.parseInt(itemStats[6]);
+            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed, livesLeft);
 
             item.addStatModifier(statMod);
             map.getTileAtCoordinates(x, y).setItem(item);
@@ -320,7 +323,8 @@ public class Serializer {
             int intellect = Integer.parseInt(itemStats[2]);
             int hardiness = Integer.parseInt(itemStats[3]);
             int movementSpeed = Integer.parseInt(itemStats[4]);
-            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
+            int livesLeft = Integer.parseInt(itemStats[5]);
+            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed, livesLeft);
             if(equippable)
                 item.setEquippable(true);
             item.addStatModifier(statMod);

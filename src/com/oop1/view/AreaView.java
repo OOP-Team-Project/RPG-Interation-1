@@ -29,7 +29,7 @@ public class AreaView extends JPanel {
         this.entityToFollow = entityToFollow;
 		setLayout(new GridLayout(0, 21)); //lays the tiles from left to right
         setMinimumSize(new Dimension(600, 600));
-        setPreferredSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(1100, 600));
 	}
 
 
@@ -38,21 +38,23 @@ public class AreaView extends JPanel {
 
 		centerTileXIndex = map.findXLocation(entityToFollow.getLocation());
 		centerTileYIndex = map.findYLocation(entityToFollow.getLocation());
+		System.out.println(centerTileXIndex);
+		System.out.println(centerTileYIndex);
 
 		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
 			if(i < 0 || i >= map.getYBoundary()){
 				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
-					add(new TileView());
+					add(new TileView(false));
 				}
 			}
 			else{
 				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
 					if(j < 0 || j >= map.getXBoundary()){
-						add(new TileView());
+						add(new TileView(false));
 					}
 					else{
-						TileView newTile = new TileView();
-//						newTile.setText((new Integer(i).toString() + " " + new Integer(j).toString()));
+						TileView newTile = new TileView(map.getTileAtCoordinates(i,j));
+						//newTile.setText((new Integer(i).toString() + " " + new Integer(j).toString()));
 						//add(new TileView(map.getTileAtCoordinates(i, j)));
 						add(newTile);
 					}

@@ -10,6 +10,7 @@ public class Summoner extends Occupation {
         baseIntellect = 25;
         intellectBase = 4;
         movementSpeed = 2;
+        baseHardiness = 10;
     }
 
     public void performAbility() {

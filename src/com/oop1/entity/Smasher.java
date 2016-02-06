@@ -10,6 +10,7 @@ public class Smasher extends Occupation {
         baseIntellect = 15;
         intellectBase = 2;
         movementSpeed = 2.5;
+        baseHardiness = 20;
     }
 
     public void performAbility() {

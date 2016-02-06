@@ -1,34 +1,27 @@
 package com.oop1;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.List;
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import com.oop1.engine.*;
 import com.oop1.view.*;
 
 public class RunGame implements Runnable {
 
-    static Engine engine;   //The game engine that is running the program.
-    //private JFrame mainFrame;   //This is the main Java Swing frame. It holds a whooole bunch of JPanels that comprise
-                                // of the multitude of views.
+    static Engine engine;         //The game engine that is running the program.
 
-    public RunGame(){   //Constructor for this class.
-
-    }
+    public RunGame(){   /*Constructor for this class. */ }
 
 
     public static void main(String[] args) {    //This is the main function. It all starts here, folks!
-
         //Initially, we have a blank gameState (one that will likely be overridden by a load or new game operation.
         GameState initialGameState = new GameState();
 
         //Initially, we have only one view when the game boots up: a main menu view. The player can select a bunch of
-        //  choices from here that will (probably) add in new views to be displayed.
+        //choices from here that will (probably) add in new views to be displayed.
         ArrayList<JPanel> initialList = new ArrayList<JPanel>();
+
         MainMenuView initialMenu = new MainMenuView();
+
         initialList.add(initialMenu);
 
         engine = new Engine(initialGameState, initialList);   //Assign gameState and views to this engine.
@@ -40,9 +33,8 @@ public class RunGame implements Runnable {
         try{
             runner.join();  //We keep the main() function running until this thread is finished.
         } catch(Exception e){
-
+            e.printStackTrace();
         }
-
     }
 
     public void run() {
@@ -53,7 +45,6 @@ public class RunGame implements Runnable {
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-
             engine.update();    //We let the engine do its thing, whatever that may be.
         }
     }

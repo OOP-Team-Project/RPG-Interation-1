@@ -4,7 +4,6 @@ import com.oop1.entity.Entity;
 import com.oop1.map.Map;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 
 public class Engine {
@@ -18,7 +17,8 @@ public class Engine {
         views = newViews;
 
         mainFrame = new JFrame("Team TigerTiger Cat's Awesome RPG Game!");
-        mainFrame.setSize(1200, 600);
+        mainFrame.setSize(1000, 800);
+        mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //mainFrame.setLayout(new GridLayout(1, 1));
 

@@ -160,7 +160,7 @@ public class CharacterCreationView extends JPanel {
                 newEntity = new Entity(new Summoner(), defaultMap.getTileAtCoordinates(50, 50));
             }
             else  {
-                newEntity = new Entity(new Sneak(), defaultMap.getTileAtCoordinates(0, 0));
+                newEntity = new Entity(new Sneak(), defaultMap.getTileAtCoordinates(5, 0));
             }
             //--    -   -   -   -   -   -   -   -
             ArrayList<JPanel> defaultViews = new ArrayList<JPanel>();

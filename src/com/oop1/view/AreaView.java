@@ -16,6 +16,8 @@ public class AreaView extends JPanel {
 	//Game map -- array of Tiles
 	Tile[] testAreaView = new Tile[200];
 	Tile newTile;
+    public static final int areaViewWidth = 15;
+    public static final int areaViewHeight = 15;
 
 	private boolean isInitialized = false; //Doing this because, for some reason, constructors aren't working right...
 	//private Engine engine;
@@ -24,44 +26,44 @@ public class AreaView extends JPanel {
 	private int centerTileXIndex, centerTileYIndex = 0;
 
 	public AreaView(Map newMap) {
-
 		map = newMap;
-		setLayout(new GridLayout(0, 21)); //lays the tiles from left to right
-
-	}
-
+		setLayout(new GridLayout(0, areaViewWidth)); //lays the tiles from left to right
+    }
 
 	private void initializeView(){
-		//setLayout(new GridLayout(0, 10));
-
 		Tile playerTile = Engine.getPlayer().getLocation();
 
 		centerTileXIndex = map.findXLocation(playerTile);
 		centerTileYIndex = map.findYLocation(playerTile);
+        int xOffset = areaViewWidth / 2;
+        int yOffset = areaViewHeight / 2;
 
-		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
-			if(i < 0 || i >= map.getYBoundary()){
-				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
-					add(new TileView(false));
-				}
-			}
-			else{
-				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
-					if(j < 0 || j >= map.getXBoundary()){
-						add(new TileView(false));
-					}
-					else{
-						TileView newTile = new TileView(map.getTileAtCoordinates(j, i));
-						newTile.theLabel.setText((new Integer(j).toString() + " " + new Integer(i).toString()));
-						//add(new TileView(map.getTileAtCoordinates(i, j)));
-						add(newTile);
-					}
-				}
-			}
-		}
+        System.out.println("x = " + centerTileXIndex + '\n' + "y = " + centerTileYIndex);
 
-		TileView nextTile;
+        for(int i = centerTileYIndex - yOffset; i <= centerTileYIndex + yOffset; i++){
+            if(i < 0 || i >= map.getYBoundary()){
+                for(int j = centerTileXIndex - xOffset; j <= centerTileXIndex + xOffset; j++){
+                    add(new TileView(false));
+                }
+            }
+            else{
+                for(int j = centerTileXIndex - xOffset; j <= centerTileXIndex + xOffset; j++){
+                    if(j < 0 || j >= map.getXBoundary()){
+                        add(new TileView(false));
+                    }
+                    else{
+                        //must be j,i AKA y,x because JPanels are added from left to right?
+                        TileView newTile = new TileView(map.getTileAtCoordinates(j, i));
+                        newTile.theLabel.setText((new Integer(j).toString() + " " + new Integer(i).toString()));
+                        //add(new TileView(map.getTileAtCoordinates(i, j)));
+                        add(newTile);
+                    }
+                }
+            }
+        }
 		/*
+		TileView nextTile;
+
 		for(int i = 1; i < 10; i++){
 			for(int j = 1; j < 5; j++) {
 				//Check the player position??
@@ -159,3 +161,27 @@ public class AreaView extends JPanel {
 		//}
 	}
 }
+
+
+/*
+		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
+			if(i < 0 || i >= map.getYBoundary()){
+				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
+					add(new TileView(false));
+				}
+			}
+			else{
+				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
+					if(j < 0 || j >= map.getXBoundary()){
+						add(new TileView(false));
+					}
+					else{
+						TileView newTile = new TileView(map.getTileAtCoordinates(j, i));
+						newTile.theLabel.setText((new Integer(j).toString() + " " + new Integer(i).toString()));
+						//add(new TileView(map.getTileAtCoordinates(i, j)));
+						add(newTile);
+					}
+				}
+			}
+		}
+ */

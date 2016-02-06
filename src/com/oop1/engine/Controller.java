@@ -10,25 +10,34 @@ import javax.swing.*;
 import java.applet.Applet;
 import java.awt.event.*;
 
-public class Controller extends JPanel implements KeyListener {
+public class Controller implements KeyListener {
     //Entity avatar = Engine.getPlayer(); //avatar
     //get the map
     //Map map = Engine.getCurrentMap();
+    private Entity avatar;
     public static AreaView areaView;
+    private Engine engine;
+    private char keyPressed;
 
     public Controller(){
         int i = 0;
-        setFocusable(true);
-        requestFocusInWindow();
+        //setFocusable(true);
+        //requestFocusInWindow();
     }
 
-    public Controller(AreaView av){
+    public Controller(AreaView av, Entity avatar){
         areaView = av;
 
-        setOpaque(false);
+        //setOpaque(false);
 
-        setFocusable(true);
-        requestFocus();
+        //setFocusable(true);
+        //requestFocus();
+    }
+
+    public Controller(Engine e){
+        engine = e;
+        //setFocusable(true);
+        //requestFocus();
     }
 
     public static void setAreaView(AreaView av){
@@ -37,18 +46,19 @@ public class Controller extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        Entity avatar = Engine.getPlayer(); //avatar
-        Map map = Engine.getCurrentMap();
-
+        //Entity avatar = engine.getPlayer(); //avatar
         //System.out.println("hehehehehe");
         /*try {
             Thread.sleep(10);
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }*/
+        System.out.println("Test Test Test");
 
-        char pressed = e.getKeyChar();
-        Tile currentTile = avatar.getLocation();    //the Avatar's current location
+        keyPressed = e.getKeyChar();
+
+        engine.processInput(keyPressed);
+        /*Tile currentTile = avatar.getLocation();    //the Avatar's current location
         Tile moveToTile = currentTile;              //the Tile the Avatar moves to
         int xLoc = map.findXLocation(currentTile);  //get X loc
         int yLoc = map.findYLocation(currentTile);  //get Y loc
@@ -96,6 +106,7 @@ public class Controller extends JPanel implements KeyListener {
             areaView.setCenterTileYIndex(yLoc);
             areaView.setShouldUpdate(true); //Tell the area view it needs to refresh.
         }
+        */
     }
 
     @Override
@@ -106,5 +117,9 @@ public class Controller extends JPanel implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
 
+    }
+
+    public char getKey(){
+        return keyPressed;
     }
 }

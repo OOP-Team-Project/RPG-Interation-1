@@ -36,6 +36,8 @@ public class Entity {
 
     private Occupation occupation;
 
+    private char[] keyPresses = new char[10];   //Holds last 10 chars
+
     //Constructor for initial creation of entity
     public Entity(Occupation o) {
         occupation = o;
@@ -88,6 +90,7 @@ public class Entity {
             return false;   //We couldn't do it... (SFX: "Christmas Time is Here" intro plays)
         }
     }
+
 
     public Stats getBaseStats() {
         return baseStats;

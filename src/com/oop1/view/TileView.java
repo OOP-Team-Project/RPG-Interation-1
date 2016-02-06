@@ -24,7 +24,9 @@ public class TileView extends JPanel {
 
 	public TileView(Tile newTile){
 		theTile = newTile;
+		if(newTile == null){
 
+		}
 		if(theTile.hasItem()){
 			//add(new ItemView(theTile.getItem()));
 			int i = 0;
@@ -43,6 +45,10 @@ public class TileView extends JPanel {
 
 		theLabel = new JLabel("!!!");
 		add(theLabel);
+	}
+
+	public void setTile(Tile newTile){
+		theTile = newTile;
 	}
 
 	public void drawTile() { //pass Tile tile to this method

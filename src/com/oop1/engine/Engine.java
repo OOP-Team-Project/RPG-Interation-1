@@ -1,96 +1,115 @@
 package com.oop1.engine;
 
-
 import com.oop1.entity.Entity;
 import com.oop1.map.Map;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.List;
-
+import com.oop1.map.Tile;
 
 public class Engine {
-    private static GameState state;    //This holds the map and entities (i.e., the data)
 
-    private static List<JPanel> views; //This holds the currentViews (i.e. AreaView, StatusView, etc.)
-    private static JFrame mainFrame;   //This is the frame that binds the universe together.
+    private static final long DESIRED_GAME_TICK_LENGTH_NANOS = 1000000000L / 60L;
 
-    public Engine(GameState newState, List<JPanel> newViews) {    //Constructor for the engine. I guess it will hook up Views/Maps and such?
-        state = newState;
-        views = newViews;
+    private GameState state;
+    private boolean isGameRunning = false;
+    private GameThread gameThread;
+    private Controller controller;
 
-        mainFrame = new JFrame("Team TigerTiger Cat's Awesome RPG Game!");
-        mainFrame.setSize(1200, 600);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setResizable(false);
+    private char[] keyPresses = new char[10];   //Holds last 10 chars
 
-        //mainFrame.addKeyListener(new Controller());
-        //mainFrame.setLayout(new GridLayout(1, 1));
-
-        for(int i = 0; i < newViews.size(); i++) {
-            mainFrame.add(newViews.get(i));
-            mainFrame.setComponentZOrder(newViews.get(i), 0);
-        }
-        //mainFrame.pack();
-        mainFrame.setVisible(true);
+    public Engine(GameState state) {
+        this.state = state;
+        this.controller = new Controller(this);
     }
 
-
-    public void update() {  //Called by RunGame every frame.
-
-        //So my idea for this is to call paint on all of the views and see how that goes.
-        for(int i = 0; i < views.size(); i++)
-            views.get(i).repaint();
-
-        //For debugging:
-        if(views.size() > 2){
-            int i = 0;
-        }
-
-        mainFrame.setVisible(true);
+    public void update() {
+        // TODO: implement this
+        processInput(controller.getKey());
     }
 
-    public static void beginGame(List<JPanel> viewsToAdd, List<Map> mapsToAdd, List<Entity> entitiesToAdd) {
-                                        //Static because it needs to be called by views. If we don't want this, we can find
-                                        // find some other way to link Engine and views (make all views a subclass of
-                                        // a "View" class that includes a reference to an engine would be a good way, I think)
-        // TODO: implement this better
-        for(int i = 0; i < viewsToAdd.size(); i++){
-            views.add(viewsToAdd.get(i));   //We add in any views that the game should start with (AreaView, etc)
-            mainFrame.add(viewsToAdd.get(i));   //And assign them to the main frame (otherwise they won't get drawn!)
-            mainFrame.setComponentZOrder(viewsToAdd.get(i), 0);
-
-        }
-
-        state.setMaps(mapsToAdd);       //We add in the maps that comprise this game.
-        state.setEntities(entitiesToAdd);   //We add in the entities that are in the game.
-
+    public void beginGame() {
+        gameThread = new GameThread();
+        isGameRunning = true;
+        gameThread.start();
     }
 
     public void endGame() {
-        // TODO: implement this
+        // tell the game thread to stop running
+        isGameRunning = false;
+
+        // wait for the game thread to finish its last iteration
+        try {
+            gameThread.join();
+            // possibly prepare some sort of results or something down here.
+        } catch (InterruptedException e) {
+            System.err.println("Failed to get result of game due to an error.");
+            e.printStackTrace();
+        }
     }
 
-
-    public static Entity getPlayer(){
-        return state.getEntities().get(0);
+    public Entity getPlayer() {
+        return state.getAvatar();
     }
 
-
-    public static void addView(JPanel newView){
-        views.add(newView);
-        mainFrame.add(newView);
-        mainFrame.setComponentZOrder(newView, 0);
+    public Map getCurrentMap() {
+        // TODO: FIX THIS HACK
+        return state.getMaps().get(0);
     }
 
-    public static void removeView(JPanel viewToRemove){
-        views.remove(viewToRemove);
-        mainFrame.remove(viewToRemove);
+    public void processInput(char c){
+        for(int i = 0; i < 9; i++){
+            keyPresses[i] = keyPresses[i + 1];
+        }
+        keyPresses[9] = c;
+
+        Entity avatar = state.getAvatar();
+        Map map = state.getMaps().get(0);
+
+
+        Tile currentTile = avatar.getLocation();    //the Avatar's current location
+        Tile moveToTile = currentTile;              //the Tile the Avatar moves to
+        int xLoc = map.findXLocation(currentTile);  //get X loc
+        int yLoc = map.findYLocation(currentTile);  //get Y loc
+
+        if (keyPresses[9] == '1') {
+            moveToTile = map.getTileAtCoordinates(--xLoc, --yLoc);
+        } else if (keyPresses[9] == '2') {
+            moveToTile = map.getTileAtCoordinates(xLoc, --yLoc);
+        } else if (keyPresses[9]  == '3') {
+            moveToTile = map.getTileAtCoordinates(++xLoc, --yLoc);
+        } else if (keyPresses[9]  == '4') {
+            moveToTile = map.getTileAtCoordinates(--xLoc, yLoc);
+        } else if (keyPresses[9]  == '6') {
+            moveToTile = map.getTileAtCoordinates(++xLoc, yLoc);
+        } else if (keyPresses[9]  == '7') {
+            moveToTile = map.getTileAtCoordinates(--xLoc, ++yLoc);
+        } else if (keyPresses[9]  == '8') {
+            moveToTile = map.getTileAtCoordinates(xLoc, ++yLoc);
+        } else if (keyPresses[9]  == '9') {
+            moveToTile = map.getTileAtCoordinates(++xLoc, ++yLoc);
+        } else {
+            return; //a key was pressed that the controller does not recognize
+        }
+
+        avatar.setLocation(moveToTile);
     }
 
+    private class GameThread extends Thread {
 
-    public static Map getCurrentMap(){
-        return state.getMaps().get(0);  //Hacky, hacky thing!!!
+        public void run() {
+            while (isGameRunning) {
+                long startTime = System.nanoTime();
+
+                update();
+                long endTime = System.nanoTime();
+                long elapsed = endTime - startTime;
+
+                try {
+                    sleep(DESIRED_GAME_TICK_LENGTH_NANOS - elapsed);
+                } catch (InterruptedException e) {
+                    System.err.println("The game ended unexpectedly");
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        }
     }
-
 }

@@ -31,6 +31,7 @@ public class DecalView extends JPanel {
         add(jLabel);
         add(Box.createVerticalGlue());
         jLabel.setIcon(imageIcon);
+        setBackground(Color.green);
     }
 
 

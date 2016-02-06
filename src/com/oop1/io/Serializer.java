@@ -203,9 +203,9 @@ public class Serializer {
             String decalType = str.substring(0, str.indexOf(';'));
             int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
             int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
-            if(decalType == "RED_CROSS")
+            if(decalType.equals("RED_CROSS"))
                 decal = new Decal("RED_CROSS");
-            else if(decalType == "GOLD_STAR")
+            else if(decalType.equals("GOLD_STAR"))
                 decal = new Decal("GOLD_STAR");
             else
                 decal = new Decal("SKULL_AND_CROSSBONES");

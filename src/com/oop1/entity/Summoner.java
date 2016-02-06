@@ -20,4 +20,8 @@ public class Summoner extends Occupation {
     public int getBaseHardiness() {
         return 10;
     }
+
+    public String toString() {
+        return "Summoner";
+    }
 }

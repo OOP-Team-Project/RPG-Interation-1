@@ -20,4 +20,8 @@ public class Sneak extends Occupation {
     public int getBaseHardiness() {
         return 15;
     }
+
+    public String toString() {
+        return "Sneak";
+    }
 }

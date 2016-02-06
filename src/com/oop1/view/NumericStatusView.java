@@ -51,4 +51,19 @@ public class NumericStatusView extends JPanel {
         g.fillRect(0, 0, (int)(getWidth() * percentage), getHeight());
     }
 
+    /**
+     * Sets the actual size of this status view by setting all three of minimum, maximum, and preferred sizes.
+     *
+     * This forces the view to actually display at this size when part of a BoxLayout
+     *
+     * @param width
+     * @param height
+     */
+    public void setActualSize(int width, int height) {
+        Dimension barSize = new Dimension(width, height);
+        setMaximumSize(barSize);
+        setMinimumSize(barSize);
+        setPreferredSize(barSize);
+
+    }
 }

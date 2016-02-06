@@ -14,15 +14,14 @@ public class Serializer {
 
     // Serializing functions
     private static String serializeMap(GameState state){
-        Map map = state.getMap().get(0);
+        Map map = state.getMaps().get(0);
         String str = map.toString();
-        System.out.println(str);
 
         return str;
     }
 
     private static String serializeDecals(GameState state){
-        Map map = state.getMap().get(0);
+        Map map = state.getMaps().get(0);
         StringBuilder str = new StringBuilder();
         Tile[][] tiles = map.getTiles();
         for(int row = 0; row < tiles.length; ++row){
@@ -42,7 +41,7 @@ public class Serializer {
     }
 
     private static String serializeItems(GameState state){
-        Map map = state.getMap().get(0);
+        Map map = state.getMaps().get(0);
         StringBuilder str = new StringBuilder();
         StringBuilder takeableStr = new StringBuilder();
         Tile[][] tiles = map.getTiles();
@@ -83,6 +82,70 @@ public class Serializer {
         return str.toString();
     }
 
+    private static String serializeAreaEffects(GameState state){
+        Map map = state.getMaps().get(0);
+        StringBuilder str = new StringBuilder();
+        List<AreaEffect> effectList = map.getAreaEffects();
+        for(AreaEffect effect : effectList){
+            str.append(effect.getEffectName());
+            for(Tile tile : effect.getAffectedTiles()){
+                str.append(";");
+                str.append(map.findXLocation(tile));
+                str.append(",");
+                str.append(map.findYLocation(tile));
+            }
+            if(effect.getDamageAmount() > 0){
+                str.append("-");
+               str.append(effect.getDamageAmount());
+            }
+            str.append("%\n");
+        }
+        return str.toString();
+    }
+
+    private static String serializeEntities(GameState state){
+        List<Entity> entities = state.getEntities();
+        Map map = state.getMaps().get(0);
+        StringBuilder str = new StringBuilder();
+        for(Entity entity : entities){
+            str.append(entity.getOrientation());
+            str.append(";");
+            str.append(map.findXLocation(entity.getLocation()));
+            str.append(",");
+            str.append(map.findYLocation(entity.getLocation()));
+            str.append(";");
+            str.append(entity.getBaseStats().getOccupation().printOccupation());
+            str.append(";");
+            str.append(entity.getBaseStats().getStrength());
+            str.append(";");
+            str.append(entity.getBaseStats().getAgility());
+            str.append(";");
+            str.append(entity.getBaseStats().getIntellect());
+            str.append(";");
+            str.append(entity.getBaseStats().getHardiness());
+            str.append(";");
+            str.append((int)entity.getBaseStats().getMovementSpeed());
+            str.append(";");
+            str.append(entity.getBaseStats().getCurrentMana());
+            str.append(";");
+            str.append(entity.getBaseStats().getCurrentLife());
+            str.append(";");
+            str.append(entity.getBaseStats().getLivesLeft());
+            str.append(";");
+            str.append(entity.getBaseStats().getExperience());
+            str.append("%\n");
+        }
+        return str.toString();
+    }
+
+    private static String serializeInventory(GameState state){
+        List<Entity> entities = state.getEntities();
+        StringBuilder str = new StringBuilder();
+        for(Entity entity : entities){
+            str.append(entity.getInventory().printForSave());
+        }
+        return str.toString();
+    }
 
     // Deserializing functions
     private static Map deserializeMap(String mapData){
@@ -241,6 +304,15 @@ public class Serializer {
         String[] items = inventory.split("%");
         Inventory newInventory = new Inventory();
         for(String str : items){
+            boolean equippable = false, equipIt = false;
+            if(str.substring(0,1).equals("E")) {
+                equippable = true;
+                str = str.substring(1);
+                if(str.substring(0,1).equals("E")){
+                    equipIt = true;
+                    str = str.substring(1);
+                }
+            }
             TakeableItem item = new TakeableItem(new Tile(TerrainType.GRASS));
             String[] itemStats = str.split(";");
             int strength = Integer.parseInt(itemStats[0]);
@@ -249,28 +321,14 @@ public class Serializer {
             int hardiness = Integer.parseInt(itemStats[3]);
             int movementSpeed = Integer.parseInt(itemStats[4]);
             StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
-
+            if(equippable)
+                item.setEquippable(true);
             item.addStatModifier(statMod);
             newInventory.addItem(item);
+            if(equipIt)
+                newInventory.equipItem(item);
         }
         entityList.get(0).setInventory(newInventory);
-    }
-
-    private static void deserializeEquipment(String inventory, List<Entity> entityList){
-        String[] items = inventory.split("%");
-        for(String str : items){
-            TakeableItem item = new TakeableItem(new Tile(TerrainType.GRASS));
-            String[] itemStats = str.split(";");
-            int strength = Integer.parseInt(itemStats[0]);
-            int agility = Integer.parseInt(itemStats[1]);
-            int intellect = Integer.parseInt(itemStats[2]);
-            int hardiness = Integer.parseInt(itemStats[3]);
-            int movementSpeed = Integer.parseInt(itemStats[4]);
-            StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed);
-
-            item.addStatModifier(statMod);
-            entityList.get(0).getInventory().equipItem(item);
-        }
     }
 
     public static String serialize(GameState state) {
@@ -283,19 +341,18 @@ public class Serializer {
         retString.append("!Items on map!\n");
         retString.append(serializeItems(state));
         retString.append("!Area effects!\n");
-        //retString.append(serializeAreaEffects(state));
+        retString.append(serializeAreaEffects(state));
         retString.append("!Entities!\n");
-
+        retString.append(serializeEntities(state));
         retString.append("!Items in inventory!\n");
-
-        retString.append("!Items in equipment!\n");
+        retString.append(serializeInventory(state));
 
         return retString.toString();
     }
 
     public static GameState deserialize(String loadData) {
         Map loadedMap;
-        List<Entity> entityList = new ArrayList<>();
+        List<Entity> entityList;
         List<Map> mapList = new ArrayList<>();
 
         // Split up the map, decals, items, area effects, entities, and inventory
@@ -312,7 +369,6 @@ public class Serializer {
         // Deal with entity data
         entityList = deserializeEntity(data[12], loadedMap);
         deserializeInventory(data[14], entityList);
-        deserializeEquipment(data[16], entityList);
 
         GameState gs = new GameState();
         gs.setMaps(mapList);

@@ -20,4 +20,8 @@ public class Smasher extends Occupation {
     public int getBaseHardiness() {
         return 30;
     }
+
+    public String printOccupation(){
+        return "SMASHER";
+    }
 }

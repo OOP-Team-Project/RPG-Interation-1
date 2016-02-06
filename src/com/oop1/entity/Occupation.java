@@ -15,6 +15,8 @@ public abstract class Occupation {
 
     public abstract void performAbility();
 
+    public abstract String printOccupation();
+
     protected int getBaseStrength() {
         return baseStrength;
     }

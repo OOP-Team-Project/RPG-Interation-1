@@ -22,6 +22,13 @@ public class LevelUp extends AreaEffect {
       return;
     }
 
+    public String getEffectName(){
+        return "levelUp";
+    }
+
+    public int getDamageAmount(){
+        return 0;
+    }
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("This LevelUp affects tiles: ");

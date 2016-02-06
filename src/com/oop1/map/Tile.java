@@ -63,9 +63,4 @@ public class Tile {
         else
             return "W";
     }
-
-    public Item getItem(){
-        return item;
-    }
-
 }

@@ -14,6 +14,4 @@ effect_type;x,y-amount(if HealDamage or TakeDamage)%			            <-- Area Effe
 !Entities!
 orientation;location;occupation;strength;agility;intellect;hardiness;movementSpeed;currentMana;currentHealth;livesLeft;experience%			<-- Entities
 !Items in inventory!
-strength;agility;intellect;hardiness;movementSpeed%			<-- Items in inventory
-!Items in equipment!
-strength;agility;intellect;hardiness;movementSpeed%           <-- Items in equipment
+<E<E>>strength;agility;intellect;hardiness;movementSpeed%			<-- Items in inventory;1st E denotes it's equippable;2nd E denotes it is equipped

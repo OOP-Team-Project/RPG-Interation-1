@@ -8,4 +8,8 @@ public class Obstacle extends Item {
         // TODO: make this do something
 
     }
+
+    public String toString(){
+        return "obstacle";
+    }
 }

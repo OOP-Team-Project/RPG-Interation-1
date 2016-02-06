@@ -5,9 +5,7 @@ import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,9 +29,6 @@ public class SaveManager {
         return instance;
     }
 
-    // This will open file "saveName" and pull out all the data.
-    // It will then call deserialize on it to get it into a game state
-    // It will then return that game state
     public GameState loadGame(String saveName) throws IOException {
         StringBuilder loadedGameData = new StringBuilder();
         Scanner s = null;
@@ -41,14 +36,17 @@ public class SaveManager {
         while(s.hasNextLine()){
             loadedGameData.append(s.nextLine());
         }
-        if(s != null)
-            s.close();
+        s.close();
 
         return Serializer.deserialize(loadedGameData.toString());
     }
 
-    public void saveGame(GameState state, String saveName) {
-
+    public void saveGame(GameState state, String saveName) throws IOException {
+        File output = new File(saveName);
+        PrintWriter printer = new PrintWriter(output);
+        String saveGameData = Serializer.serialize(state);
+        printer.write(saveGameData);
+        printer.close();
     }
 
     public List<String> getAllSaveNames() {

@@ -12,6 +12,14 @@ public class Map {
         tiles = newTiles;
     }
 
+    public Tile[][] getTiles(){
+        return tiles;
+    }
+
+    public List<AreaEffect> getAreaEffects(){
+        return areaEffects;
+    }
+
     public static Map generateMap() {
         return new Map();
     }
@@ -35,7 +43,7 @@ public class Map {
             for(int j = 0; j < tiles[i].length; ++j){
                 str.append(tiles[i][j]);
             }
-            str.append("\n");
+            str.append("%\n");
         }
         return str.toString();
     }

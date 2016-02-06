@@ -31,12 +31,27 @@ public class Tile {
             return true;
     }
 
+    public Decal getDecal(){
+        return decal;
+    }
+
+    public boolean hasDecal(){
+        if(decal != null)
+            return true;
+        else
+            return false;
+    }
+
     public void removeItem(){
         item = null;
     }
 
     public void addItem(Item newItem){
         item = newItem;
+    }
+
+    public Item getItem(){
+        return item;
     }
 
     public String toString(){

@@ -1,19 +1,19 @@
-!
+!Map!
 GGMM%					<-- Map grid
 GGWM%
 GWWG%
 GWGG%
-!
+!Decals!
 decal_type;x,y%		<-- Decals on map
-!
+!Items on map!
 item_type;x,y%			<-- Obstacle, interactive, one-shot items
-!
-x,y;itemName;strength;agility;intellect;hardiness;movementSpeed%            <-- Takeable items on map
-!
+!Takeable items on map!
+x,y;strength;agility;intellect;hardiness;movementSpeed%            <-- Takeable items on map
+!Area effects!
 effect_type;x,y-amount(if HealDamage or TakeDamage)%			            <-- Area Effects on map
-!
+!Entities!
 orientation;location;occupation;strength;agility;intellect;hardiness;movementSpeed;currentMana;currentHealth;livesLeft;experience%			<-- Entities
-!
-itemName;strength;agility;intellect;hardiness;movementSpeed%			<-- Items in inventory
-!
-itemName;strength;agility;intellect;hardiness;movementSpeed%           <-- Items in equipment
+!Items in inventory!
+strength;agility;intellect;hardiness;movementSpeed%			<-- Items in inventory
+!Items in equipment!
+strength;agility;intellect;hardiness;movementSpeed%           <-- Items in equipment

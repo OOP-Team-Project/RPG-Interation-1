@@ -1,5 +1,7 @@
 package com.oop1.view;
 
+import javax.swing.*;
+
 import java.awt.*;
 
 import com.oop1.engine.Engine;
@@ -65,20 +67,20 @@ public class TileView extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		//based off tileTerrain set color
-		if(theTile != null)
+		if (theTile != null)
 			tileTerrain = theTile.toString();
 		if (tileTerrain.equals("^")) {
 			g.setColor(Color.gray);
 		} else if (tileTerrain.equals("_")) {
 			g.setColor(Color.green);
-		} else if (tileTerrain.equals("~")){
+		} else if (tileTerrain.equals("~")) {
 			g.setColor(Color.blue);
-		} else{
+		} else {
 			g.setColor(Color.black);
 		}
 
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		g.fillRect(0, 0, 60, 60);
+
 	}
-	
 }

@@ -27,6 +27,8 @@ public class GameState {
         this.maps = maps;
     }
 
+    public Entity getAvatar() { return entities.get(0); }
+
     public List<Entity> getEntities() {
         return entities;
     }

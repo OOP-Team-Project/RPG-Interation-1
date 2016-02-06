@@ -22,6 +22,10 @@ public class Smasher extends Occupation {
         return 30;
     }
 
+    public String toString() {
+        return "Smasher";
+    }
+
     public String printOccupation(){
         return "SMASHER";
     }

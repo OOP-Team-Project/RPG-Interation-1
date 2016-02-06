@@ -1,6 +1,6 @@
 package com.oop1.view;
 
-//import build.tools.javazic.Main;
+import com.oop1.RunGame;
 import com.oop1.engine.Engine;
 import com.oop1.engine.GameState;
 
@@ -14,100 +14,55 @@ public class MainMenuView extends JPanel {
     private JLabel headerLabel;
     private JLabel statusLabel;
 
-    private JButton okButton;
-    private JButton submitButton;
-    private JButton cancelButton;
+    private JButton newGameButton;
+    private JButton loadButton;
+    private JButton quitButton;
 
-    private boolean testVariable = false;
-    private boolean shouldHide = false;
+    RunGame delegate;
 
-    private GameState game;
-
-    public MainMenuView(){}
-
-    public MainMenuView(GameState game){
-        this.game = game;
+    public MainMenuView(RunGame delegate) {
+        this.delegate = delegate;
+        setLayout(new FlowLayout());
+        createMenu();
     }
 
-    private void MainMenuView(){
-
+    private void createMenu() {
         headerLabel = new JLabel("",JLabel.CENTER );
         statusLabel = new JLabel("",JLabel.CENTER);
 
         statusLabel.setSize(350,100);
 
-        this.setLayout(new FlowLayout());
+        setLayout(new FlowLayout());
 
-        //showEventDemo();
-    }
+        newGameButton = new JButton("New Game");
+        newGameButton.setActionCommand("New Game");
+        newGameButton.addActionListener(new ButtonClickListener());
 
-    private void showEventDemo(){
-        if(testVariable == false){
+        loadButton = new JButton("Load Game");
+        loadButton.setActionCommand("Load Game");
+        loadButton.addActionListener(new ButtonClickListener());
 
-            headerLabel = new JLabel("",JLabel.CENTER );
-            statusLabel = new JLabel("",JLabel.CENTER);
+        quitButton = new JButton("Quit");
+        quitButton.setActionCommand("Quit");
+        quitButton.addActionListener(new ButtonClickListener());
 
-            statusLabel.setSize(350,100);
-
-            //headerLabel.setText("Control in action: Button");
-
-            this.setLayout(new FlowLayout());
-
-            okButton = new JButton("New Game");
-            submitButton = new JButton("Load Game");
-            cancelButton = new JButton("Quit");
-
-            okButton.setActionCommand("New Game");
-            submitButton.setActionCommand("Load Game");
-            cancelButton.setActionCommand("Quit");
-
-            okButton.addActionListener(new ButtonClickListener());
-            submitButton.addActionListener(new ButtonClickListener());
-            cancelButton.addActionListener(new ButtonClickListener());
-
-            this.add(okButton);
-            this.add(submitButton);
-            this.add(cancelButton);
-
-            this.add(this.statusLabel);
-            this.add(this.headerLabel);
-
-            testVariable = true;
-        }
-
-
-        //this.add(headerLabel);
+        add(newGameButton);
+        add(loadButton);
+        add(quitButton);
+        add(statusLabel);
+        add(headerLabel);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-
-        if(shouldHide == true){
-            this.remove(headerLabel);
-            this.remove(okButton);
-            this.remove(submitButton);
-            this.remove(cancelButton);
-            this.remove(statusLabel);
-        } else{
-            showEventDemo();
-        }
-
-    }
-
-    private void removeFromEngine(){
-        Engine.removeView(this);    //Pops this view from the thing
     }
 
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
             if( command.equals( "New Game" ))  {
-                //statusLabel.setText("New Game Button clicked.");
-                removeFromEngine();
-                Engine.addView(new CharacterCreationView(game));
-                shouldHide = true;
+                delegate.createNewGame();
             }
             else if( command.equals( "Load Game" ) )  {
                 statusLabel.setText("Load Game Button clicked.");

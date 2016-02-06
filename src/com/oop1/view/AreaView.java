@@ -1,6 +1,7 @@
 package com.oop1.view;
 
 import com.oop1.engine.Engine;
+import com.oop1.entity.Entity;
 import com.oop1.map.Map;
 import com.oop1.map.Tile;
 
@@ -13,46 +14,64 @@ import javax.swing.JPanel;
  * Displays the subset of visible tiles to the player
  */
 public class AreaView extends JPanel {
-	//Game map -- array of Tiles
+    //Game map -- array of Tiles
 	Tile[] testAreaView = new Tile[200];
 	Tile newTile;
 
 	private boolean isInitialized = false; //Doing this because, for some reason, constructors aren't working right...
-	//private Engine engine;
 	private Map map;
+    private Entity entityToFollow;
 
 	private int centerTileXIndex, centerTileYIndex = 0;
 
-	public AreaView(Map newMap) {
-
+	public AreaView(Map newMap, Entity entityToFollow) {
 		map = newMap;
+        this.entityToFollow = entityToFollow;
 		setLayout(new GridLayout(0, 21)); //lays the tiles from left to right
-
+        setMinimumSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(600, 600));
 	}
 
 
-	private void initializeView(){
+	private void initializeView() {
 		//setLayout(new GridLayout(0, 10));
 
+<<<<<<< HEAD
 		Tile playerTile = Engine.getPlayer().getLocation();
 
 		centerTileXIndex = map.findXLocation(playerTile);
 		centerTileYIndex = map.findYLocation(playerTile);
+=======
+		centerTileXIndex = map.findXLocation(entityToFollow.getLocation());
+		centerTileYIndex = map.findYLocation(entityToFollow.getLocation());
+>>>>>>> 1b41864984775e42710dda7f16c6d1f73a279e14
 
 		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
 			if(i < 0 || i >= map.getYBoundary()){
 				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
+<<<<<<< HEAD
 					add(new com.oop1.view.TileView(false));
+=======
+					add(new TileView());
+>>>>>>> 1b41864984775e42710dda7f16c6d1f73a279e14
 				}
 			}
 			else{
 				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
 					if(j < 0 || j >= map.getXBoundary()){
+<<<<<<< HEAD
 						add(new com.oop1.view.TileView(false));
 					}
 					else{
 						com.oop1.view.TileView newTile = new com.oop1.view.TileView(map.getTileAtCoordinates(i, j));
 						newTile.theLabel.setText((new Integer(i).toString() + " " + new Integer(j).toString()));
+=======
+						add(new TileView());
+					}
+					else{
+						TileView newTile = new TileView();
+//						newTile.setText((new Integer(i).toString() + " " + new Integer(j).toString()));
+>>>>>>> 1b41864984775e42710dda7f16c6d1f73a279e14
 						//add(new TileView(map.getTileAtCoordinates(i, j)));
 						add(newTile);
 					}
@@ -60,7 +79,11 @@ public class AreaView extends JPanel {
 			}
 		}
 
+<<<<<<< HEAD
 		com.oop1.view.TileView nextTile;
+=======
+		TileView nextTile;
+>>>>>>> 1b41864984775e42710dda7f16c6d1f73a279e14
 		/*
 		for(int i = 1; i < 10; i++){
 			for(int j = 1; j < 5; j++) {

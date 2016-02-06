@@ -56,8 +56,6 @@ public class Map {
     }
 
     public int findXLocation(Tile toFind){
-
-
         for(int i = 0; i < tiles.length; i++){
             for(int j = 0; j < tiles[i].length; j++){
                 if(tiles[i][j] == toFind)

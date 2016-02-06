@@ -28,11 +28,6 @@ public class TileView extends JPanel{
 
 	public TileView(Tile newTile){
 		theTile = newTile;
-//		Entity avatar = Engine.getPlayer();
-//
-//		if(avatar.getLocation() == theTile){
-//			add(new EntityView(avatar));
-//		}
 
 		if(theTile.hasItem()){
 			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -40,15 +35,15 @@ public class TileView extends JPanel{
 			setPreferredSize(new Dimension(60,60));
 			add(new ItemView(theTile.getItem()));
 			add(Box.createVerticalGlue());
-			int i = 0;
 		}
 
 		if(theTile.hasDecal()){
+			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+			setMaximumSize(new Dimension(60,60));
+			setPreferredSize(new Dimension(60,60));
 			add(new DecalView(theTile.getDecal()));
+			add(Box.createVerticalGlue());
 		}
-
-		theLabel = new JLabel("!!!");
-		add(theLabel);
 	}
 
 	public TileView(boolean thing){	//Used to do blank tils.

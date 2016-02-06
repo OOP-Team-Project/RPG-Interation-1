@@ -1,6 +1,18 @@
-package com.oop1.view;
+// StringStatusView.java
 
-import javax.swing.*;
+// Created on 2/3/2016 by Nicole Kulakowski
 
-public class StringStatusView extends JPanel {
+package com.oop1.View;
+import java.awt.*;
+
+public class StringStatusView extends View{
+
+	private Stats stats;
+
+	@override
+	public void draw( Graphics g ){
+		//TODO
+	}
+
+
 }

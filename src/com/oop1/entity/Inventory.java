@@ -50,6 +50,7 @@ public class Inventory {
         }
     }
 
+
     public void unequipItem(TakeableItem item) {
         if (equipment.contains(item)) {
             equipment.remove(item);
@@ -77,15 +78,7 @@ public class Inventory {
             }
         }
     }
-
-    public void addItem(TakeableItem item) {
-        items.add(item);
-    }
-
-    public String toString() {
-        return "Inventory: " + items.toString() + "\nEquipped: " + equipment.toString();
-    }
-
+}
     public String printForSave(){
         StringBuilder str = new StringBuilder();
         for (TakeableItem item : items) {

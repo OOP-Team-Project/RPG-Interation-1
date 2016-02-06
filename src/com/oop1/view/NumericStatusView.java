@@ -1,7 +1,14 @@
-package com.oop1.view;
+// NumericStatusView.java
 
-import javax.swing.*;
+// Created on 2/3/2016 by Nicole Kulakowski
 
-public class NumericStatusView extends JPanel {
+public class NumericStatusView{
+
+	private Stats stats;
+
+	public void drawNumericStats(){
+
+	}
+
 
 }

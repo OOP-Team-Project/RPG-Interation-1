@@ -203,13 +203,13 @@ public class Serializer {
             String decalType = str.substring(0, str.indexOf(';'));
             int x = Integer.parseInt(str.substring(str.indexOf(';')+1, str.indexOf(',')));
             int y = Integer.parseInt(str.substring(str.indexOf(',')+1));
-            //if(decalType == "RED_CROSS")
-            //    decal = Decal.RED_CROSS;
-            //else if(decalType == "GOLD_STAR")
-            //    decal = Decal.GOLD_STAR;
-            //else
-            //    decal = Decal.SKULL_AND_CROSSBONES;
-            //map.getTileAtCoordinates(x, y).setDecal(decal);
+            if(decalType.equals("RED_CROSS"))
+                decal = new Decal("RED_CROSS");
+            else if(decalType.equals("GOLD_STAR"))
+                decal = new Decal("GOLD_STAR");
+            else
+                decal = new Decal("SKULL_AND_CROSSBONES");
+            map.getTileAtCoordinates(x, y).setDecal(decal);
         }
     }
 
@@ -306,12 +306,18 @@ public class Serializer {
             entity.setLocation(map.getTileAtCoordinates(x,y));
 
             Stats.StatsBuilder sb = new Stats.StatsBuilder();
-            if(stats[2].equals("SMASHER"))
+            if(stats[2].equals("SMASHER")) {
                 sb.occupation(new Smasher());
-            else if(stats[2].equals("SUMMONER"))
+                entity.setOccupation(new Smasher());
+            }
+            else if(stats[2].equals("SUMMONER")) {
                 sb.occupation(new Summoner());
-            else
+                entity.setOccupation(new Summoner());
+            }
+            else {
                 sb.occupation(new Sneak());
+                entity.setOccupation(new Sneak());
+            }
 
             sb.strength(Integer.parseInt(stats[3]));
             sb.agility(Integer.parseInt(stats[4]));

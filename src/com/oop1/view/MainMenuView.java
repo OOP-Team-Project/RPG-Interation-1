@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MainMenuView extends JPanel {
 
@@ -30,7 +31,7 @@ public class MainMenuView extends JPanel {
         headerLabel = new JLabel("",JLabel.CENTER );
         statusLabel = new JLabel("",JLabel.CENTER);
 
-        statusLabel.setSize(350,100);
+        statusLabel.setSize(800,600);
 
         setLayout(new FlowLayout());
 
@@ -66,9 +67,12 @@ public class MainMenuView extends JPanel {
             }
             else if( command.equals( "Load Game" ) )  {
                 statusLabel.setText("Load Game Button clicked.");
+                try {
+                    delegate.loadGame();
+                }catch(IOException exception){}
             }
             else  {
-                statusLabel.setText("Cancel Button clicked.");
+                System.exit(0);
             }
         }
     }

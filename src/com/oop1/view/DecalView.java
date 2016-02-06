@@ -7,7 +7,9 @@ import java.awt.*;
 
 import java.awt.Color;
 
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 
@@ -18,31 +20,18 @@ public class DecalView extends JPanel {
     //private BufferedImage skull;
 
     public DecalView(Decal newDecal) {
-
-        //duck = Decal.DUCK[0][0];
-        //skull = Decal.SKULL_AND_CROSSBONES[0][0];
         decal = newDecal;
-    }
-
-    public void draw(Graphics graphics) {
-        // TODO: implement this
-
-        //graphics.drawImage(duck, 50, 50, null);
-
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-
-        //duck = Decal.DUCK[0][0];
-
-        g.drawImage(decal.getImage()[0][0], 0, 0, null);
-
-        //for(int i = 0; i < 50; i++){
-        //	tiles[i].paintComponent(g);
-        //}
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        BufferedImage image = null;
+        image = decal.getImage()[0][0];
+        ImageIcon imageIcon = new ImageIcon(image);
+        JLabel jLabel = new JLabel();
+        jLabel.setMaximumSize(new Dimension(60,60));
+        jLabel.setPreferredSize(new Dimension(60,60));
+        add(jLabel);
+        add(Box.createVerticalGlue());
+        jLabel.setIcon(imageIcon);
+        setBackground(Color.green);
     }
 
 

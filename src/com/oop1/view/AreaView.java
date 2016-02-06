@@ -43,17 +43,17 @@ public class AreaView extends JPanel {
 		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
 			if(i < 0 || i >= map.getYBoundary()){
 				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
-					add(new com.oop1.View.TileView(false));
+					add(new TileView());
 				}
 			}
 			else{
 				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
 					if(j < 0 || j >= map.getXBoundary()){
-						add(new com.oop1.View.TileView(false));
+						add(new TileView());
 					}
 					else{
-						com.oop1.View.TileView newTile = new com.oop1.View.TileView(map.getTileAtCoordinates(i, j));
-						newTile.theLabel.setText((new Integer(i).toString() + " " + new Integer(j).toString()));
+						TileView newTile = new TileView();
+//						newTile.setText((new Integer(i).toString() + " " + new Integer(j).toString()));
 						//add(new TileView(map.getTileAtCoordinates(i, j)));
 						add(newTile);
 					}
@@ -61,7 +61,7 @@ public class AreaView extends JPanel {
 			}
 		}
 
-		com.oop1.View.TileView nextTile;
+		TileView nextTile;
 		/*
 		for(int i = 1; i < 10; i++){
 			for(int j = 1; j < 5; j++) {

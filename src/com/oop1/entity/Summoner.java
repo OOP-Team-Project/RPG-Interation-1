@@ -22,6 +22,10 @@ public class Summoner extends Occupation {
         return 10;
     }
 
+    public String toString() {
+        return "Summoner";
+	}
+
     public String printOccupation(){
         return "SUMMONER";
     }

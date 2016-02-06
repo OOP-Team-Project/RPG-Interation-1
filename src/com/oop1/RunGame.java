@@ -1,4 +1,5 @@
 package com.oop1;
+
 import com.oop1.engine.GameState;
 import com.oop1.io.SaveManager;
 import com.oop1.view.AreaView;
@@ -23,7 +24,6 @@ public class RunGame implements Runnable {
                                 // of the multitude of views.
 
     public RunGame(){   //Constructor for this class.
-
     }
 
 

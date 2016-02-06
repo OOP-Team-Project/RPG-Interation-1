@@ -7,7 +7,9 @@ import com.oop1.map.Tile;
 import java.awt.event.*;
 
 public class Controller implements KeyListener {
-    Entity avatar = new Entity(new Smasher(), new Tile(TerrainType.GRASS)); //avatar
+    //Entity avatar = new Entity(new Smasher(), new Tile(TerrainType.GRASS)); //avatar
+    Entity avatar = Engine.getPlayer();
+
     @Override
     public void keyPressed(KeyEvent e) {
         char pressed = e.getKeyChar();

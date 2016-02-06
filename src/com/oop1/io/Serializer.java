@@ -264,7 +264,7 @@ public class Serializer {
             String effectType = str.substring(0, str.indexOf(';'));
             str = str.substring(str.indexOf(';')+1);
             String[] locations = str.split(",");
-            Set<Tile> tiles = new HashSet<>();
+            Set<Tile> tiles = new HashSet<Tile>();
             int x, y;
             for(int i = 0; i < locations.length; ++i){
                 x = Integer.parseInt(locations[i]);
@@ -293,8 +293,8 @@ public class Serializer {
 
     private static List<Entity> deserializeEntity(String entityData, Map map){
         if(entityData.substring(0,1).equals("$"))
-            return new ArrayList<>();
-        List<Entity> entityList = new ArrayList<>();
+            return new ArrayList<Entity>();
+        List<Entity> entityList = new ArrayList<Entity>();
         String[] entities = entityData.split("%");
         for(String str : entities){
             Entity entity = new Entity();
@@ -386,7 +386,7 @@ public class Serializer {
     public static GameState deserialize(String loadData) {
         Map loadedMap;
         List<Entity> entityList;
-        List<Map> mapList = new ArrayList<>();
+        List<Map> mapList = new ArrayList<Map>();
 
         // Split up the map, decals, items, area effects, entities, and inventory
         String[] data = loadData.split("!");

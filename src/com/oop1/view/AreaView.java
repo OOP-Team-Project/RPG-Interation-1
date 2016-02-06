@@ -67,43 +67,11 @@ public class AreaView extends JPanel {
 				//Check the player position??
 				//Calculate which coordinates we need to display
 
+				int xIndex = playerTile.getXLocation();
+				int yIndex = playerTile.getYLocation();
 
-				if(centerTileXIndex - i > 0 && centerTileXIndex + i < map.getXBoundary()
-						&& centerTileYIndex - i > 0 && centerTileYIndex + i < map.getYBoundary()) {
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex - i, centerTileYIndex - j));
-					add(nextTile);
-					nextTile.setLocation(60*(5 - i), 60*(10 - j));
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex + i, centerTileYIndex - j));
-					add(nextTile);
-					nextTile.setLocation(60*(5 + i), 60*(10 - j));
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex - i, centerTileYIndex + j));
-					add(nextTile);
-					nextTile.setLocation(60*(5 - i), 60*(10 + j));
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex + i, centerTileYIndex + j));
-					add(nextTile);
-					nextTile.setLocation(60*(5 + i), 60*(10 + j));
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex, centerTileYIndex - j));
-					add(nextTile);
-					nextTile.setLocation(60*(5), 60*(10 - j));
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex, centerTileYIndex + j));
-					add(nextTile);
-					nextTile.setLocation(60*(5), 60*(10 - j));
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex - i, centerTileYIndex));
-					add(nextTile);
-					nextTile.setLocation(60*(5 - i), 60*(10));
-
-					nextTile = new TileView(map.getTileAtCoordinates(centerTileXIndex + i, centerTileYIndex));
-					add(nextTile);
-					nextTile.setLocation(60*(5 + i), 60*(10 - j));
-
-				}
+				if(xIndex > 0 && xIndex < map)
+				add(new TileView(map.getTileAtCoordinates(, 1)));//tiles[i] = new TileView();
 			}
 		}
 		*/

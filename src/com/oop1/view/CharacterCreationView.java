@@ -153,7 +153,7 @@ public class CharacterCreationView extends JPanel {
                     }
 
                     if(i == 25 && j == 25)
-                        newTile.setDecal(new Decal());
+                        newTile.setDecal(new Decal("DUCK"));
 
                     defaultTiles[i][j] = newTile;
                 }

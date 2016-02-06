@@ -14,20 +14,20 @@ import javax.imageio.ImageIO;
 public class DecalView extends JPanel {
     private Decal decal;
 
-    private BufferedImage duck;  // duck is for testing functionality
-    private BufferedImage skull;
+    //private BufferedImage duck;  // duck is for testing functionality
+    //private BufferedImage skull;
 
-    public DecalView() {
+    public DecalView(Decal newDecal) {
 
-        duck = Decal.DUCK[0][0];
-        skull = Decal.SKULL_AND_CROSSBONES[0][0];
-
+        //duck = Decal.DUCK[0][0];
+        //skull = Decal.SKULL_AND_CROSSBONES[0][0];
+        decal = newDecal;
     }
 
     public void draw(Graphics graphics) {
         // TODO: implement this
 
-        graphics.drawImage(duck, 50, 50, null);
+        //graphics.drawImage(duck, 50, 50, null);
 
     }
 
@@ -36,9 +36,9 @@ public class DecalView extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        duck = Decal.DUCK[0][0];
+        //duck = Decal.DUCK[0][0];
 
-        g.drawImage(duck, 0, 0, null);
+        g.drawImage(decal.getImage()[0][0], 0, 0, null);
 
         //for(int i = 0; i < 50; i++){
         //	tiles[i].paintComponent(g);

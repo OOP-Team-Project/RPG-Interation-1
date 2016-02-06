@@ -30,7 +30,7 @@ public class TileView extends JPanel {
 		}
 
 		if(theTile.hasDecal()){
-			add(new DecalView());
+			add(new DecalView(theTile.getDecal()));
 		}
 
 		theLabel = new JLabel("!!!");

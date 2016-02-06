@@ -10,6 +10,8 @@ public class EntityView extends JPanel {
 
     public EntityView(Entity entity) {
         this.entity = entity;
+
     }
+
 
 }

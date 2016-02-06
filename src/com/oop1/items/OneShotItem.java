@@ -19,4 +19,8 @@ public class OneShotItem extends Item {
 
     }
 
+    public String toString(){
+        return "oneShot";
+    }
+
 }

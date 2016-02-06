@@ -1,7 +1,7 @@
 package com.oop1.entity;
 
+import com.oop1.items.Item;
 import com.oop1.items.TakeableItem;
-
 
 import java.util.*;
 
@@ -17,6 +17,7 @@ public class Inventory {
         items = new ArrayList<TakeableItem>();
         equipment = new HashSet<TakeableItem>();
     }
+
     /**
      * Get all the items in this inventory
      *
@@ -24,7 +25,9 @@ public class Inventory {
      * modifications to the inventory should be performed
      * via the other methods on this class.
      */
-    public Collection<TakeableItem> getAllItems() { return Collections.unmodifiableCollection(items); }
+    public Collection<TakeableItem> getAllItems() {
+        return Collections.unmodifiableCollection(items);
+    }
 
     /**
      * Get all the equipped items
@@ -34,7 +37,9 @@ public class Inventory {
      * via the other methods on this class.
      */
 
-    public Collection<TakeableItem> getEquippedItems() { return Collections.unmodifiableCollection(equipment); }
+    public Collection<TakeableItem> getEquippedItems() {
+        return Collections.unmodifiableCollection(equipment);
+    }
 
     public void equipItem(TakeableItem item) {
         if (items.contains(item)) {
@@ -79,6 +84,43 @@ public class Inventory {
 
     public String toString() {
         return "Inventory: " + items.toString() + "\nEquipped: " + equipment.toString();
+    }
+
+    public String printForSave(){
+        StringBuilder str = new StringBuilder();
+        for (TakeableItem item : items) {
+            if(item.isEquippable())
+                str.append("E");
+            str.append(item.getStatModifiers().get(0).getStrengthModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getAgilityModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getIntellectModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getHardinessModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getMovementModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getLivesLeftModifier());
+            str.append("%\n");
+        }
+        for (TakeableItem item : equipment) {
+            str.append("EE");
+            str.append(item.getStatModifiers().get(0).getStrengthModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getAgilityModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getIntellectModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getHardinessModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getMovementModifier());
+            str.append(";");
+            str.append(item.getStatModifiers().get(0).getLivesLeftModifier());
+            str.append("%\n");
+        }
+
+        return str.toString();
     }
 
 //    public static void main(String[] args) {

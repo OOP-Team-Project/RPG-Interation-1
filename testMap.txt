@@ -1,27 +1,26 @@
-!
-GGMM%
-GGWM%
-GWWG%
-GWGG%
-!
+!Map!
+__^^%
+__~^%
+_~~_%
+_~__%
+!Decals!
 RED_CROSS;2,3%
 GOLD_STAR;1,1%
 SKULL_AND_CROSSBONES;3,0%
-!
+!Items on map!
 interactive;2,2%
 oneShot;0,0%
 obstacle;3,3%
-!
-1,2;potion;4;1;5;2;7%
-!
+!Takeable items on map!
+1,2;4;1;5;2;7;1%
+!Area effects!
 healDamage;1,3,2,2,1,1-20%
 takeDamage;0,3-10%
 instantDeath;2,1%
 levelUp;3,2%
-!
-90;0,1;SMASHER;10;4;3;11;5;84;99;3;64;%
-!
-helmet;10;3;1;3;4%
-sword;0;2;4;1;2%
-!
-staff;2;4;2;1;1%
+!Entities!
+90;0,1;SMASHER;10;4;3;11;5;84;99;3;64%
+!Items in inventory!
+E10;3;1;3;4;1%
+0;2;4;1;2;1%
+EE2;4;2;1;1;1%

@@ -315,7 +315,7 @@ public class Serializer {
         deserializeEquipment(data[16], entityList);
 
         GameState gs = new GameState();
-        gs.setMap(mapList);
+        gs.setMaps(mapList);
         gs.setEntities(entityList);
 
         return gs;

@@ -12,6 +12,7 @@ public class StatusView extends JPanel {
     private Entity avatar;
 
     public StatusView(Entity avatar) {
+
         this.avatar = avatar;
     }
 }

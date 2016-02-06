@@ -81,4 +81,9 @@ public class Engine {
         mainFrame.remove(viewToRemove);
     }
 
+
+    public static Map getCurrentMap(){
+        return state.getMaps().get(0);  //Hacky, hacky thing!!!
+    }
+
 }

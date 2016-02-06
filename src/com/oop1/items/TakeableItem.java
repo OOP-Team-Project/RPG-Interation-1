@@ -4,16 +4,17 @@ import com.oop1.entity.Entity;
 import com.oop1.map.Tile;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 public class TakeableItem extends Item {
 
     private ArrayList<StatModifier> statModifiers = new ArrayList<StatModifier>();
     private boolean equippable = false;
     private Tile loc;
+    private String name;
 
-    public TakeableItem(){}
+    public TakeableItem() {
+
+    }
 
     public TakeableItem(Tile tile) {
         loc = tile;
@@ -25,8 +26,6 @@ public class TakeableItem extends Item {
 
     @Override
     public void interact(Entity entity) {
-        // TODO: implement this
-        //must still remove item from the tile
         loc.removeItem();
         entity.addToInventory(this);
     }
@@ -45,5 +44,10 @@ public class TakeableItem extends Item {
 
     public String toString(){
         return "takeableItem";
+    }
+
+    public String getName() {
+        if (name == null) { return "Unnamed Item"; }
+        return name;
     }
 }

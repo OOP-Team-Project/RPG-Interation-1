@@ -1,6 +1,5 @@
 package com.oop1.entity;
 
-import com.oop1.items.Item;
 import com.oop1.items.TakeableItem;
 
 import java.util.*;
@@ -25,8 +24,8 @@ public class Inventory {
      * modifications to the inventory should be performed
      * via the other methods on this class.
      */
-    public Collection<TakeableItem> getAllItems() {
-        return Collections.unmodifiableCollection(items);
+    public List<TakeableItem> getAllItems() {
+        return Collections.unmodifiableList(items);
     }
 
     /**
@@ -44,17 +43,14 @@ public class Inventory {
     public void equipItem(TakeableItem item) {
         if (items.contains(item)) {
             if (item.isEquippable()) {
-                items.remove(item);
                 equipment.add(item);
             }
         }
     }
 
-
     public void unequipItem(TakeableItem item) {
         if (equipment.contains(item)) {
             equipment.remove(item);
-            items.add(item);
         }
     }
 

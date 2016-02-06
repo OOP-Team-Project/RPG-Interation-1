@@ -354,11 +354,11 @@ public class Serializer {
             int movementSpeed = Integer.parseInt(itemStats[4]);
             int livesLeft = Integer.parseInt(itemStats[5]);
             StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed, livesLeft);
-            if(equippable)
+            if (equippable)
                 item.setEquippable(true);
             item.addStatModifier(statMod);
             newInventory.addItem(item);
-            if(equipIt)
+            if (equipIt)
                 newInventory.equipItem(item);
         }
         entityList.get(0).setInventory(newInventory);

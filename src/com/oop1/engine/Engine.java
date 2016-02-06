@@ -1,5 +1,6 @@
 package com.oop1.engine;
 
+import com.oop1.RunGame;
 import com.oop1.entity.Entity;
 import com.oop1.map.Map;
 
@@ -11,14 +12,18 @@ public class Engine {
     private boolean isGameRunning = false;
     private GameThread gameThread;
     private Controller controller;
+    private RunGame delegate;
 
-    public Engine(GameState state) {
+    public Engine(GameState state, RunGame delegate) {
         this.state = state;
         this.controller = new Controller(this);
+        this.delegate = delegate;
+        delegate.registerController(controller);
     }
 
     public void update() {
         // TODO: implement this
+        delegate.redraw();
     }
 
     public void beginGame() {

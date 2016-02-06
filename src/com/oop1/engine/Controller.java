@@ -19,6 +19,7 @@ public class Controller implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println("moved");
         char pressed = e.getKeyChar();
         Tile currentTile = avatar.getLocation();    //the Avatar's current location
         Tile moveToTile = currentTile;              //the Tile the Avatar moves to

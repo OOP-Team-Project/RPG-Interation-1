@@ -1,5 +1,6 @@
 package com.oop1;
 
+import com.oop1.engine.Controller;
 import com.oop1.engine.Engine;
 import com.oop1.engine.GameState;
 import com.oop1.entity.Occupation;
@@ -57,6 +58,14 @@ public class RunGame implements Runnable {
     public void startNewGame(Occupation o) throws IOException {
         System.out.println("Starting new game");
         GameState game = SaveManager.getInstance().createNewGameState(o);
-        startGame(new Engine(game));
+        startGame(new Engine(game, this));
+    }
+
+    public void redraw() {
+        gameWindow.repaint();
+    }
+
+    public void registerController(Controller controller) {
+        gameWindow.getContentPane().addKeyListener(controller);
     }
 }

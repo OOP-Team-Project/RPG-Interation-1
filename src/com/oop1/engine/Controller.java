@@ -8,9 +8,14 @@ import com.oop1.map.Map;
 import java.awt.event.*;
 
 public class Controller implements KeyListener {
-    Entity avatar = Engine.getPlayer(); //avatar
-    //get the map
-    Map map = Engine.getCurrentMap();
+
+    private Entity avatar;
+    private Map map;
+
+    public Controller(Engine engine) {
+        avatar = engine.getPlayer(); //avatar
+        map = engine.getCurrentMap();
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {

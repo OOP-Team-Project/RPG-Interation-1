@@ -1,6 +1,7 @@
 package com.oop1.view;
 
 import com.oop1.engine.Engine;
+import com.oop1.entity.Entity;
 import com.oop1.map.Map;
 import com.oop1.map.Tile;
 
@@ -13,32 +14,30 @@ import javax.swing.JPanel;
  * Displays the subset of visible tiles to the player
  */
 public class AreaView extends JPanel {
-	//Game map -- array of Tiles
+    //Game map -- array of Tiles
 	Tile[] testAreaView = new Tile[200];
 	Tile newTile;
 
 	private boolean isInitialized = false; //Doing this because, for some reason, constructors aren't working right...
-	//private Engine engine;
 	private Map map;
+    private Entity entityToFollow;
 
 	private int centerTileXIndex, centerTileYIndex = 0;
 
-	public AreaView(Map newMap) {
-
+	public AreaView(Map newMap, Entity entityToFollow) {
 		map = newMap;
+        this.entityToFollow = entityToFollow;
 		setLayout(new GridLayout(0, 21)); //lays the tiles from left to right
-
+        setMinimumSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(600, 600));
 	}
 
 
-	private void initializeView(){
+	private void initializeView() {
 		//setLayout(new GridLayout(0, 10));
 
-		Tile playerTile = Engine.getPlayer().getLocation();
-		System.out.println(Engine.getPlayer().getBaseStats().getOccupation().printOccupation());
-
-		centerTileXIndex = map.findXLocation(playerTile);
-		centerTileYIndex = map.findYLocation(playerTile);
+		centerTileXIndex = map.findXLocation(entityToFollow.getLocation());
+		centerTileYIndex = map.findYLocation(entityToFollow.getLocation());
 
 		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
 			if(i < 0 || i >= map.getYBoundary()){

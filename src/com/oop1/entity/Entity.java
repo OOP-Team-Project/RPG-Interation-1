@@ -11,6 +11,7 @@ SW   S   SE
 package com.oop1.entity;
 
 import com.oop1.items.TakeableItem;
+import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
 
 
@@ -73,12 +74,13 @@ public class Entity {
         this.orientation = orientation;
     }
 
-    public Tile getLocation() {
-        return location;
-    }
+    public Tile getLocation() { return location; }
 
     public void setLocation(Tile location) {
-        this.location = location;
+        TerrainType terrain = location.getTerrainType();
+        if(terrain.canEntityPass(this)) {
+            this.location = location;
+        }
     }
 
     public Stats getBaseStats() {

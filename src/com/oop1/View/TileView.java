@@ -1,5 +1,7 @@
 package com.oop1.view;
 
+import java.awt.*;
+
 import com.oop1.map.Decal;
 import com.oop1.map.Tile;
 
@@ -42,8 +44,7 @@ public class TileView extends JPanel {
 	}
 
 	public void drawTile() { //pass Tile tile to this method
-		
-		
+
 	}
 
 	public void addLabel(JLabel newLabel){
@@ -54,9 +55,7 @@ public class TileView extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setLayout(new GridLayout(0, 1));
-
-		//g.drawRect(0, 0, 60, 60);
+		//based off tileTerrain set color
 		if(theTile != null)
 			tileTerrain = theTile.toString();
 		if (tileTerrain == "M") {
@@ -68,7 +67,6 @@ public class TileView extends JPanel {
 		} else{
 			g.setColor(Color.black);
 		}
-
 
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		g.fillRect(0, 0, 60, 60);

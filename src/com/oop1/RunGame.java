@@ -57,4 +57,21 @@ public class RunGame implements Runnable {
             engine.update();    //We let the engine do its thing, whatever that may be.
         }
     }
+
+    /* -Miles: "this is not my code and it doesn't work so I'm gonna comment it out kthxbye"
+    public static void main(String[] args) {
+        JFrame gameFrame = new JFrame();
+        gameFrame.setSize(1200, 600);
+        gameFrame.setTitle("Game");
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                AreaView displayArea = new AreaView();
+                gameFrame.add(displayArea);
+                gameFrame.setVisible(true);
+            }
+        });
+
+*/
+
 }

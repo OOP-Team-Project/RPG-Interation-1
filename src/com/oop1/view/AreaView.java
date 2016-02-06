@@ -2,16 +2,20 @@ package com.oop1.view;
 
 import com.oop1.engine.Engine;
 import com.oop1.map.Map;
-import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
 
-import javax.swing.*;
 import java.awt.*;
+
+import javax.swing.JPanel;
+
 
 /**
  * Displays the subset of visible tiles to the player
  */
 public class AreaView extends JPanel {
+	//Game map -- array of Tiles
+	Tile[] testAreaView = new Tile[200];
+	Tile newTile;
 
 	private boolean isInitialized = false; //Doing this because, for some reason, constructors aren't working right...
 	//private Engine engine;
@@ -25,6 +29,7 @@ public class AreaView extends JPanel {
 		setLayout(new GridLayout(0, 21)); //lays the tiles from left to right
 
 	}
+
 
 	private void initializeView(){
 		//setLayout(new GridLayout(0, 10));

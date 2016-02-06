@@ -20,48 +20,17 @@ public class DecalView extends JPanel {
     //private BufferedImage skull;
 
     public DecalView(Decal newDecal) {
-
-        //duck = Decal.DUCK[0][0];
-        //skull = Decal.SKULL_AND_CROSSBONES[0][0];
         decal = newDecal;
-    }
-
-    public void draw(Graphics graphics) {
-        // TODO: implement this
-
-        //graphics.drawImage(duck, 50, 50, null);
-
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-
-        //duck = Decal.DUCK[0][0];
-        //ImageIcon imageIcon = new ImageIcon(image);
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         BufferedImage image = null;
-        try
-        {
-            //image = ImageIO.read(new File("src/com/oop1/resources/SKULL_AND_CROSSBONES.png"));
-            image = decal.getImage()[0][0];
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        //ImageIcon imageIcon = new ImageIcon(decal.getImage()[0][0]);
+        image = decal.getImage()[0][0];
         ImageIcon imageIcon = new ImageIcon(image);
-        JLabel jLabel = new JLabel(imageIcon);
+        JLabel jLabel = new JLabel();
+        jLabel.setMaximumSize(new Dimension(60,60));
+        jLabel.setPreferredSize(new Dimension(60,60));
         add(jLabel);
-        //jLabel.setIcon(imageIcon);
-        //jLabel.setDisabledIcon(imageIcon);
-        //g2.drawImage(decal.getImage()[0][0], 0, 0, null);
-
-        //for(int i = 0; i < 50; i++){
-        //	tiles[i].paintComponent(g);
-        //}
+        add(Box.createVerticalGlue());
+        jLabel.setIcon(imageIcon);
     }
 
 

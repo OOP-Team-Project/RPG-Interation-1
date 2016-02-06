@@ -73,6 +73,7 @@ public class MainMenuView extends JPanel {
             }
             else  {
                 statusLabel.setText("Cancel Button clicked.");
+                System.exit(0);
             }
         }
     }

@@ -51,7 +51,11 @@ public class TileView extends JPanel {
 		}
 
 		if(theTile.hasDecal()){
+			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+			setMaximumSize(new Dimension(60,60));
+			setPreferredSize(new Dimension(60,60));
 			add(new DecalView(theTile.getDecal()));
+			add(Box.createVerticalGlue());
 		}
 	}
 

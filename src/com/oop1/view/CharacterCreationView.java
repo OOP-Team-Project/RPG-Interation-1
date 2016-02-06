@@ -90,22 +90,66 @@ public class CharacterCreationView extends JPanel {
 
     }
 
+    private void removeFromEngine(){
+        Engine.removeView(this);    //Pops this view from the thing
+    }
+
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
             Map defaultMap = Map.generateMap(); //Maybe try just plain old "= new Map()"?
-            Tile[][] defaultTiles = new Tile[50][50];
-
+            Tile[][] defaultTiles = new Tile[100][100];
+            /*
             for(int i = 0; i < 50; i++){
                 for(int j = 0; j < 50; j++){
                     defaultTiles[i][j] = new Tile(TerrainType.GRASS);
                     defaultTiles[i][j].setDecal(new Decal());
-                    defaultTiles[i][j].setXLocation(i);
-                    defaultTiles[i][j].setYLocation(j);
                 }
             }
+            */
+            /*
+            Tile[] testAreaView = new Tile[200];
+
+            for (int i = 0; i < 200; i++) {
+                Tile newTile;
+
+                if (i % 5 == 0) {
+                    newTile = new Tile(TerrainType.MOUNTAIN);
+                    testAreaView[i] = newTile;
+                } else if (i % 8 == 0) {
+                    newTile = new Tile(TerrainType.WATER);
+                    testAreaView[i] = newTile;
+                } else {
+                    newTile = new Tile(TerrainType.GRASS);
+                    testAreaView[i] = newTile;
+                }
+            }
+            */
+            for(int i = 0; i < 100; i++){
+                for(int j = 0; j < 100; j++){
+
+                    Tile newTile;
+
+                    if (i % 5 == 0) {
+                        newTile = new Tile(TerrainType.MOUNTAIN);
+                    } else if (i % 8 == 0) {
+                        newTile = new Tile(TerrainType.WATER);
+                    } else {
+                        newTile = new Tile(TerrainType.GRASS);
+                    }
+
+                    if(i == 25 && j == 25)
+                        newTile.setDecal(new Decal("DUCK"));
+
+                    defaultTiles[i][j] = newTile;
+                }
+            }
+
+            //defaultMap.setTiles(testAreaView);
             defaultMap.setTiles(defaultTiles);
+
+
 
             Entity newEntity;
 
@@ -113,10 +157,10 @@ public class CharacterCreationView extends JPanel {
                 newEntity = new Entity(new Smasher(), defaultMap.getTileAtCoordinates(25, 25));
             }
             else if( command.equals( "Summoner!" ) )  {
-                newEntity = new Entity(new Summoner(), defaultMap.getTileAtCoordinates(25, 25));
+                newEntity = new Entity(new Summoner(), defaultMap.getTileAtCoordinates(50, 50));
             }
             else  {
-                newEntity = new Entity(new Sneak(), defaultMap.getTileAtCoordinates(25, 25));
+                newEntity = new Entity(new Sneak(), defaultMap.getTileAtCoordinates(0, 0));
             }
             //--    -   -   -   -   -   -   -   -
             ArrayList<JPanel> defaultViews = new ArrayList<JPanel>();
@@ -136,6 +180,7 @@ public class CharacterCreationView extends JPanel {
             defaultMaps.add(defaultMap);
             //--    -   -   -   -   -   -   -   -
 
+            removeFromEngine();
             Engine.beginGame(defaultViews, defaultMaps, defaultEntities);
 
             shouldHide = true;

@@ -51,17 +51,16 @@ public class Tile {
         item = newItem;
     }
 
-    public String toString(){
-        if(terrainType == TerrainType.MOUNTAIN)
-            return "M";
-        else if(terrainType == TerrainType.GRASS)
-            return "G";
-        else
-            return "W";
-    }
-
     public Item getItem(){
         return item;
     }
 
+    public String toString(){
+        if(terrainType == TerrainType.MOUNTAIN)
+            return "^";
+        else if(terrainType == TerrainType.GRASS)
+            return "_";
+        else
+            return "~";
+    }
 }

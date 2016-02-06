@@ -1,6 +1,11 @@
 package com.oop1;
-
-import java.util.ArrayList;
+import com.oop1.engine.GameState;
+import com.oop1.io.SaveManager;
+import com.oop1.view.AreaView;
+import com.oop1.view.DecalView;
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.awt.*;
@@ -12,7 +17,7 @@ import com.oop1.view.*;
 public class RunGame implements Runnable {
 
     static Engine engine;   //The game engine that is running the program.
-    private JFrame mainFrame;   //This is the main Java Swing frame. It holds a whooole bunch of JPanels that comprise
+    //private JFrame mainFrame;   //This is the main Java Swing frame. It holds a whooole bunch of JPanels that comprise
                                 // of the multitude of views.
 
     public RunGame(){   //Constructor for this class.
@@ -57,4 +62,22 @@ public class RunGame implements Runnable {
             engine.update();    //We let the engine do its thing, whatever that may be.
         }
     }
+
+    /* -Miles: "this is not my code and it doesn't work so I'm gonna comment it out kthxbye"
+    public static void main(String[] args) {
+        JFrame gameFrame = new JFrame();
+        gameFrame.setSize(1200, 600);
+        gameFrame.setTitle("Game");
+        gameFrame.setResizable(false);
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                AreaView displayArea = new AreaView();
+                gameFrame.add(displayArea);
+                gameFrame.setVisible(true);
+            }
+        });
+
+*/
+
 }

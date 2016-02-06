@@ -10,6 +10,7 @@ public class Sneak extends Occupation {
         baseIntellect = 15;
         intellectBase = 2;
         movementSpeed = 3;
+        baseHardiness = 15;
     }
 
     public void performAbility() {
@@ -19,5 +20,9 @@ public class Sneak extends Occupation {
     @Override
     public int getBaseHardiness() {
         return 15;
+    }
+
+    public String printOccupation(){
+        return "SNEAK";
     }
 }

@@ -32,6 +32,14 @@ public class HealDamage extends AreaEffect {
       return;
     }
 
+    public String getEffectName(){
+        return "healDamage";
+    }
+
+    public int getDamageAmount(){
+        return damageHealed;
+    }
+
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("This HealDamage heals ");

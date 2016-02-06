@@ -15,15 +15,17 @@ public class Engine {
 
     public Engine(GameState newState, List<JPanel> newViews) {    //Constructor for the engine. I guess it will hook up Views/Maps and such?
         state = newState;
-
         views = newViews;
 
         mainFrame = new JFrame("Team TigerTiger Cat's Awesome RPG Game!");
-        mainFrame.setSize(500,500);
-        mainFrame.setLayout(new GridLayout(1, 1));
+        mainFrame.setSize(1200, 600);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //mainFrame.setLayout(new GridLayout(1, 1));
 
-        for(int i = 0; i < newViews.size(); i++)
+        for(int i = 0; i < newViews.size(); i++) {
             mainFrame.add(newViews.get(i));
+            mainFrame.setComponentZOrder(newViews.get(i), 0);
+        }
     }
 
 
@@ -49,6 +51,7 @@ public class Engine {
         for(int i = 0; i < viewsToAdd.size(); i++){
             views.add(viewsToAdd.get(i));   //We add in any views that the game should start with (AreaView, etc)
             mainFrame.add(viewsToAdd.get(i));   //And assign them to the main frame (otherwise they won't get drawn!)
+            mainFrame.setComponentZOrder(viewsToAdd.get(i), 0);
         }
         state.setMaps(mapsToAdd);       //We add in the maps that comprise this game.
         state.setEntities(entitiesToAdd);   //We add in the entities that are in the game.
@@ -59,7 +62,7 @@ public class Engine {
         // TODO: implement this
     }
 
-    public Entity getPlayer(){
+    public static Entity getPlayer(){
         return state.getEntities().get(0);
     }
 
@@ -67,5 +70,15 @@ public class Engine {
     public static void addView(JPanel newView){
         views.add(newView);
         mainFrame.add(newView);
+        mainFrame.setComponentZOrder(newView, 0);
+    }
+
+    public static void removeView(JPanel viewToRemove){
+        views.remove(viewToRemove);
+        mainFrame.remove(viewToRemove);
+    }
+
+    public static Map getCurrentMap(){
+        return state.getMaps().get(0);  //Hacky, hacky thing!!!
     }
 }

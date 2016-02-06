@@ -22,6 +22,13 @@ public class InstantDeath extends AreaEffect {
       return;
     }
 
+    public String getEffectName(){
+        return "instantDeath";
+    }
+
+    public int getDamageAmount(){
+        return 0;
+    }
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("This InstantDeath affects tiles: ");

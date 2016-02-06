@@ -26,6 +26,10 @@ public class Serializer {
         Tile[][] tiles = map.getTiles();
         for(int row = 0; row < tiles.length; ++row){
             for(int col = 0; col < tiles[row].length; ++col){
+                if(tiles[row][col] == null) {
+                    str.append("$\n");
+                    break;
+                }
                 if(tiles[row][col].hasDecal()) {
                     str.append(tiles[row][col].getDecal().toString());
                     str.append(";");
@@ -36,7 +40,6 @@ public class Serializer {
                 }
             }
         }
-        str.append("\n");
         return str.toString();
     }
 
@@ -47,6 +50,12 @@ public class Serializer {
         Tile[][] tiles = map.getTiles();
         for(int row = 0; row < tiles.length; ++row){
             for(int col = 0; col < tiles[row].length; ++col){
+                if(tiles[row][col] == null) {
+                    str.append("$\n");
+                    str.append("!Takeable items on map!\n");
+                    str.append("$\n");
+                    return str.toString();
+                }
                 if(tiles[row][col].hasItem()) {
                     if(tiles[row][col].getItem().toString().equals("takeableItem")){
                         TakeableItem item = ((TakeableItem)tiles[row][col].getItem());
@@ -90,18 +99,22 @@ public class Serializer {
         List<AreaEffect> effectList = map.getAreaEffects();
         for(AreaEffect effect : effectList){
             str.append(effect.getEffectName());
+            str.append(";");
             for(Tile tile : effect.getAffectedTiles()){
-                str.append(";");
                 str.append(map.findXLocation(tile));
                 str.append(",");
                 str.append(map.findYLocation(tile));
+                str.append(",");
             }
+            str.deleteCharAt(str.length()-1);
             if(effect.getDamageAmount() > 0){
                 str.append("-");
                str.append(effect.getDamageAmount());
             }
             str.append("%\n");
         }
+        if(str.toString().equals(""))
+            str.append("$\n");
         return str.toString();
     }
 
@@ -137,6 +150,8 @@ public class Serializer {
             str.append(entity.getBaseStats().getExperience());
             str.append("%\n");
         }
+        if(str.toString().equals(""))
+            str.append("$\n");
         return str.toString();
     }
 
@@ -146,6 +161,8 @@ public class Serializer {
         for(Entity entity : entities){
             str.append(entity.getInventory().printForSave());
         }
+        if(str.toString().equals(""))
+            str.append("$\n");
         return str.toString();
     }
 
@@ -178,6 +195,8 @@ public class Serializer {
     }
 
     private static void deserializeDecals(String decalData, Map map){
+        if(decalData.substring(0,1).equals("$"))
+            return;
         String[] decals = decalData.split("%");
         for(String str : decals){
             Decal decal;
@@ -195,6 +214,8 @@ public class Serializer {
     }
 
     private static void deserializeItems(String itemData, Map map){
+        if(itemData.substring(0,1).equals("$"))
+            return;
         String[] items = itemData.split("%");
         for(String str : items){
             Item item;
@@ -212,6 +233,8 @@ public class Serializer {
     }
 
     private static void deserializeTakeableItems(String itemData, Map map){
+        if(itemData.substring(0,1).equals("$"))
+            return;
         String[] items = itemData.split("%");
         for(String str : items){
             String[] itemStats = str.split(";");
@@ -232,6 +255,8 @@ public class Serializer {
     }
 
     private static void deserializeAreaEffects(String effectData, Map map){
+        if(effectData.substring(0,1).equals("$"))
+            return;
         String[] effects = effectData.split("%");
         for(String str : effects){
             AreaEffect effect;
@@ -267,6 +292,8 @@ public class Serializer {
     }
 
     private static List<Entity> deserializeEntity(String entityData, Map map){
+        if(entityData.substring(0,1).equals("$"))
+            return new ArrayList<>();
         List<Entity> entityList = new ArrayList<>();
         String[] entities = entityData.split("%");
         for(String str : entities){
@@ -304,6 +331,8 @@ public class Serializer {
     }
 
     private static void deserializeInventory(String inventory, List<Entity> entityList){
+        if(inventory.substring(0,1).equals("$"))
+            return;
         String[] items = inventory.split("%");
         Inventory newInventory = new Inventory();
         for(String str : items){

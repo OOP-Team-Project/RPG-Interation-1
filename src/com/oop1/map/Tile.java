@@ -51,6 +51,10 @@ public class Tile {
         item = newItem;
     }
 
+    public Item getItem(){
+        return item;
+    }
+
     public String toString(){
         if(terrainType == TerrainType.MOUNTAIN)
             return "M";
@@ -59,9 +63,4 @@ public class Tile {
         else
             return "W";
     }
-
-    public Item getItem(){
-        return item;
-    }
-
 }

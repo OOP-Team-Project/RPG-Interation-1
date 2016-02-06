@@ -16,4 +16,13 @@ public class Smasher extends Occupation {
     public void performAbility() {
         System.out.println("Hi I'm Smasher");
     }
+
+    @Override
+    public int getBaseHardiness() {
+        return 30;
+    }
+
+    public String printOccupation(){
+        return "SMASHER";
+    }
 }

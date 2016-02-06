@@ -13,6 +13,8 @@ public class TakeableItem extends Item {
     private boolean equippable = false;
     private Tile loc;
 
+    public TakeableItem(){}
+
     public TakeableItem(Tile tile) {
         loc = tile;
     }
@@ -39,5 +41,9 @@ public class TakeableItem extends Item {
 
     public ArrayList<StatModifier> getStatModifiers() {
         return statModifiers;
+    }
+
+    public String toString(){
+        return "takeableItem";
     }
 }

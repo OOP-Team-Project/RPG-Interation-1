@@ -21,6 +21,26 @@ public class StatModifier {
 
     private int livesLeftModifier;
 
+    public int getStrengthModifier(){
+        return strengthModifier;
+    }
+
+    public int getAgilityModifier(){
+        return agilityModifier;
+    }
+
+    public int getIntellectModifier(){
+        return intellectModifier;
+    }
+
+    public int getHardinessModifier(){
+        return hardinessModifier;
+    }
+
+    public int getMovementModifier(){
+        return movementModifier;
+    }
+
     public StatModifier(int strengthModifier,
                         int agilityModifier,
                         int intellectModifier,

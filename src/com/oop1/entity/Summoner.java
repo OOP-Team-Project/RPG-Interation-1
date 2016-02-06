@@ -16,4 +16,13 @@ public class Summoner extends Occupation {
     public void performAbility() {
         System.out.println("Hi I'm Summoner");
     }
+
+    @Override
+    public int getBaseHardiness() {
+        return 10;
+    }
+
+    public String printOccupation(){
+        return "SUMMONER";
+    }
 }

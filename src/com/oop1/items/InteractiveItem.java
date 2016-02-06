@@ -7,4 +7,8 @@ public class InteractiveItem extends Item {
     public void interact(Entity entity) {
         // TODO: implement
     }
+
+    public String toString(){
+        return "interactive";
+    }
 }

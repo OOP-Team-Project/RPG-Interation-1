@@ -1,6 +1,11 @@
 package com.oop1;
-
-import java.util.ArrayList;
+import com.oop1.engine.GameState;
+import com.oop1.io.SaveManager;
+import com.oop1.view.AreaView;
+import com.oop1.view.DecalView;
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.awt.*;
@@ -63,6 +68,7 @@ public class RunGame implements Runnable {
         JFrame gameFrame = new JFrame();
         gameFrame.setSize(1200, 600);
         gameFrame.setTitle("Game");
+        gameFrame.setResizable(false);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

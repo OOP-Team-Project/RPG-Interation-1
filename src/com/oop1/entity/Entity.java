@@ -10,9 +10,8 @@ SW   S   SE
 
 package com.oop1.entity;
 
-import com.oop1.items.TakeableItem;
+import com.oop1.items.Item;
 import com.oop1.map.Tile;
-
 
 public class Entity {
 
@@ -29,7 +28,7 @@ public class Entity {
     /**
      * this character's base stats, i.e. stats before item modifiers
      */
-    private Stats baseStats;
+    private Stats stats;
 
     private Inventory inventory;
 
@@ -38,7 +37,7 @@ public class Entity {
     //Constructor for initial creation of entity
     public Entity(Occupation o, Tile loc) {
       occupation = o;
-      baseStats = Stats.builder().occupation(o).build();
+      stats = Stats.builder().occupation(o).build();
       inventory = new Inventory();
       orientation = 0;
       location = loc;
@@ -46,16 +45,16 @@ public class Entity {
 
     public Entity() { }
 
+    public void useItem(Item item) {
+        // TODO: implement this
+    }
+
     /**
      * @return this entity's actual current stats, including modifications from equipped items
      */
     public Stats getModifiedStats() {
         // TODO: implement this
-        return baseStats;
-    }
-
-    public void addToInventory(TakeableItem item) {
-        inventory.addItem(item);
+        return stats;
     }
 
     public int getOrientation() {
@@ -75,11 +74,11 @@ public class Entity {
     }
 
     public Stats getBaseStats() {
-        return baseStats;
+        return stats;
     }
 
     public void setBaseStats(Stats baseStats) {
-        this.baseStats = baseStats;
+        this.stats = baseStats;
     }
 
     public Inventory getInventory() {
@@ -97,7 +96,4 @@ public class Entity {
     public void setOccupation(Occupation occupation) {
         this.occupation = occupation;
     }
-
-
 }
-

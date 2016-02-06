@@ -23,12 +23,16 @@ public class Engine {
         mainFrame.setSize(1200, 600);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
+
+        //mainFrame.addKeyListener(new Controller());
         //mainFrame.setLayout(new GridLayout(1, 1));
 
         for(int i = 0; i < newViews.size(); i++) {
             mainFrame.add(newViews.get(i));
             mainFrame.setComponentZOrder(newViews.get(i), 0);
         }
+        //mainFrame.pack();
+        mainFrame.setVisible(true);
     }
 
 
@@ -55,7 +59,9 @@ public class Engine {
             views.add(viewsToAdd.get(i));   //We add in any views that the game should start with (AreaView, etc)
             mainFrame.add(viewsToAdd.get(i));   //And assign them to the main frame (otherwise they won't get drawn!)
             mainFrame.setComponentZOrder(viewsToAdd.get(i), 0);
+
         }
+
         state.setMaps(mapsToAdd);       //We add in the maps that comprise this game.
         state.setEntities(entitiesToAdd);   //We add in the entities that are in the game.
 
@@ -82,7 +88,9 @@ public class Engine {
         mainFrame.remove(viewToRemove);
     }
 
+
     public static Map getCurrentMap(){
         return state.getMaps().get(0);  //Hacky, hacky thing!!!
     }
+
 }

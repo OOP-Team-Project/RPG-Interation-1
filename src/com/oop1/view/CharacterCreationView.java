@@ -1,5 +1,6 @@
 package com.oop1.view;
 
+import com.oop1.engine.Controller;
 import com.oop1.engine.Engine;
 import com.oop1.engine.GameState;
 import com.oop1.entity.Entity;
@@ -178,7 +179,13 @@ public class CharacterCreationView extends JPanel {
             //--    -   -   -   -   -   -   -   -
             ArrayList<JPanel> defaultViews = new ArrayList<JPanel>();
 
-            defaultViews.add(new AreaView(defaultMap));
+            AreaView newAreaView = new AreaView(defaultMap);
+            //Controller controller = new Controller();
+            //Controller.setAreaView(newAreaView);
+            Controller newController = new Controller(newAreaView);
+
+            defaultViews.add(newAreaView);
+            //defaultViews.add(newController);
             //defaultViews.add(new EntityView(newEntity)); //I'm guessing that, actually, the AreaView() will have these, right?
             //--    -   -   -   -   -   -   -   -
 

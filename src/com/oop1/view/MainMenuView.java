@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MainMenuView extends JPanel {
 
@@ -66,6 +67,9 @@ public class MainMenuView extends JPanel {
             }
             else if( command.equals( "Load Game" ) )  {
                 statusLabel.setText("Load Game Button clicked.");
+                try {
+                    delegate.loadGame();
+                }catch(IOException exception){}
             }
             else  {
                 statusLabel.setText("Cancel Button clicked.");

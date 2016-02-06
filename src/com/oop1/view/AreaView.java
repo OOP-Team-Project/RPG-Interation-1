@@ -38,8 +38,6 @@ public class AreaView extends JPanel {
 
 		centerTileXIndex = map.findXLocation(entityToFollow.getLocation());
 		centerTileYIndex = map.findYLocation(entityToFollow.getLocation());
-		System.out.println(centerTileXIndex);
-		System.out.println(centerTileYIndex);
 
 		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
 			if(i < 0 || i >= map.getYBoundary()){

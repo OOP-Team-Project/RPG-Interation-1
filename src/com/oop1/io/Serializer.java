@@ -306,12 +306,18 @@ public class Serializer {
             entity.setLocation(map.getTileAtCoordinates(x,y));
 
             Stats.StatsBuilder sb = new Stats.StatsBuilder();
-            if(stats[2].equals("SMASHER"))
+            if(stats[2].equals("SMASHER")) {
                 sb.occupation(new Smasher());
-            else if(stats[2].equals("SUMMONER"))
+                entity.setOccupation(new Smasher());
+            }
+            else if(stats[2].equals("SUMMONER")) {
                 sb.occupation(new Summoner());
-            else
+                entity.setOccupation(new Summoner());
+            }
+            else {
                 sb.occupation(new Sneak());
+                entity.setOccupation(new Sneak());
+            }
 
             sb.strength(Integer.parseInt(stats[3]));
             sb.agility(Integer.parseInt(stats[4]));

@@ -66,4 +66,10 @@ public class SaveManager {
         state.getAvatar().setOccupation(o);
         return state;
     }
+
+    public GameState loadGameState() throws IOException {
+        GameState state = instance.loadGame("map1.txt");
+        //System.out.println(state.getAvatar().getOccupation().printOccupation());
+        return state;
+    }
 }

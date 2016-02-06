@@ -86,11 +86,16 @@ public class MainMenuView extends JPanel {
 
     }
 
+    private void removeFromEngine(){
+        Engine.removeView(this);    //Pops this view from the thing
+    }
+
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
             if( command.equals( "New Game" ))  {
                 //statusLabel.setText("New Game Button clicked.");
+                removeFromEngine();
                 Engine.addView(new CharacterCreationView());
                 shouldHide = true;
             }

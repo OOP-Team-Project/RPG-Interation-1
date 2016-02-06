@@ -31,4 +31,8 @@ public abstract class AreaEffect {
     public void setAffectedTiles(Set<Tile> newTiles){
         affectedTiles = newTiles;
     }
+
+    public abstract String getEffectName();
+
+    public abstract int getDamageAmount();
 }

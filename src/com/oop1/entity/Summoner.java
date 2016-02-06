@@ -10,6 +10,7 @@ public class Summoner extends Occupation {
         baseIntellect = 25;
         intellectBase = 4;
         movementSpeed = 2;
+        baseHardiness = 10;
     }
 
     public void performAbility() {
@@ -19,5 +20,9 @@ public class Summoner extends Occupation {
     @Override
     public int getBaseHardiness() {
         return 10;
+    }
+
+    public String printOccupation(){
+        return "SUMMONER";
     }
 }

@@ -83,6 +83,12 @@ public class Engine {
     }
 
 
+
+    public static Map getCurrentMap(){
+        return state.getMaps().get(0);  //Hacky, hacky thing!!!
+    }
+
+
     public static Map getCurrentMap(){
         return state.getMaps().get(0);  //Hacky, hacky thing!!!
     }

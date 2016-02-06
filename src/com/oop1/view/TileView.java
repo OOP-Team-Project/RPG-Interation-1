@@ -28,11 +28,11 @@ public class TileView extends JPanel {
 
 	public TileView(Tile newTile){
 		theTile = newTile;
-		Entity avatar = Engine.getPlayer();
-
-		if(avatar.getLocation() == theTile){
-			add(new EntityView(avatar));
-		}
+//		Entity avatar = Engine.getPlayer();
+//
+//		if(avatar.getLocation() == theTile){
+//			add(new EntityView(avatar));
+//		}
 
 		if(theTile.hasItem()){
 			//add(new ItemView(theTile.getItem()));

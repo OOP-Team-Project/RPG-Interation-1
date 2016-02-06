@@ -1,11 +1,13 @@
 package com.oop1.engine;
 
+
 import com.oop1.entity.Entity;
 import com.oop1.map.Map;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+
 
 public class Engine {
     private static GameState state;    //This holds the map and entities (i.e., the data)
@@ -62,6 +64,7 @@ public class Engine {
     public void endGame() {
         // TODO: implement this
     }
+
 
     public static Entity getPlayer(){
         return state.getEntities().get(0);

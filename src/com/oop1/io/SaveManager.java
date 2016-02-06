@@ -22,7 +22,7 @@ public class SaveManager {
         instance = new SaveManager();
     }
 
-    private SaveManager() {
+    public SaveManager() {
     }
 
     public static SaveManager getInstance() {

@@ -34,7 +34,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TileView extends JPanel {
+public class TileView extends JPanel{
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
@@ -46,7 +46,11 @@ public class TileView extends JPanel {
 		theTile = newTile;
 
 		if(theTile.hasItem()){
-			//add(new ItemView(theTile.getItem()));
+			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+			setMaximumSize(new Dimension(60,60));
+			setPreferredSize(new Dimension(60,60));
+			add(new ItemView(theTile.getItem()));
+			add(Box.createVerticalGlue());
 			int i = 0;
 		}
 

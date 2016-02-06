@@ -4,7 +4,7 @@ import com.oop1.engine.Rules;
 
 /**
  * Holds an Entity's statistics.
- *
+ * <p>
  * Stats objects should be created via the StatsBuilder as in:
  * <pre>
  *      Stats.builder()
@@ -13,10 +13,11 @@ import com.oop1.engine.Rules;
  *           ...
  *           .build();
  * </pre>
- *
+ * <p>
  * To create the base stats for a new character, all one needs to supply is
  * the occupation: <pre>Stats.builder().occupation(foo).build()</pre>
  */
+
 public class Stats {
 
     static final int LIFE_PER_STRENGTH = 25;
@@ -25,21 +26,16 @@ public class Stats {
     static final double DEFENSIVE_RATING_PER_AGILITY = 0.002;
     static final double ARMOR_RATING_PER_HARDINESS = 0.5;
 
-    public static StatsBuilder builder() {
-        return new StatsBuilder();
-    }
-
     private int experience;
     private int currentLife;
     private int currentMana;
-
     // primary stats
+    private int livesLeft;
     private int strength;
     private int agility;
     private int intellect;
     private int hardiness;
     private double movementSpeed;
-
     private Occupation occupation;
 
     /**
@@ -48,29 +44,10 @@ public class Stats {
     protected Stats() {
     }
 
-    public int getMaxMana() {
-        return intellect * MANA_PER_INTELLECT;
+    public static StatsBuilder builder() {
+        return new StatsBuilder();
     }
 
-    public int getMaxLife() {
-        return strength * LIFE_PER_STRENGTH;
-    }
-
-    public int getCurrentLevel() {
-        return Rules.getLevelFromTotalExperience(experience);
-    }
-
-    public double getOffensiveRating() {
-        return strength * OFFENSIVE_RATING_PER_STRENGTH;
-    }
-
-    public double getDefensiveRating() {
-        return agility * DEFENSIVE_RATING_PER_AGILITY;
-    }
-
-    public double getArmorRating() {
-        return hardiness * ARMOR_RATING_PER_HARDINESS;
-    }
 
     /**
      * Immediately gives this Entity enough experience to move to the next level.
@@ -104,8 +81,9 @@ public class Stats {
         experience += amount;
         int newLevel = getCurrentLevel();
 
-        if (previousLevel < newLevel) {
+        while (previousLevel < newLevel) {
             didGainLevel();
+            previousLevel++;
         }
 
     }
@@ -131,15 +109,19 @@ public class Stats {
     public void expendMana(int amount) {
         currentMana -= amount;
         if (currentMana < 0) {
-            currentLife = 0;
+            currentMana = 0;
         }
     }
 
     public void gainMana(int amount) {
         currentMana += amount;
-        if (currentMana > getMaxLife()) {
-            currentLife = getMaxLife();
+        if (currentMana > getMaxMana()) {
+            currentMana = getMaxMana();
         }
+    }
+
+    public int getLivesLeft() {
+        return livesLeft;
     }
 
     public int getExperience() {
@@ -178,11 +160,36 @@ public class Stats {
         return occupation;
     }
 
+    public int getMaxMana() {
+        return intellect * MANA_PER_INTELLECT;
+    }
+
+    public int getMaxLife() {
+        return strength * LIFE_PER_STRENGTH;
+    }
+
+    public int getCurrentLevel() {
+        return Rules.getLevelFromTotalExperience(experience);
+    }
+
+    public double getOffensiveRating() {
+        return strength * OFFENSIVE_RATING_PER_STRENGTH;
+    }
+
+    public double getDefensiveRating() {
+        return agility * DEFENSIVE_RATING_PER_AGILITY;
+    }
+
+    public double getArmorRating() {
+        return hardiness * ARMOR_RATING_PER_HARDINESS;
+    }
+
     public static class StatsBuilder {
-        private int agility;
-        private int strength;
-        private int intellect;
-        private int hardiness;
+        private int livesLeft = Integer.MIN_VALUE;
+        private int agility = Integer.MIN_VALUE;
+        private int strength = Integer.MIN_VALUE;
+        private int intellect = Integer.MIN_VALUE;
+        private int hardiness = Integer.MIN_VALUE;
         private double movementSpeed = Double.NEGATIVE_INFINITY;
 
         private int experience = Integer.MIN_VALUE;
@@ -197,8 +204,8 @@ public class Stats {
             }
             Stats stats = new Stats();
             stats.occupation = occupation;
-
             // if a value wasn't provided for a property, use the default
+            stats.livesLeft = livesLeft == Integer.MIN_VALUE ? 1 : livesLeft;
             stats.agility = agility == Integer.MIN_VALUE ? occupation.getBaseAgility() : agility;
             stats.strength = strength == Integer.MIN_VALUE ? occupation.getBaseStrength() : strength;
             stats.intellect = intellect == Integer.MIN_VALUE ? occupation.getBaseIntellect() : intellect;
@@ -206,8 +213,13 @@ public class Stats {
             stats.experience = experience == Integer.MIN_VALUE ? 0 : experience;
             stats.currentLife = currentLife == Integer.MIN_VALUE ? stats.getMaxLife() : currentLife;
             stats.currentMana = currentMana == Integer.MIN_VALUE ? stats.getMaxMana() : currentMana;
-            stats.movementSpeed = movementSpeed == Double.NEGATIVE_INFINITY ? stats.movementSpeed : movementSpeed;
+            stats.movementSpeed = movementSpeed == Double.NEGATIVE_INFINITY ? occupation.movementSpeed : movementSpeed;
             return stats;
+        }
+
+        public StatsBuilder livesLeft(int livesLeft) {
+            this.livesLeft = livesLeft;
+            return this;
         }
 
         public StatsBuilder agility(int agility) {

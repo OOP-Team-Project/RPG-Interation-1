@@ -31,6 +31,7 @@ public class StatusView extends JPanel {
     private InventoryView inventory;
 
     public StatusView(Entity avatar) {
+
         this.avatar = avatar;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

@@ -30,6 +30,14 @@ public class TakeDamage extends AreaEffect {
         entity.getBaseStats().takeDamage(damageTaken);
     }
 
+    public String getEffectName(){
+        return "takeDamage";
+    }
+
+    public int getDamageAmount(){
+        return damageTaken;
+    }
+
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("This TakeDamage deals ");

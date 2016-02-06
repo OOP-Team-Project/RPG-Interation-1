@@ -10,8 +10,10 @@ SW   S   SE
 
 package com.oop1.entity;
 
-import com.oop1.items.Item;
+import com.oop1.items.TakeableItem;
+import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
+
 
 public class Entity {
 
@@ -28,25 +30,28 @@ public class Entity {
     /**
      * this character's base stats, i.e. stats before item modifiers
      */
-    private Stats stats;
+    private Stats baseStats;
 
     private Inventory inventory;
 
     private Occupation occupation;
 
     //Constructor for initial creation of entity
+    public Entity(Occupation o) {
+        occupation = o;
+        baseStats = Stats.builder().occupation(o).build();
+        inventory = new Inventory();
+        orientation = 0;
+    }
     public Entity(Occupation o, Tile loc) {
-      occupation = o;
-      stats = Stats.builder().occupation(o).build();
-      inventory = new Inventory();
-      orientation = 0;
-      location = loc;
+        occupation = o;
+        baseStats = Stats.builder().occupation(o).build();
+        inventory = new Inventory();
+        orientation = 0;
+        location = loc;
     }
 
-    public Entity() { }
-
-    public void useItem(Item item) {
-        // TODO: implement this
+    public Entity() {
     }
 
     /**
@@ -54,7 +59,11 @@ public class Entity {
      */
     public Stats getModifiedStats() {
         // TODO: implement this
-        return stats;
+        return baseStats;
+    }
+
+    public void addToInventory(TakeableItem item) {
+        inventory.addItem(item);
     }
 
     public int getOrientation() {
@@ -65,20 +74,21 @@ public class Entity {
         this.orientation = orientation;
     }
 
-    public Tile getLocation() {
-        return location;
-    }
+    public Tile getLocation() { return location; }
 
     public void setLocation(Tile location) {
-        this.location = location;
+        TerrainType terrain = location.getTerrainType();
+        if(terrain.canEntityPass(this)) {
+            this.location = location;
+        }
     }
 
     public Stats getBaseStats() {
-        return stats;
+        return baseStats;
     }
 
     public void setBaseStats(Stats baseStats) {
-        this.stats = baseStats;
+        this.baseStats = baseStats;
     }
 
     public Inventory getInventory() {
@@ -96,4 +106,7 @@ public class Entity {
     public void setOccupation(Occupation occupation) {
         this.occupation = occupation;
     }
+
+
 }
+

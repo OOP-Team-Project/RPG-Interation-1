@@ -19,16 +19,44 @@ public class StatModifier {
 
     private int movementModifier;
 
+    private int livesLeftModifier;
+
+    public int getStrengthModifier(){
+        return strengthModifier;
+    }
+
+    public int getAgilityModifier(){
+        return agilityModifier;
+    }
+
+    public int getIntellectModifier(){
+        return intellectModifier;
+    }
+
+    public int getHardinessModifier(){
+        return hardinessModifier;
+    }
+
+    public int getMovementModifier(){
+        return movementModifier;
+    }
+
+    public int getLivesLeftModifier(){
+        return livesLeftModifier;
+    }
+
     public StatModifier(int strengthModifier,
                         int agilityModifier,
                         int intellectModifier,
                         int hardinessModifier,
-                        int movementModifier) {
+                        int movementModifier,
+                        int livesLeft) {
         this.strengthModifier = strengthModifier;
         this.agilityModifier = agilityModifier;
         this.intellectModifier = intellectModifier;
         this.hardinessModifier = hardinessModifier;
         this.movementModifier = movementModifier;
+        this.livesLeftModifier += livesLeft;
     }
 
     public Stats getModifiedStats(Stats old) {
@@ -42,6 +70,7 @@ public class StatModifier {
                     .currentLife(old.getCurrentLife())
                     .currentMana(old.getCurrentMana())
                     .experience(old.getExperience())
+                    .livesLeft(old.getLivesLeft() + livesLeftModifier)
                     .build();
     }
 }

@@ -10,8 +10,7 @@ import java.awt.event.*;
 public class Controller implements KeyListener {
     Entity avatar = Engine.getPlayer(); //avatar
     //get the map
-    GameState state = new GameState();
-    Map map = state.getMaps().get(0);
+    Map map = Engine.getCurrentMap();
 
     @Override
     public void keyPressed(KeyEvent e) {

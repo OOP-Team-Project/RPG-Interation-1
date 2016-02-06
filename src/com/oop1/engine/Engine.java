@@ -77,4 +77,8 @@ public class Engine {
         views.remove(viewToRemove);
         mainFrame.remove(viewToRemove);
     }
+
+    public static Map getCurrentMap(){
+        return state.getMaps().get(0);  //Hacky, hacky thing!!!
+    }
 }

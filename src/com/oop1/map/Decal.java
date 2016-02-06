@@ -12,6 +12,8 @@ public class Decal {
 
     public static BufferedImage[][] SKULL_AND_CROSSBONES = load("skull.png", 16, 16);
     public static BufferedImage[][] DUCK = load("duck.gif", 16, 16);
+    public static BufferedImage[][] RED_CROSS = load("cross.png", 16, 16);
+    public static BufferedImage[][] GOLD_STAR = load("star.png", 16, 16);
 
     public static BufferedImage[][] load(String s, int w, int h) {
         BufferedImage[][] ret;

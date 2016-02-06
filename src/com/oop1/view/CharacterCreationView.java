@@ -152,8 +152,8 @@ public class CharacterCreationView extends JPanel {
                         newTile = new Tile(TerrainType.GRASS);
                     }
 
-                    if(i == 25 && j == 25)
-                        newTile.setDecal(new Decal("DUCK"));
+                    //if(i == 25 && j == 25)
+                        //newTile.setDecal(new Decal("DUCK"));
 
                     defaultTiles[i][j] = newTile;
                 }

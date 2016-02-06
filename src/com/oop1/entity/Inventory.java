@@ -78,7 +78,11 @@ public class Inventory {
             }
         }
     }
-}
+
+    public void addItem(TakeableItem item){
+        items.add(item);
+    }
+
     public String printForSave(){
         StringBuilder str = new StringBuilder();
         for (TakeableItem item : items) {

@@ -1,6 +1,8 @@
 package com.oop1.view;
 
+import build.tools.javazic.Main;
 import com.oop1.engine.Engine;
+import com.oop1.engine.GameState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,14 @@ public class MainMenuView extends JPanel {
 
     private boolean testVariable = false;
     private boolean shouldHide = false;
+
+    private GameState game;
+
+    public MainMenuView(){}
+
+    public MainMenuView(GameState game){
+        this.game = game;
+    }
 
     private void MainMenuView(){
 
@@ -96,7 +106,7 @@ public class MainMenuView extends JPanel {
             if( command.equals( "New Game" ))  {
                 //statusLabel.setText("New Game Button clicked.");
                 removeFromEngine();
-                Engine.addView(new CharacterCreationView());
+                Engine.addView(new CharacterCreationView(game));
                 shouldHide = true;
             }
             else if( command.equals( "Load Game" ) )  {

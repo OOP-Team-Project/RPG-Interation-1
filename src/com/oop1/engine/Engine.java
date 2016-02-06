@@ -20,6 +20,7 @@ public class Engine {
         mainFrame = new JFrame("Team TigerTiger Cat's Awesome RPG Game!");
         mainFrame.setSize(1200, 600);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setResizable(false);
         //mainFrame.setLayout(new GridLayout(1, 1));
 
         for(int i = 0; i < newViews.size(); i++) {

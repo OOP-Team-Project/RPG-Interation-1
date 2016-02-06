@@ -1,6 +1,7 @@
 package com.oop1.view;
 
 import com.oop1.engine.Engine;
+import com.oop1.engine.GameState;
 import com.oop1.entity.Entity;
 import com.oop1.entity.Smasher;
 import com.oop1.entity.Sneak;
@@ -27,6 +28,14 @@ public class CharacterCreationView extends JPanel {
 
     private boolean testVariable = false;
     private boolean shouldHide = false;
+
+    private GameState game;
+
+    public CharacterCreationView(){}
+
+    public CharacterCreationView(GameState game){
+        this.game = game;
+    }
 
     private void MainMenuView(){
         this.setLayout(new FlowLayout());
@@ -95,10 +104,14 @@ public class CharacterCreationView extends JPanel {
     }
 
     private class ButtonClickListener implements ActionListener {
+
+        private ButtonClickListener(){}
+
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
-            Map defaultMap = Map.generateMap(); //Maybe try just plain old "= new Map()"?
+            //Map defaultMap = Map.generateMap(); //Maybe try just plain old "= new Map()"?
+            Map defaultMap = game.getMaps().get(0);
             Tile[][] defaultTiles = new Tile[100][100];
             /*
             for(int i = 0; i < 50; i++){
@@ -147,7 +160,7 @@ public class CharacterCreationView extends JPanel {
             }
 
             //defaultMap.setTiles(testAreaView);
-            defaultMap.setTiles(defaultTiles);
+            //defaultMap.setTiles(defaultTiles);
 
 
 
@@ -171,12 +184,13 @@ public class CharacterCreationView extends JPanel {
 
 
             //--    -   -   -   -   -   -   -   -
-            ArrayList<Entity> defaultEntities = new ArrayList<Entity>();
+            ArrayList<Entity> defaultEntities = new ArrayList<>();
+            newEntity = game.getEntities().get(0);
             defaultEntities.add(newEntity);
             //--    -   -   -   -   -   -   -   -
 
             //--    -   -   -   -   -   -   -   -
-            ArrayList<Map> defaultMaps = new ArrayList<Map>();
+            ArrayList<Map> defaultMaps = new ArrayList<>();
             defaultMaps.add(defaultMap);
             //--    -   -   -   -   -   -   -   -
 

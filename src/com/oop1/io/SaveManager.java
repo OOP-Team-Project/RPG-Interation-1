@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class SaveManager {
 
-    private static SaveManager instance;
+    public static SaveManager instance;
 
     static {
         instance = new SaveManager();

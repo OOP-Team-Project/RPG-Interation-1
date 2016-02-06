@@ -41,7 +41,7 @@ public class Engine {
         }
     }
 
-    public Entity getPlayer() {
+    public static Entity getPlayer() {
         return state.getAvatar();
     }
 

@@ -104,7 +104,7 @@ public class RunGame implements Runnable, WindowListener {
         System.out.print("windowClosed method called.\n");
         if (JOptionPane.showConfirmDialog(null, "Would you like to save?", "",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                SaveManager.getInstance().saveGame(game,"map1_saved");
+        //        SaveManager.getInstance().saveGame(game,"map1_saved"); TODO: get GAMESTATE and call this function!!!!
         } else {
             //just quit, do nothing
         }

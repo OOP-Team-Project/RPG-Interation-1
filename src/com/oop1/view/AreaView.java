@@ -254,6 +254,6 @@ public class AreaView extends JPanel {
 				}
 			}
 		}
-		repaint();
+		//repaint();
 	}
 }

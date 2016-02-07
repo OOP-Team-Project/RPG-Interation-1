@@ -16,8 +16,8 @@ public class TileView extends JPanel {
 	private ItemView itemView;
 	private EntityView entityView;
 	private Decal decal;
-	private BufferedImage currentTerrain;
 	private JLabel backgroundTexture;
+	private ImageIcon backgroundIcon;
 
 	public BufferedImage[][] mMOUNTAIN = decal.load("../resources/MOUNTAINS.png", 60, 60);
 	public BufferedImage[][] mWATER = decal.load("../resources/WATER.png", 60, 60);
@@ -48,25 +48,25 @@ public class TileView extends JPanel {
 			case WATER: setBackground(Color.BLUE); break;
 			case GRASS: setBackground(Color.GREEN); break;
 			case MOUNTAIN: setBackground(Color.GRAY); break;
+			default: setBackground(Color.BLACK); break;
 		}
 
 		// Displays the terrain types on the tiles
+		BufferedImage currentTerrain = null;
+
 		switch (theTile.getTerrainType()) {
 			case WATER: currentTerrain = mWATER[0][0]; break;
 			case GRASS: currentTerrain = mGRASS[0][0]; break;
 			case MOUNTAIN: currentTerrain = mMOUNTAIN[0][0]; break;
 		}
 
-		// I think the issue is here: we might need another variable
-		// type for the icon to move with the map
-			ImageIcon imageIcon = new ImageIcon(currentTerrain);
-			backgroundTexture.setIcon(imageIcon);// = new JLabel(imageIcon);
+		if(currentTerrain != null) {
+			backgroundIcon.setImage(currentTerrain);
+			backgroundTexture.setIcon(backgroundIcon);
 			backgroundTexture.setMaximumSize(new Dimension(60, 60));
 			backgroundTexture.setPreferredSize(new Dimension(60, 60));
 			add(backgroundTexture);
-			//add(Box.createVerticalGlue());
-			//jLabel.setIcon(imageIcon);
-			//jLabel.setText("some text")
+		}
 
 
 		if (theTile.hasItem()){
@@ -84,6 +84,7 @@ public class TileView extends JPanel {
 	public TileView(Tile newTile){
 		setTile(newTile);
 		backgroundTexture = new JLabel();
+		backgroundIcon = new ImageIcon();
 	}
 
 	public void setEntity(Entity entity) {

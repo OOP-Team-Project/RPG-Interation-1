@@ -66,6 +66,15 @@ public class Engine {
     public void processInput() {
         Entity avatar = state.getAvatar();
 
+        if(avatar.getBaseStats().decrementedLivesLeft()) {
+            runGame.showMessage(false);
+            avatar.getBaseStats().setDecrementedLivesLeft(false);
+        }
+
+        if (avatar.getBaseStats().getLivesLeft() == 0) {
+            runGame.showMessage(true);
+        }
+
         if (currentTick - avatar.getLastMoveTime() <= avatar.getMinimumTimeBetweenMoves()) {
             return;
         }

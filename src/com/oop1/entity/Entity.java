@@ -36,6 +36,18 @@ public class Entity {
 
     private Occupation occupation;
 
+    /**
+     * Tells the game tick at which this character last moves
+     */
+    private long lastMoveTime;
+
+    /**
+     * The number of ticks between moves that this character must wait.
+     */
+    private long minimumTimeBetweenMoves = 15;
+
+    private char[] keyPresses = new char[10];   //Holds last 10 chars
+
     //Constructor for initial creation of entity
     public Entity(Occupation o) {
         occupation = o;
@@ -76,10 +88,18 @@ public class Entity {
 
     public Tile getLocation() { return location; }
 
-    public void setLocation(Tile location) {
+    public boolean setLocation(Tile location) {
+        if(location == null)
+            return false;
+        if(location.getTerrainType() == null)
+            return false;
         TerrainType terrain = location.getTerrainType();
         if(terrain.canEntityPass(this)) {
             this.location = location;
+            return true;    //We did it!
+        }
+        else {
+            return false;   //We couldn't do it... (SFX: "Christmas Time is Here" intro plays)
         }
     }
 
@@ -107,6 +127,20 @@ public class Entity {
         this.occupation = occupation;
     }
 
+    public void setLastMoveTime(long lastMoveTime) {
+        this.lastMoveTime = lastMoveTime;
+    }
 
+    public long getLastMoveTime() {
+        return lastMoveTime;
+    }
+
+    public long getMinimumTimeBetweenMoves() {
+        return minimumTimeBetweenMoves;
+    }
+
+    public void setMinimumTimeBetweenMoves(long minimumTimeBetweenMoves) {
+        this.minimumTimeBetweenMoves = minimumTimeBetweenMoves;
+    }
 }
 

@@ -1,12 +1,9 @@
 package com.oop1.view;
 
-import javax.swing.*;
-
 import java.awt.*;
 
-import com.oop1.engine.Engine;
-import com.oop1.entity.Entity;
 import com.oop1.map.Decal;
+import com.oop1.map.TerrainType;
 import com.oop1.map.Tile;
 import com.oop1.view.DecalView;
 
@@ -17,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TileView extends JPanel{
+public class TileView extends JPanel {
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
@@ -26,7 +23,20 @@ public class TileView extends JPanel{
 
 	private String tileTerrain;
 
+	public TileView(boolean thing){	//Used to do blank tils.
+		tileTerrain = "Blank";
+
+		theLabel = new JLabel("!!!");
+		add(theLabel);
+	}
+
+	public void setTile(Tile newTile){
+		theTile = newTile;
+	}
+
 	private void drawIconsOnTiles(){
+		if(theTile == null)
+			return;
 		if(theTile.hasItem()){
 			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 			setMaximumSize(new Dimension(60,60));
@@ -60,13 +70,6 @@ public class TileView extends JPanel{
 		add(Box.createVerticalGlue());
 	}
 
-	public TileView(boolean thing){	//Used to do blank tils.
-		tileTerrain = "Blank";
-
-		theLabel = new JLabel("!!!");
-		add(theLabel);
-	}
-
 	public void drawTile() { //pass Tile tile to this method
 
 	}
@@ -79,21 +82,21 @@ public class TileView extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
 		//based off tileTerrain set color
-		if (theTile != null)
-			tileTerrain = theTile.toString();
-		if (tileTerrain.equals("^")) {
-			g.setColor(Color.gray);
-		} else if (tileTerrain.equals("_")) {
-			g.setColor(Color.green);
-		} else if (tileTerrain.equals("~")) {
-			g.setColor(Color.blue);
-		} else {
-			g.setColor(Color.black);
+		switch (theTile.getTerrainType()) {
+			case MOUNTAIN:
+				g2.setColor(Color.gray);
+				break;
+			case GRASS:
+				g2.setColor(Color.green);
+				break;
+			case WATER:
+				g2.setColor(Color.blue);
+				break;
 		}
 
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		g.fillRect(0, 0, 60, 60);
-
+		g2.fillRect(0, 0, 60, 60);
 	}
 }

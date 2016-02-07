@@ -1,30 +1,40 @@
 package com.oop1.engine;
 
+import com.oop1.RunGame;
 import com.oop1.entity.Entity;
 import com.oop1.map.Map;
+import com.oop1.map.Tile;
 
 public class Engine {
 
     private static final long DESIRED_GAME_TICK_LENGTH_NANOS = 1000000000L / 60L;
+    private static final long DESIRED_GAME_TICK_LENGTH_MILLISECONDS = 1000L / 60L;
 
     private GameState state;
     private boolean isGameRunning = false;
     private GameThread gameThread;
     private Controller controller;
+    private long currentTick = 0L;
 
-    public Engine(GameState state) {
+    private RunGame runGame;
+
+    private char[] keyPresses = new char[10];   //Holds last 10 chars
+
+    public Engine(GameState state, RunGame rg) {
         this.state = state;
-        this.controller = new Controller(this);
+        this.runGame = rg;
     }
 
     public void update() {
-        // TODO: implement this
+        processInput();
+        currentTick++;
     }
 
     public void beginGame() {
         gameThread = new GameThread();
         isGameRunning = true;
         gameThread.start();
+        currentTick = 0;
     }
 
     public void endGame() {
@@ -50,26 +60,100 @@ public class Engine {
         return state.getMaps().get(0);
     }
 
-    private class GameThread extends Thread {
+    public void processInput() {
+        Entity avatar = state.getAvatar();
 
-        public void run() {
-            while (isGameRunning) {
-                long startTime = System.nanoTime();
+        if (currentTick - avatar.getLastMoveTime() <= avatar.getMinimumTimeBetweenMoves()) {
+            return;
+        }
 
-                update();
+        Map map = state.getMaps().get(0);
 
-                long endTime = System.nanoTime();
-                long elapsed = endTime - startTime;
+        Tile currentTile = avatar.getLocation();    //the Avatar's current location
+        int xLoc = map.findXLocation(currentTile);  //get X loc
+        int yLoc = map.findYLocation(currentTile);  //get Y loc
 
-                try {
-                    sleep(DESIRED_GAME_TICK_LENGTH_NANOS - elapsed);
-                } catch (InterruptedException e) {
-                    System.err.println("The game ended unexpectedly");
-                    e.printStackTrace();
+        int dx = 0;
+        int dy = 0;
+
+        for (Character c : controller.getPressedKeys()) {
+
+            switch (c.charValue()) {
+                case '1':
+                    dx++;
+                    dy--;
                     break;
-                }
+                case '2':
+                case 's': // fall through
+                    dx++;
+                    break;
+                case '3':
+                    dx++;
+                    dy++;
+                    break;
+                case '4':
+                case 'a': // fall through
+                    dy--;
+                    break;
+                case '6':
+                case 'd': // fall through
+                    dy++;
+                    break;
+                case '7':
+                    dx--;
+                    dy--;
+                    break;
+                case '8':
+                case 'w': // fall through
+                    dx--;
+                    break;
+                case '9':
+                    dx--;
+                    dy++;
+                    break;
             }
         }
 
+        Tile moveToTile = map.getTileAtCoordinates(xLoc + dx, yLoc + dy);
+
+        if (avatar.setLocation(moveToTile)) {
+            runGame.stateChanged(this);
+            avatar.setLastMoveTime(currentTick);
+        }
+
+    }
+
+    public void setRunning(boolean b){
+        isGameRunning = true;
+    }
+
+    public void setController(Controller c){
+        controller = c;
+    }
+
+    private class GameThread extends Thread {
+
+        public void run() {
+            while(true) {
+                if(isGameRunning) {
+                    long startTime = System.currentTimeMillis();
+
+                    update();
+                    long endTime = System.currentTimeMillis();
+                    long elapsed = endTime - startTime;
+
+                    try {
+                        if(DESIRED_GAME_TICK_LENGTH_MILLISECONDS - elapsed > 0) {
+                            //sleep(DESIRED_GAME_TICK_LENGTH_MILLISECONDS - elapsed);
+                            sleep(1);
+                        }
+                    } catch (InterruptedException e) {
+                        System.err.println("The game ended unexpectedly");
+                        e.printStackTrace();
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

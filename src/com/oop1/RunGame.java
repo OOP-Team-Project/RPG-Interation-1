@@ -1,9 +1,9 @@
 package com.oop1;
 
+import com.oop1.engine.Controller;
 import com.oop1.engine.Engine;
 import com.oop1.engine.GameState;
 import com.oop1.entity.Occupation;
-import com.oop1.entity.Sneak;
 import com.oop1.io.SaveManager;
 import com.oop1.view.AreaView;
 import com.oop1.view.CharacterCreationView;
@@ -45,15 +45,18 @@ public class RunGame implements Runnable {
     public void loadGame() throws IOException {
         System.out.println("Loading game");
         GameState game = SaveManager.getInstance().loadGameState();
-        startGame(new Engine(game));
+        startGame(new Engine(game, this));
     }
 
     public void startGame(Engine engine) {
         System.out.println("Starting game with engine " + engine);
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-        container.add(new AreaView(engine.getCurrentMap(), engine.getPlayer()));
+        Controller newController = new Controller();
+        engine.setController(newController);
+        container.add(new AreaView(engine.getCurrentMap(), engine.getPlayer(), newController));
         container.add(new StatusView(engine.getPlayer()));
+        engine.beginGame();
         gameWindow.setContentPane(container);
         gameWindow.setResizable(false);
         gameWindow.pack();
@@ -64,6 +67,11 @@ public class RunGame implements Runnable {
     public void startNewGame(Occupation o) throws IOException {
         System.out.println("Starting new game");
         GameState game = SaveManager.getInstance().createNewGameState(o);
-        startGame(new Engine(game));
+        startGame(new Engine(game, this));
+    }
+
+    public void stateChanged(Engine engine){
+        //TODO do more stuff and or make this conditional
+        gameWindow.repaint();
     }
 }

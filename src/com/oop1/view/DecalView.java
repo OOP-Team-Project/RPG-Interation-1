@@ -34,5 +34,4 @@ public class DecalView extends JPanel {
         setBackground(Color.green);
     }
 
-
 }

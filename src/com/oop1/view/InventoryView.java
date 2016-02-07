@@ -5,6 +5,10 @@ import com.oop1.entity.Stats;
 import com.oop1.items.TakeableItem;
 
 import javax.swing.*;
+import javax.swing.plaf.ScrollBarUI;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.metal.MetalScrollBarUI;
+import javax.swing.plaf.synth.SynthScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,10 +22,19 @@ public class InventoryView extends JPanel {
 
         final JList list = new JList();
         if(inventory != null) {
+            setLayout(new BorderLayout());
+
             list.setListData(inventory.getAllItems().toArray());
             list.setCellRenderer(new CellRenderer());
             list.setBackground(new Color(0, 0, 0, 0));
-            add(list);
+
+            JScrollPane scrollPane= new JScrollPane(list);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setBackground(new Color(0,0,0,0));
+
+            scrollPane.getVerticalScrollBar().setUI(new CustomUI.funScrollBarUI());
+            add(scrollPane);
+            scrollPane.setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0), 3));
 
         list.addMouseListener(new MouseListener() {
             @Override

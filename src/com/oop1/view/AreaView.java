@@ -228,16 +228,16 @@ public class AreaView extends JPanel {
 	}
 
 	private int getCenterX() {
-		return map.findXLocation(entityToFollow.getLocation());
+		return entityToFollow.getLocation().getXLoc();//map.findXLocation(entityToFollow.getLocation());
 	}
 	private int getCenterY() {
-		return map.findYLocation(entityToFollow.getLocation());
+		return entityToFollow.getLocation().getYLoc();
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		//Graphics2D g2 = (Graphics2D)  g;
 		requestFocus();
 
 		int x = getCenterX();

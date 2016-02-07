@@ -82,19 +82,7 @@ public class CharacterCreationView extends JPanel {
             } else {
                 o = new Sneak();
             }
-            //--    -   -   -   -   -   -   -   -
-            /*ArrayList<JPanel> defaultViews = new ArrayList<JPanel>();
 
-            AreaView newAreaView = new AreaView(defaultMap);
-            //Controller controller = new Controller();
-            //Controller.setAreaView(newAreaView);
-            Controller newController = new Controller(newAreaView);
-
-            defaultViews.add(newAreaView);
-            //defaultViews.add(newController);
-            //defaultViews.add(new EntityView(newEntity)); //I'm guessing that, actually, the AreaView() will have these, right?
-            //--    -   -   -   -   -   -   -   -
-            */
             try {
                 delegate.startNewGame(o);
             } catch (IOException e1) {

@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TileView extends JPanel {
+public class TileView extends JComponent {
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
@@ -63,21 +63,22 @@ public class TileView extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
 		//based off tileTerrain set color
 		switch (theTile.getTerrainType()) {
 			case MOUNTAIN:
-				g.setColor(Color.gray);
+				g2.setColor(Color.gray);
 				break;
 			case GRASS:
-				g.setColor(Color.green);
+				g2.setColor(Color.green);
 				break;
 			case WATER:
-				g.setColor(Color.blue);
+				g2.setColor(Color.blue);
 				break;
 		}
 
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		g.fillRect(0, 0, 60, 60);
+		g2.fillRect(0, 0, 60, 60);
 	}
 	
 }

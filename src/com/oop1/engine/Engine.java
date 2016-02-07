@@ -126,8 +126,10 @@ public class Engine {
                     long elapsed = endTime - startTime;
 
                     try {
-                        if(DESIRED_GAME_TICK_LENGTH_MILLISECONDS - elapsed > 0)
-                            sleep(DESIRED_GAME_TICK_LENGTH_MILLISECONDS - elapsed);
+                        if(DESIRED_GAME_TICK_LENGTH_MILLISECONDS - elapsed > 0) {
+                            //sleep(DESIRED_GAME_TICK_LENGTH_MILLISECONDS - elapsed);
+                            sleep(1);
+                        }
                     } catch (InterruptedException e) {
                         System.err.println("The game ended unexpectedly");
                         e.printStackTrace();

@@ -4,7 +4,6 @@ import com.oop1.engine.Controller;
 import com.oop1.engine.Engine;
 import com.oop1.engine.GameState;
 import com.oop1.entity.Occupation;
-import com.oop1.entity.Sneak;
 import com.oop1.io.SaveManager;
 import com.oop1.view.AreaView;
 import com.oop1.view.CharacterCreationView;
@@ -67,9 +66,6 @@ public class RunGame implements Runnable {
 
     public void stateChanged(Engine engine){
         //TODO do more stuff and or make this conditional
-        long startTime = System.currentTimeMillis();
         gameWindow.repaint();
-        long endTime = System.currentTimeMillis();
-        System.out.println(startTime - endTime);
     }
 }

@@ -14,6 +14,7 @@ public class Engine {
     private boolean isGameRunning = false;
     private GameThread gameThread;
     private Controller controller;
+    private long currentTick = 0L;
 
     private RunGame runGame;
 
@@ -25,15 +26,15 @@ public class Engine {
     }
 
     public void update() {
-        // TODO: implement this
         processInput(controller.getKey());
-        //runGame.stateChanged(this); //Let the rungame know about how stuff is now.
+        currentTick++;
     }
 
     public void beginGame() {
         gameThread = new GameThread();
         isGameRunning = true;
         gameThread.start();
+        currentTick = 0;
     }
 
     public void endGame() {
@@ -59,49 +60,54 @@ public class Engine {
         return state.getMaps().get(0);
     }
 
-    public void processInput(char c){
-        //if(c == '\0')
-            //return;
+    public void processInput(char c) {
+        Entity avatar = state.getAvatar();
 
-        for(int i = 0; i < 9; i++){
-            keyPresses[i] = keyPresses[i + 1];
+        if (currentTick - avatar.getLastMoveTime() <= avatar.getMinimumTimeBetweenMoves()) {
+            return;
         }
-        keyPresses[9] = c;
 
-        if(keyPresses[0] != keyPresses[9]) {
+        Map map = state.getMaps().get(0);
 
-            Entity avatar = state.getAvatar();
-            Map map = state.getMaps().get(0);
+        Tile currentTile = avatar.getLocation();    //the Avatar's current location
+        Tile moveToTile = currentTile;              //the Tile the Avatar moves to
+        int xLoc = map.findXLocation(currentTile);  //get X loc
+        int yLoc = map.findYLocation(currentTile);  //get Y loc
 
+        switch (c) {
+            case '1':
+                moveToTile = map.getTileAtCoordinates(xLoc + 1, yLoc - 1);
+                break;
+            case '2':
+            case 's': // fall through
+                moveToTile = map.getTileAtCoordinates(xLoc + 1, yLoc);
+                break;
+            case '3':
+                moveToTile = map.getTileAtCoordinates(xLoc + 1, yLoc + 1);
+                break;
+            case '4':
+            case 'a': // fall through
+                moveToTile = map.getTileAtCoordinates(xLoc, yLoc - 1);
+                break;
+            case '6':
+            case 'd': // fall through
+                moveToTile = map.getTileAtCoordinates(xLoc, yLoc + 1);
+                break;
+            case '7':
+                moveToTile = map.getTileAtCoordinates(xLoc - 1, yLoc - 1);
+                break;
+            case '8':
+            case 'w': // fall through
+                moveToTile = map.getTileAtCoordinates(xLoc - 1, yLoc);
+                break;
+            case '9':
+                moveToTile = map.getTileAtCoordinates(xLoc - 1, yLoc + 1);
+                break;
+        }
 
-            Tile currentTile = avatar.getLocation();    //the Avatar's current location
-            Tile moveToTile = currentTile;              //the Tile the Avatar moves to
-            int xLoc = map.findXLocation(currentTile);  //get X loc
-            int yLoc = map.findYLocation(currentTile);  //get Y loc
-
-            if (keyPresses[9] == '1') {
-                moveToTile = map.getTileAtCoordinates(--xLoc, --yLoc);
-            } else if (keyPresses[9] == '2') {
-                moveToTile = map.getTileAtCoordinates(xLoc, --yLoc);
-            } else if (keyPresses[9] == '3') {
-                moveToTile = map.getTileAtCoordinates(++xLoc, --yLoc);
-            } else if (keyPresses[9] == '4') {
-                moveToTile = map.getTileAtCoordinates(--xLoc, yLoc);
-            } else if (keyPresses[9] == '6') {
-                moveToTile = map.getTileAtCoordinates(++xLoc, yLoc);
-            } else if (keyPresses[9] == '7') {
-                moveToTile = map.getTileAtCoordinates(--xLoc, ++yLoc);
-            } else if (keyPresses[9] == '8') {
-                moveToTile = map.getTileAtCoordinates(xLoc, ++yLoc);
-            } else if (keyPresses[9] == '9') {
-                moveToTile = map.getTileAtCoordinates(++xLoc, ++yLoc);
-            } else {
-                return; //a key was pressed that the controller does not recognize
-            }
-
-            if(avatar.setLocation(moveToTile))
-                runGame.stateChanged(this);
-
+        if (avatar.setLocation(moveToTile)) {
+            runGame.stateChanged(this);
+            avatar.setLastMoveTime(currentTick);
         }
 
     }

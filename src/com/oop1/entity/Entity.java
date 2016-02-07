@@ -36,6 +36,16 @@ public class Entity {
 
     private Occupation occupation;
 
+    /**
+     * Tells the game tick at which this character last moves
+     */
+    private long lastMoveTime;
+
+    /**
+     * The number of ticks between moves that this character must wait.
+     */
+    private long minimumTimeBetweenMoves = 6;
+
     private char[] keyPresses = new char[10];   //Holds last 10 chars
 
     //Constructor for initial creation of entity
@@ -93,7 +103,6 @@ public class Entity {
         }
     }
 
-
     public Stats getBaseStats() {
         return baseStats;
     }
@@ -118,6 +127,20 @@ public class Entity {
         this.occupation = occupation;
     }
 
+    public void setLastMoveTime(long lastMoveTime) {
+        this.lastMoveTime = lastMoveTime;
+    }
 
+    public long getLastMoveTime() {
+        return lastMoveTime;
+    }
+
+    public long getMinimumTimeBetweenMoves() {
+        return minimumTimeBetweenMoves;
+    }
+
+    public void setMinimumTimeBetweenMoves(long minimumTimeBetweenMoves) {
+        this.minimumTimeBetweenMoves = minimumTimeBetweenMoves;
+    }
 }
 

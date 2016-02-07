@@ -242,7 +242,8 @@ public class AreaView extends JPanel {
 			requestFocus();
 
 		int x = getCenterX();
-		int y = getCenterY();
+		int y = getCenterY()-1; //this puts character in center of map but very dirty
+								//why not for xs as well?
 		for (int i = 0; i < tileViews.length; ++i) {
 			for (int j = 0; j < tileViews[0].length; ++j) {
 

@@ -7,6 +7,7 @@ import com.oop1.entity.Occupation;
 import com.oop1.io.SaveManager;
 import com.oop1.view.AreaView;
 import com.oop1.view.CharacterCreationView;
+import com.oop1.view.SaveMenuView;
 import com.oop1.view.MainMenuView;
 import com.oop1.view.StatusView;
 
@@ -17,6 +18,7 @@ public class RunGame implements Runnable {
 
     JFrame gameWindow;
     AreaView areaView;
+    GameState game;
 
     public static void main(String[] args) {
         RunGame runner = new RunGame();
@@ -45,7 +47,7 @@ public class RunGame implements Runnable {
 
     public void loadGame() throws IOException {
         System.out.println("Loading game");
-        GameState game = SaveManager.getInstance().loadGameState();
+        game = SaveManager.getInstance().loadGame("saved.txt");
         startGame(new Engine(game, this));
     }
 
@@ -69,7 +71,7 @@ public class RunGame implements Runnable {
 
     public void startNewGame(Occupation o) throws IOException {
         System.out.println("Starting new game");
-        GameState game = SaveManager.getInstance().createNewGameState(o);
+        game = SaveManager.getInstance().createNewGameState(o);
         startGame(new Engine(game, this));
     }
 
@@ -78,5 +80,21 @@ public class RunGame implements Runnable {
         areaView.didUpdate();
         areaView.requestFocus();
         gameWindow.repaint();
+    }
+
+    //opens up the main menu during game play
+    public void mainMenu() {
+        System.out.print("Opening pause menu!");
+        gameWindow.setContentPane(new SaveMenuView(this));
+        gameWindow.pack();
+    }
+
+    //saves and resumes game
+    public void saveGame() throws IOException {
+        try {
+            SaveManager.getInstance().saveGame(game, "saved.txt");
+        } catch (IOException e1) {e1.printStackTrace();}
+        game = SaveManager.getInstance().loadGame("saved.txt");
+        startGame(new Engine(game, this));
     }
 }

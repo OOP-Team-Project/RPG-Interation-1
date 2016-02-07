@@ -4,6 +4,7 @@ import com.oop1.RunGame;
 import com.oop1.entity.Entity;
 import com.oop1.map.Map;
 import com.oop1.map.Tile;
+import com.oop1.view.SaveMenuView;
 
 public class Engine {
 
@@ -15,6 +16,8 @@ public class Engine {
     private GameThread gameThread;
     private Controller controller;
     private long currentTick = 0L;
+
+    private boolean isPaused = false;
 
     private RunGame runGame;
 
@@ -111,6 +114,12 @@ public class Engine {
                     dx--;
                     dy++;
                     break;
+                case 'p': //open pause menu
+                    if (isPaused == false) {
+                        System.out.print("game paused!");
+                        runGame.mainMenu();
+                        isPaused = true;
+                    }
             }
         }
 

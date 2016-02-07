@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TileView extends JComponent {
+public class TileView extends JPanel {
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;

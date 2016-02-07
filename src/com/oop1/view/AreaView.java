@@ -238,7 +238,9 @@ public class AreaView extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		//Graphics2D g2 = (Graphics2D)  g;
-		requestFocus();
+
+		if(!hasFocus())
+			requestFocus();
 
 		int x = getCenterX();
 		int y = getCenterY();

@@ -4,8 +4,6 @@ import com.oop1.entity.Entity;
 import com.oop1.map.Tile;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 public class TakeableItem extends Item {
 

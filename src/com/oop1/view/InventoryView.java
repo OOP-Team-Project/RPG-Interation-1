@@ -16,10 +16,11 @@ public class InventoryView extends JPanel {
         this.inventory = inventory;
 
         final JList list = new JList();
-        list.setListData(inventory.getAllItems().toArray());
-        list.setCellRenderer(new CellRenderer());
-        list.setBackground(new Color(0,0,0,0));
-        add(list);
+        if(inventory != null) {
+            list.setListData(inventory.getAllItems().toArray());
+            list.setCellRenderer(new CellRenderer());
+            list.setBackground(new Color(0, 0, 0, 0));
+            add(list);
 
         list.addMouseListener(new MouseListener() {
             @Override
@@ -27,43 +28,48 @@ public class InventoryView extends JPanel {
                 if(e.getButton() == MouseEvent.BUTTON3){
                     int index = list.locationToIndex(e.getPoint());
                     Inventory inventory = InventoryView.this.inventory;
-                    TakeableItem item = inventory.getAllItems().get(index);
-                    if (inventory.getEquippedItems().contains(item)) {
-                        inventory.unequipItem(item);
+                    if(index >= 0) {
+                        TakeableItem item = inventory.getAllItems().get(index);
+                        if (inventory.getEquippedItems().contains(item)) {
+                            inventory.unequipItem(item);
+                        }
+                        inventory.dropItem(item);
+                        list.setListData(inventory.getAllItems().toArray());
                     }
-                    inventory.dropItem(item);
-                    list.setListData(inventory.getAllItems().toArray());
                 }
                 if (e.getClickCount() == 2) {
                     int index = list.locationToIndex(e.getPoint());
-                    Inventory inventory = InventoryView.this.inventory;
-                    TakeableItem item = inventory.getAllItems().get(index);
-                    if (inventory.getEquippedItems().contains(item)) {
-                        inventory.unequipItem(item);
-                    } else {
-                        inventory.equipItem(item);
+                    if(index >= 0) {
+                        Inventory inventory = InventoryView.this.inventory;
+                        TakeableItem item = inventory.getAllItems().get(index);
+                        if (inventory.getEquippedItems().contains(item)) {
+                            inventory.unequipItem(item);
+                        } else {
+                            inventory.equipItem(item);
+                        }
+                        list.setListData(inventory.getAllItems().toArray());
                     }
-                    list.setListData(inventory.getAllItems().toArray());
                 }
             }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
+                @Override
+                public void mousePressed(MouseEvent e) {
 
-            }
+                }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+        }
     }
 
     private class CellRenderer implements ListCellRenderer<TakeableItem> {

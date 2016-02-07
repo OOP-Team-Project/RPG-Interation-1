@@ -2,8 +2,11 @@ package com.oop1.engine;
 
 import com.oop1.RunGame;
 import com.oop1.entity.Entity;
+import com.oop1.map.AreaEffect;
 import com.oop1.map.Map;
 import com.oop1.map.Tile;
+
+import java.util.Iterator;
 
 public class Engine {
 
@@ -116,9 +119,29 @@ public class Engine {
 
         Tile moveToTile = map.getTileAtCoordinates(xLoc + dx, yLoc + dy);
 
-        if (avatar.setLocation(moveToTile)) {
-            runGame.stateChanged(this);
-            avatar.setLastMoveTime(currentTick);
+
+        Iterator<AreaEffect> iter = map.getAreaEffects().iterator();
+        while(iter.hasNext()){
+            AreaEffect effect = iter.next();
+            if(effect.getAffectedTiles().contains(moveToTile)){
+                effect.affectEntity(avatar);
+                iter.remove();
+                moveToTile.removeDecal();
+            }
+        }
+
+        if(moveToTile != null) {
+            if (moveToTile.hasItem() && (dx != 0 || dy != 0)) {
+                if (moveToTile.getItem().toString().equals("obstacle"))
+                    return;
+                moveToTile.getItem().interact(avatar);
+
+            }
+
+            if (avatar.setLocation(moveToTile)) {
+                runGame.stateChanged(this);
+                avatar.setLastMoveTime(currentTick);
+            }
         }
 
     }

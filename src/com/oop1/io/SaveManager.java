@@ -1,6 +1,8 @@
 package com.oop1.io;
 
 import com.oop1.engine.GameState;
+import com.oop1.entity.Entity;
+import com.oop1.entity.Inventory;
 import com.oop1.entity.Occupation;
 import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
@@ -63,12 +65,28 @@ public class SaveManager {
      */
     public GameState createNewGameState(Occupation o) throws IOException {
         GameState state = instance.loadGame("map1.txt");
-        state.getAvatar().setOccupation(o);
+        Tile t = state.getAvatar().getLocation();
+        List<Entity> entityList = new ArrayList<Entity>();
+        entityList.add(new Entity(o));
+        entityList.get(0).setLocation(t);
+
+        if(state.getAvatar().getInventory() != null)
+            entityList.get(0).setInventory(state.getAvatar().getInventory());
+        else
+            entityList.get(0).setInventory(new Inventory());
+
+        state.getEntities().clear();
+        state.setEntities(entityList);
         return state;
     }
 
     public GameState loadGameState() throws IOException {
         GameState state = instance.loadGame("map1.txt");
+
+        if(state.getAvatar().getInventory() != null)
+            state.getAvatar().setInventory(state.getAvatar().getInventory());
+        else
+            state.getAvatar().setInventory(new Inventory());
         //System.out.println(state.getAvatar().getOccupation().printOccupation());
         return state;
     }

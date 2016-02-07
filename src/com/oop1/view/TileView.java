@@ -75,7 +75,7 @@ public class TileView extends JPanel {
 			setComponentZOrder(backgroundTexture, ++zPosition);
 		}
 		if (theTile.hasDecal()){
-			decalView = new DecalView(new Decal("SKULL_AND_CROSSBONES"));
+			decalView = new DecalView(new Decal(theTile.whichDecal()));
 			add(decalView);
 			setComponentZOrder(backgroundTexture, ++zPosition);
 		}

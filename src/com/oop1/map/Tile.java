@@ -44,6 +44,14 @@ public class Tile {
             return false;
     }
 
+    public void removeDecal(){
+        decal = null;
+    }
+
+    public String whichDecal() {
+        return decal.toString();
+    }
+
     public void removeItem(){
         item = null;
     }

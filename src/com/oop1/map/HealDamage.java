@@ -27,9 +27,7 @@ public class HealDamage extends AreaEffect {
     }
 
     public void affectEntity(Entity entity){
-      int currentHealth = entity.getBaseStats().getCurrentLife();
-      entity.getBaseStats().healDamage(damageHealed);
-      return;
+        entity.getBaseStats().healDamage(damageHealed);
     }
 
     public String getEffectName(){

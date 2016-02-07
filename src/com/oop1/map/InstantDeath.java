@@ -18,8 +18,7 @@ public class InstantDeath extends AreaEffect {
     }
 
     public void affectEntity(Entity entity){
-      entity.getBaseStats().takeDamage(entity.getBaseStats().getCurrentLife());
-      return;
+        entity.getBaseStats().takeDamage(entity.getBaseStats().getCurrentLife());
     }
 
     public String getEffectName(){

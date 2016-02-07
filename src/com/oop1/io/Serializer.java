@@ -360,7 +360,7 @@ public class Serializer {
             String[] itemStats = str.split(";");
             item.setName(itemStats[0]);
             boolean equippable = false, equipIt = false;
-            if(itemStats[1].substring(0,1).equals("E")) {
+            if (itemStats[1].substring(0,1).equals("E")) {
                 equippable = true;
                 itemStats[1] = itemStats[1].substring(1);
                 if(itemStats[1].substring(0,1).equals("E")){

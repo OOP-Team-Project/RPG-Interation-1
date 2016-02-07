@@ -25,8 +25,8 @@ public class Inventory {
      * modifications to the inventory should be performed
      * via the other methods on this class.
      */
-    public Collection<TakeableItem> getAllItems() {
-        return Collections.unmodifiableCollection(items);
+    public List<TakeableItem> getAllItems() {
+        return Collections.unmodifiableList(items);
     }
 
     /**

@@ -131,7 +131,7 @@ public class Engine {
         }
 
         if(moveToTile != null) {
-            if (moveToTile.hasItem()) {
+            if (moveToTile.hasItem() && (dx != 0 || dy != 0)) {
                 if (moveToTile.getItem().toString().equals("obstacle"))
                     return;
                 moveToTile.getItem().interact(avatar);

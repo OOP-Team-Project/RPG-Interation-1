@@ -40,6 +40,7 @@ public class AreaView extends JPanel {
 		centerTileYIndex = map.findYLocation(entityToFollow.getLocation());
 
 		for(int i = centerTileXIndex - 5; i < centerTileXIndex + 5; i++){
+			TileView newTile;
 			if(i < 0 || i >= map.getYBoundary()){
 				for(int j = centerTileYIndex - 10; j <= centerTileYIndex + 10; j++){
 					add(new TileView(false));
@@ -51,7 +52,11 @@ public class AreaView extends JPanel {
 						add(new TileView(false));
 					}
 					else{
-						TileView newTile = new TileView(map.getTileAtCoordinates(i,j));
+						if(i == centerTileXIndex && j == centerTileYIndex){
+							newTile = new TileView(map.getTileAtCoordinates(i,j), entityToFollow.getOccupation().printOccupation());
+						}
+						else
+							newTile = new TileView(map.getTileAtCoordinates(i,j));
 						//newTile.setText((new Integer(i).toString() + " " + new Integer(j).toString()));
 						//add(new TileView(map.getTileAtCoordinates(i, j)));
 						add(newTile);

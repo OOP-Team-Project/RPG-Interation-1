@@ -26,9 +26,7 @@ public class TileView extends JPanel{
 
 	private String tileTerrain;
 
-	public TileView(Tile newTile){
-		theTile = newTile;
-
+	private void drawIconsOnTiles(){
 		if(theTile.hasItem()){
 			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 			setMaximumSize(new Dimension(60,60));
@@ -44,6 +42,22 @@ public class TileView extends JPanel{
 			add(new DecalView(theTile.getDecal()));
 			add(Box.createVerticalGlue());
 		}
+	}
+
+	public TileView(Tile newTile){
+		theTile = newTile;
+		drawIconsOnTiles();
+	}
+
+	public TileView(Tile newTile, String occupation){
+		theTile = newTile;
+		drawIconsOnTiles();
+
+		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		setMaximumSize(new Dimension(60,60));
+		setPreferredSize(new Dimension(60,60));
+		add(new EntityView(occupation));
+		add(Box.createVerticalGlue());
 	}
 
 	public TileView(boolean thing){	//Used to do blank tils.

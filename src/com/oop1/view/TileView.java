@@ -35,6 +35,8 @@ public class TileView extends JPanel {
 	}
 
 	private void drawIconsOnTiles(){
+		if(theTile == null)
+			return;
 		if(theTile.hasItem()){
 			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 			setMaximumSize(new Dimension(60,60));

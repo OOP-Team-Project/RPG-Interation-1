@@ -45,7 +45,7 @@ public class RunGame implements Runnable {
     public void loadGame() throws IOException {
         System.out.println("Loading game");
         GameState game = SaveManager.getInstance().loadGameState();
-        startGame(new Engine(game));
+        startGame(new Engine(game, this));
     }
 
     public void startGame(Engine engine) {

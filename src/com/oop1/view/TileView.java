@@ -82,11 +82,10 @@ public class TileView extends JPanel {
 	}
 
 	public TileView(Tile newTile){
-		setLayout(new BorderLayout());
-
-		setTile(newTile);
+		setLayout(new BorderLayout());	//Makes sure components take up the whole tile
 		backgroundTexture = new JLabel();
 		backgroundIcon = new ImageIcon();
+		setTile(newTile);
 	}
 
 	public void setEntity(Entity entity) {

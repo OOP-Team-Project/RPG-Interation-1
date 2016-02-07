@@ -16,12 +16,11 @@ import java.io.IOException;
 public class ItemView extends JPanel{
 
     private Item item;
-    //private Image image = null;
 
     public ItemView (Item item) {
 
         this.item = item;
-        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        //setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         Image image = null;
         if(item.toString().equals("oneShot"))
             image = new ImageIcon("src/com/oop1/resources/ONE_SHOT.png").getImage();
@@ -36,10 +35,11 @@ public class ItemView extends JPanel{
         JLabel jLabel = new JLabel();
         jLabel.setMaximumSize(new Dimension(60,60));
         jLabel.setPreferredSize(new Dimension(60,60));
+        jLabel.setIcon(imageIcon);
+        jLabel.setOpaque(false);
+        setOpaque(false);
         add(jLabel);
         add(Box.createVerticalGlue());
-        jLabel.setIcon(imageIcon);
-        setBackground(Color.green);
     }
 
 }

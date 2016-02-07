@@ -18,6 +18,8 @@ public class RunGame implements Runnable {
 
     JFrame gameWindow;
     AreaView areaView;
+    GameState currentGameState;
+    boolean shouldCollectGameState = false;
 
     public static void main(String[] args) {
         RunGame runner = new RunGame();

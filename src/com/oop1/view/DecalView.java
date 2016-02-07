@@ -21,9 +21,11 @@ public class DecalView extends JPanel {
         JLabel jLabel = new JLabel();
         jLabel.setMaximumSize(new Dimension(60,60));
         jLabel.setPreferredSize(new Dimension(60,60));
+        jLabel.setIcon(imageIcon);
+        jLabel.setOpaque(false);
+        setOpaque(false);
         add(jLabel);
         add(Box.createVerticalGlue());
-        jLabel.setIcon(imageIcon);
         //setBackground(Color.green);
         //jLabel.setText("some text");
     }

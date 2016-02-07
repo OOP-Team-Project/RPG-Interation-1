@@ -22,15 +22,17 @@ public class EntityView extends JPanel {
         else {
             image = new ImageIcon("src/com/oop1/resources/SUMMONER.png").getImage();
         }
-        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        //setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         ImageIcon imageIcon = new ImageIcon(image);
         JLabel jLabel = new JLabel();
         jLabel.setMaximumSize(new Dimension(60,60));
         jLabel.setPreferredSize(new Dimension(60,60));
+        jLabel.setIcon(imageIcon);
+        jLabel.setOpaque(false);
+        setOpaque(false);
+        setBackground(Color.YELLOW);
         add(jLabel);
         add(Box.createVerticalGlue());
-        jLabel.setIcon(imageIcon);
-        //setBackground(Color.green);
     }
 }
 

@@ -60,6 +60,8 @@ public class Serializer {
                     if(tiles[row][col].getItem().toString().equals("takeableItem")){
                         TakeableItem item = ((TakeableItem)tiles[row][col].getItem());
                         StatModifier sm = item.getStatModifiers().get(0);
+                        takeableStr.append(item.getName());
+                        takeableStr.append(";");
                         takeableStr.append(row);
                         takeableStr.append(",");
                         takeableStr.append(col);
@@ -233,20 +235,28 @@ public class Serializer {
     }
 
     private static void deserializeTakeableItems(String itemData, Map map){
+        boolean isEquippable = false;
         if(itemData.substring(0,1).equals("$"))
             return;
         String[] items = itemData.split("%");
         for(String str : items){
             String[] itemStats = str.split(";");
-            int x = Integer.parseInt(itemStats[0].substring(0, str.indexOf(',')));
-            int y = Integer.parseInt(itemStats[0].substring(str.indexOf(',')+1));
+            if(itemStats[1].substring(0,1).equals("E")){
+                isEquippable = true;
+                itemStats[1] = itemStats[1].substring((1));
+            }
+            int x = Integer.parseInt(itemStats[1].substring(0, itemStats[1].indexOf(',')));
+            int y = Integer.parseInt(itemStats[1].substring(itemStats[1].indexOf(',')+1));
             TakeableItem item = new TakeableItem(map.getTileAtCoordinates(x,y));
-            int strength = Integer.parseInt(itemStats[1]);
-            int agility = Integer.parseInt(itemStats[2]);
-            int intellect = Integer.parseInt(itemStats[3]);
-            int hardiness = Integer.parseInt(itemStats[4]);
-            int movementSpeed = Integer.parseInt(itemStats[5]);
-            int livesLeft = Integer.parseInt(itemStats[6]);
+            if(isEquippable)
+                item.setEquippable(true);
+            item.setName(itemStats[0]);
+            int strength = Integer.parseInt(itemStats[2]);
+            int agility = Integer.parseInt(itemStats[3]);
+            int intellect = Integer.parseInt(itemStats[4]);
+            int hardiness = Integer.parseInt(itemStats[5]);
+            int movementSpeed = Integer.parseInt(itemStats[6]);
+            int livesLeft = Integer.parseInt(itemStats[7]);
             StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed, livesLeft);
 
             item.addStatModifier(statMod);
@@ -342,23 +352,24 @@ public class Serializer {
         String[] items = inventory.split("%");
         Inventory newInventory = new Inventory();
         for(String str : items){
-            boolean equippable = false, equipIt = false;
-            if(str.substring(0,1).equals("E")) {
-                equippable = true;
-                str = str.substring(1);
-                if(str.substring(0,1).equals("E")){
-                    equipIt = true;
-                    str = str.substring(1);
-                }
-            }
             TakeableItem item = new TakeableItem(new Tile(TerrainType.GRASS));
             String[] itemStats = str.split(";");
-            int strength = Integer.parseInt(itemStats[0]);
-            int agility = Integer.parseInt(itemStats[1]);
-            int intellect = Integer.parseInt(itemStats[2]);
-            int hardiness = Integer.parseInt(itemStats[3]);
-            int movementSpeed = Integer.parseInt(itemStats[4]);
-            int livesLeft = Integer.parseInt(itemStats[5]);
+            item.setName(itemStats[0]);
+            boolean equippable = false, equipIt = false;
+            if(itemStats[1].substring(0,1).equals("E")) {
+                equippable = true;
+                itemStats[1] = itemStats[1].substring(1);
+                if(itemStats[1].substring(0,1).equals("E")){
+                    equipIt = true;
+                    itemStats[1] = itemStats[1].substring(1);
+                }
+            }
+            int strength = Integer.parseInt(itemStats[1]);
+            int agility = Integer.parseInt(itemStats[2]);
+            int intellect = Integer.parseInt(itemStats[3]);
+            int hardiness = Integer.parseInt(itemStats[4]);
+            int movementSpeed = Integer.parseInt(itemStats[5]);
+            int livesLeft = Integer.parseInt(itemStats[6]);
             StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed, livesLeft);
             if (equippable)
                 item.setEquippable(true);

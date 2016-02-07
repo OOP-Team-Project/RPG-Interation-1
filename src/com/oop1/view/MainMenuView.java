@@ -31,7 +31,7 @@ public class MainMenuView extends JPanel {
         headerLabel = new JLabel("",JLabel.CENTER );
         statusLabel = new JLabel("",JLabel.CENTER);
 
-        statusLabel.setSize(800,600);
+//        statusLabel.setSize(800,600);
 
         setLayout(new FlowLayout());
 

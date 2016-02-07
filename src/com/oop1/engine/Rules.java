@@ -9,8 +9,11 @@ public class Rules {
         if (targetLevel < 1) {
             throw new RuntimeException("Level must be greater than or equal to 1");
         }
-        if (targetLevel == 1) { return 0; }
-        return (int)(FIRST_LEVEL_EXPERIENCE * Math.pow(targetLevel, LEVEL_EXPERIENCE_EXPONENT));
+        else if (targetLevel == 1) {
+            return FIRST_LEVEL_EXPERIENCE;
+        }
+        else
+            return (int)(FIRST_LEVEL_EXPERIENCE * Math.pow(targetLevel, LEVEL_EXPERIENCE_EXPONENT));
     }
 
     public static int getLevelFromTotalExperience(int totalExperience) {

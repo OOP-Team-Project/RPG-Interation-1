@@ -70,7 +70,6 @@ public class SaveManager {
         entityList.add(new Entity(o));
         entityList.get(0).setLocation(t);
         state.setEntities(entityList);
-        saveGame(state, "test.txt");
         return state;
     }
 

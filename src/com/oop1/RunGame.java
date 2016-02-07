@@ -47,7 +47,7 @@ public class RunGame implements Runnable {
 
     public void loadGame() throws IOException {
         System.out.println("Loading game");
-        game = SaveManager.getInstance().loadGame("saved.txt");
+        game = SaveManager.getInstance().loadGame("map1.txt");
         startGame(new Engine(game, this));
     }
 
@@ -94,8 +94,10 @@ public class RunGame implements Runnable {
         try {
             SaveManager.getInstance().saveGame(game, "saved.txt");
         } catch (IOException e1) {e1.printStackTrace();}
-        game = SaveManager.getInstance().loadGame("saved.txt");
-        startGame(new Engine(game, this));
+        System.out.println("Saved game");
+        //game = SaveManager.getInstance().loadGame("saved.txt");
+        //startGame(new Engine(game, this));
+        System.exit(0);
     }
 
     //resumes gameplay without saving
@@ -103,7 +105,7 @@ public class RunGame implements Runnable {
         try {
             SaveManager.getInstance().saveGame(game, "temp.txt");
         } catch (IOException e1) {e1.printStackTrace();}
-        game = SaveManager.getInstance().loadGame("temp.txt");
-        startGame(new Engine(game, this));
+        //game = SaveManager.getInstance().loadGame("temp.txt");
+        //startGame(new Engine(game, this));
     }
 }

@@ -1,6 +1,7 @@
 package com.oop1.view;
 
 import com.oop1.entity.Inventory;
+import com.oop1.entity.Stats;
 import com.oop1.items.TakeableItem;
 
 import javax.swing.*;
@@ -105,5 +106,33 @@ public class InventoryView extends JPanel {
             }
             return panel;
         }
+    }
+
+    private void makeStatLabels(String str){
+        JLabel label = new JLabel();
+        label.setText(str);
+        label.setBackground(new Color(0,0,0,0));
+        label.setForeground(StatusView.STATUS_VIEW_TEXT_COLOR.darker());
+        label.setFont(new Font("default", Font.BOLD, 12));
+        label.setForeground(Color.WHITE);
+        add(label);
+    }
+
+
+    public InventoryView(Stats stats) {
+        setLayout(new GridLayout(0,1));
+        makeStatLabels("  Level: " + stats.getCurrentLevel());
+        makeStatLabels("  Experience: " + stats.getExperience());
+        makeStatLabels("  Lives: " + stats.getLivesLeft());
+        makeStatLabels("  Offense: " + stats.getOffensiveRating());
+        makeStatLabels("  Defense: " + stats.getDefensiveRating());
+        makeStatLabels("  Armor: " + stats.getArmorRating());
+        makeStatLabels("  Strength: " + stats.getStrength());
+        makeStatLabels("  Agility: " + stats.getAgility());
+        makeStatLabels("  Intellect: " + stats.getIntellect());
+        makeStatLabels("  Hardiness: " + stats.getHardiness());
+        makeStatLabels("  Movement: " + stats.getMovementSpeed());
+        add(Box.createHorizontalGlue());
+
     }
 }

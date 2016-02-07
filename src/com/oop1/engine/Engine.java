@@ -26,7 +26,7 @@ public class Engine {
     }
 
     public void update() {
-        processInput(controller.getKey());
+        processInput();
         currentTick++;
     }
 
@@ -60,7 +60,7 @@ public class Engine {
         return state.getMaps().get(0);
     }
 
-    public void processInput(char c) {
+    public void processInput() {
         Entity avatar = state.getAvatar();
 
         if (currentTick - avatar.getLastMoveTime() <= avatar.getMinimumTimeBetweenMoves()) {
@@ -70,40 +70,51 @@ public class Engine {
         Map map = state.getMaps().get(0);
 
         Tile currentTile = avatar.getLocation();    //the Avatar's current location
-        Tile moveToTile = currentTile;              //the Tile the Avatar moves to
         int xLoc = map.findXLocation(currentTile);  //get X loc
         int yLoc = map.findYLocation(currentTile);  //get Y loc
 
-        switch (c) {
-            case '1':
-                moveToTile = map.getTileAtCoordinates(xLoc + 1, yLoc - 1);
-                break;
-            case '2':
-            case 's': // fall through
-                moveToTile = map.getTileAtCoordinates(xLoc + 1, yLoc);
-                break;
-            case '3':
-                moveToTile = map.getTileAtCoordinates(xLoc + 1, yLoc + 1);
-                break;
-            case '4':
-            case 'a': // fall through
-                moveToTile = map.getTileAtCoordinates(xLoc, yLoc - 1);
-                break;
-            case '6':
-            case 'd': // fall through
-                moveToTile = map.getTileAtCoordinates(xLoc, yLoc + 1);
-                break;
-            case '7':
-                moveToTile = map.getTileAtCoordinates(xLoc - 1, yLoc - 1);
-                break;
-            case '8':
-            case 'w': // fall through
-                moveToTile = map.getTileAtCoordinates(xLoc - 1, yLoc);
-                break;
-            case '9':
-                moveToTile = map.getTileAtCoordinates(xLoc - 1, yLoc + 1);
-                break;
+        int dx = 0;
+        int dy = 0;
+
+        for (Character c : controller.getPressedKeys()) {
+
+            switch (c.charValue()) {
+                case '1':
+                    dx++;
+                    dy--;
+                    break;
+                case '2':
+                case 's': // fall through
+                    dx++;
+                    break;
+                case '3':
+                    dx++;
+                    dy++;
+                    break;
+                case '4':
+                case 'a': // fall through
+                    dy--;
+                    break;
+                case '6':
+                case 'd': // fall through
+                    dy++;
+                    break;
+                case '7':
+                    dx--;
+                    dy--;
+                    break;
+                case '8':
+                case 'w': // fall through
+                    dx--;
+                    break;
+                case '9':
+                    dx--;
+                    dy++;
+                    break;
+            }
         }
+
+        Tile moveToTile = map.getTileAtCoordinates(xLoc + dx, yLoc + dy);
 
         if (avatar.setLocation(moveToTile)) {
             runGame.stateChanged(this);

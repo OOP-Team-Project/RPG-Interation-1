@@ -1,30 +1,28 @@
 package com.oop1.engine;
-import com.oop1.entity.Entity;
-import com.oop1.entity.Smasher;
-import com.oop1.map.TerrainType;
-import com.oop1.map.Tile;
-import com.oop1.map.Map;
-import com.oop1.view.AreaView;
 
-import javax.swing.*;
-import java.applet.Applet;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Controller implements KeyListener {
+
+    private Set<Character> pressedKeys;
+
     private char keyPressed;
 
     public Controller(){
+        pressedKeys = new HashSet<Character>();
     }
 
     @Override
     public void keyPressed(KeyEvent e){
-        keyPressed = e.getKeyChar();
-
+        pressedKeys.add(e.getKeyChar());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        keyPressed = '\0';
+        pressedKeys.remove(e.getKeyChar());
     }
 
     @Override
@@ -34,5 +32,9 @@ public class Controller implements KeyListener {
 
     public char getKey(){
         return keyPressed;
+    }
+
+    public Set<Character> getPressedKeys() {
+        return pressedKeys;
     }
 }

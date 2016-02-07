@@ -43,7 +43,8 @@ public class Controller implements KeyListener {
         } else {
             //a key was pressed that the controller does not recognize
         }
-        avatar.setLocation(moveToTile); //this will check if the Avatar can move to the tile
+        if (pressed == 's') System.out.print("here!");
+        else avatar.setLocation(moveToTile); //this will check if the Avatar can move to the tile
     }
 
     @Override

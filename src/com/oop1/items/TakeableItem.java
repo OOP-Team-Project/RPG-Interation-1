@@ -50,4 +50,8 @@ public class TakeableItem extends Item {
         if (name == null) { return "Unnamed Item"; }
         return name;
     }
+
+    public void setName(String newName){
+        this.name = newName;
+    }
 }

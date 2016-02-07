@@ -15,7 +15,7 @@ public class InventoryView extends JPanel {
     public InventoryView(Inventory inventory) {
         this.inventory = inventory;
 
-        JList list = new JList();
+        final JList list = new JList();
         list.setListData(inventory.getAllItems().toArray());
         list.setCellRenderer(new CellRenderer());
         list.setBackground(new Color(0,0,0,0));
@@ -26,6 +26,7 @@ public class InventoryView extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int index = list.locationToIndex(e.getPoint());
+                    Inventory inventory = InventoryView.this.inventory;
                     TakeableItem item = inventory.getAllItems().get(index);
                     if (inventory.getEquippedItems().contains(item)) {
                         inventory.unequipItem(item);

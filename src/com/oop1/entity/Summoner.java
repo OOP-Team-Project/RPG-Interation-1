@@ -39,7 +39,7 @@ public class Summoner extends Occupation {
     }
 
     @Override
-    public double getMovementSpeed() { return 2; }
+    public double getMovementSpeed() { return 1; }
 
     @Override
     public int getBaseHardiness() { return 10; }

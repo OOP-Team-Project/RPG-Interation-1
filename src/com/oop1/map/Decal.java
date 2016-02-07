@@ -63,10 +63,6 @@ public class Decal {
     }
 
     public String toString(){
-        //TODO: Fill this in for saving
-        //Needs to return the name of the decal: RED_CROSS, GOLD_STAR, or SKULL_AND_CROSSBONES
-        //This being used in the meantime as a default print
-        //String str = "RED_CROSS;2,3%";
         return currentString;
     }
 

@@ -205,15 +205,15 @@ public class Stats {
             Stats stats = new Stats();
             stats.occupation = occupation;
             // if a value wasn't provided for a property, use the default
-            stats.livesLeft = livesLeft == Integer.MIN_VALUE ? 1 : livesLeft;
-            stats.agility = agility == Integer.MIN_VALUE ? occupation.getBaseAgility() : agility;
-            stats.strength = strength == Integer.MIN_VALUE ? occupation.getBaseStrength() : strength;
-            stats.intellect = intellect == Integer.MIN_VALUE ? occupation.getBaseIntellect() : intellect;
-            stats.hardiness = hardiness == Integer.MIN_VALUE ? occupation.getBaseHardiness() : hardiness;
-            stats.experience = experience == Integer.MIN_VALUE ? 0 : experience;
-            stats.currentLife = currentLife == Integer.MIN_VALUE ? stats.getMaxLife() : currentLife;
-            stats.currentMana = currentMana == Integer.MIN_VALUE ? stats.getMaxMana() : currentMana;
-            stats.movementSpeed = movementSpeed == Double.NEGATIVE_INFINITY ? occupation.movementSpeed : movementSpeed;
+            stats.livesLeft = livesLeft < 0 ? 1 : livesLeft;
+            stats.agility = agility < 0 ? occupation.getBaseAgility() : agility;
+            stats.strength = strength < 0 ? occupation.getBaseStrength() : strength;
+            stats.intellect = intellect < 0 ? occupation.getBaseIntellect() : intellect;
+            stats.hardiness = hardiness < 0 ? occupation.getBaseHardiness() : hardiness;
+            stats.experience = experience < 0 ? 0 : experience;
+            stats.currentLife = currentLife < 0 ? stats.getMaxLife() : currentLife;
+            stats.currentMana = currentMana < 0 ? stats.getMaxMana() : currentMana;
+            stats.movementSpeed = movementSpeed == Double.NEGATIVE_INFINITY ? occupation.getMovementSpeed() : movementSpeed;
             return stats;
         }
 

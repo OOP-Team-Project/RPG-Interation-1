@@ -29,6 +29,7 @@ public class Engine {
         this.runGame = rg;
     }
 
+
     public void update() {
         processInput();
         currentTick++;
@@ -53,6 +54,11 @@ public class Engine {
             System.err.println("Failed to get result of game due to an error.");
             e.printStackTrace();
         }
+    }
+
+    public void saveGame() {
+
+
     }
 
     public Entity getPlayer() {

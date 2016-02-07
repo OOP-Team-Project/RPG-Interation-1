@@ -12,9 +12,11 @@ import com.oop1.view.StatusView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 
-public class RunGame implements Runnable {
+public class RunGame implements Runnable, WindowListener {
 
     JFrame gameWindow;
     AreaView areaView;
@@ -36,6 +38,7 @@ public class RunGame implements Runnable {
         gameWindow.setContentPane(container);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setVisible(true);
+        gameWindow.addWindowListener(this);
     }
 
     public void createNewGame() {
@@ -66,7 +69,7 @@ public class RunGame implements Runnable {
         gameWindow.setContentPane(container);
         gameWindow.setResizable(false);
         gameWindow.pack();
-        gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         gameWindow.setVisible(true);
     }
 
@@ -94,4 +97,30 @@ public class RunGame implements Runnable {
         gameWindow.repaint();
         //gameWindow.revalidate();
     }
+
+    @Override
+    public void windowClosing(WindowEvent e) { //this is called when user hits close window button
+
+        System.out.print("windowClosed method called.\n");
+        if (JOptionPane.showConfirmDialog(null, "Would you like to save?", "",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        //        SaveManager.getInstance().saveGame(game,"map1_saved"); TODO: get GAMESTATE and call this function!!!!
+        } else {
+            //just quit, do nothing
+        }
+        System.exit(0);
+    }
+//    addWindowListener(new WindowAdapter() {
+//        @Override
+//        public void windowClosing(WindowEvent e) {
+//            System.exit(0);  // Terminate the program
+//        }
+//    });
+    // Need to provide an empty body for compilation
+    @Override public void windowClosed(WindowEvent e){System.out.print("WindowListener method called: windowClosing."); }
+    @Override public void windowOpened(WindowEvent e) {System.out.print("WindowListener method called: windowOpened."); }
+    @Override public void windowIconified(WindowEvent e) {System.out.print("WindowListener method called: windowIconified."); }
+    @Override public void windowDeiconified(WindowEvent e) { System.out.print("WindowListener method called: windowDeiconified.");}
+    @Override public void windowActivated(WindowEvent e) { System.out.print("WindowListener method called: windowActivated.");}
+    @Override public void windowDeactivated(WindowEvent e) { System.out.print("WindowListener method called: windowDeactivated.");}
 }

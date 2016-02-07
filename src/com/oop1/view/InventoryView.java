@@ -116,6 +116,7 @@ public class InventoryView extends JPanel {
         label.setFont(new Font("default", Font.BOLD, 12));
         label.setForeground(Color.WHITE);
         add(label);
+        setBackground(new Color(0,0,0,0));
     }
 
 

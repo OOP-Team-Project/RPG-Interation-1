@@ -68,7 +68,7 @@ public class SaveMenuView extends JPanel {
             }
             else if( command.equals( "Resume Game" ) )  { //clicked load game
                 try {
-                    delegate.loadGame();
+                    delegate.resumeGame();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

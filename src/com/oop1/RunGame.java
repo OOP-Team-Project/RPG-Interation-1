@@ -97,4 +97,13 @@ public class RunGame implements Runnable {
         game = SaveManager.getInstance().loadGame("saved.txt");
         startGame(new Engine(game, this));
     }
+
+    //resumes gameplay without saving
+    public void resumeGame() throws IOException {
+        try {
+            SaveManager.getInstance().saveGame(game, "temp.txt");
+        } catch (IOException e1) {e1.printStackTrace();}
+        game = SaveManager.getInstance().loadGame("temp.txt");
+        startGame(new Engine(game, this));
+    }
 }

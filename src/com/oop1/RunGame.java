@@ -16,6 +16,7 @@ import java.io.IOException;
 public class RunGame implements Runnable {
 
     JFrame gameWindow;
+    AreaView areaView;
 
     public static void main(String[] args) {
         RunGame runner = new RunGame();
@@ -54,7 +55,9 @@ public class RunGame implements Runnable {
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
         Controller newController = new Controller();
         engine.setController(newController);
-        container.add(new AreaView(engine.getCurrentMap(), engine.getPlayer(), newController));
+        areaView = new AreaView(engine.getCurrentMap(), engine.getPlayer(), newController);
+        areaView.requestFocus();
+        container.add(areaView);
         container.add(new StatusView(engine.getPlayer()));
         engine.beginGame();
         gameWindow.setContentPane(container);
@@ -72,6 +75,8 @@ public class RunGame implements Runnable {
 
     public void stateChanged(Engine engine){
         //TODO do more stuff and or make this conditional
+        areaView.didUpdate();
+        areaView.requestFocus();
         gameWindow.repaint();
     }
 }

@@ -186,7 +186,6 @@
 package com.oop1.view;
 
 import com.oop1.engine.Controller;
-import com.oop1.engine.Engine;
 import com.oop1.entity.Entity;
 import com.oop1.map.Map;
 import com.oop1.map.TerrainType;
@@ -233,29 +232,28 @@ public class AreaView extends JPanel {
 		return entityToFollow.getLocation().getYLoc();
 	}
 
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		//Graphics2D g2 = (Graphics2D)  g;
-
-		if(!hasFocus())
-			requestFocus();
-
+	public void didUpdate() {
 		int x = getCenterX();
 		int y = getCenterY()-1; //this puts character in center of map but very dirty
 								//why not for xs as well?
 		for (int i = 0; i < tileViews.length; ++i) {
 			for (int j = 0; j < tileViews[0].length; ++j) {
-
 				int xCoordinate = x + i - tileViews.length / 2;
 				int yCoordinate = y + j - tileViews[i].length / 2;
 				Tile tile = map.getTileAtCoordinates(xCoordinate, yCoordinate);
-				if(tile != null)
+
+				if (tile != null)
 					tileViews[i][j].setTile(tile);
 				else
 					tileViews[i][j].setTile(new Tile(TerrainType.BLANK));
-				//System.out.println("Getting tile at coordinate " + i + ", " + j);
+
+				if (entityToFollow.getLocation().equals(tile)) {
+					tileViews[i][j].setEntity(entityToFollow);
+				} else {
+					tileViews[i][j].setEntity(null);
+				}
 			}
 		}
+		repaint();
 	}
 }

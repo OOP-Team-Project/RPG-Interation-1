@@ -180,22 +180,14 @@ public class Serializer {
         Tile[][] tiles = new Tile[numRows][numCols];
         int i = 0, j = 0;
         for(char c : mapCharArray){
-            if(c == '_') {
-                tiles[i][j] = new Tile(TerrainType.GRASS);
+            TerrainType type = TerrainType.fromChar(c);
+            if (type != TerrainType.BLANK) {
+                tiles[i][j] = new Tile(type);
                 tiles[i][j].setXLoc(i);
-                tiles[i][j++].setYLoc(j);
+                tiles[i][j].setYLoc(j);
+                ++j;
             }
-            else if(c == '~') {
-                tiles[i][j] = new Tile(TerrainType.WATER);
-                tiles[i][j].setXLoc(i);
-                tiles[i][j++].setYLoc(j);
-            }
-            else if(c == '^') {
-                tiles[i][j] = new Tile(TerrainType.MOUNTAIN);
-                tiles[i][j].setXLoc(i);
-                tiles[i][j++].setYLoc(j);
-            }
-            else if(c == '%'){
+            if(c == '%'){
                 ++i;
                 j = 0;
             }

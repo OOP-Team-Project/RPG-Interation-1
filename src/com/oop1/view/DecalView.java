@@ -4,14 +4,7 @@ import com.oop1.map.Decal;
 
 import javax.swing.*;
 import java.awt.*;
-
-import java.awt.Color;
-
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 
 public class DecalView extends JPanel {
     private Decal decal;
@@ -32,6 +25,7 @@ public class DecalView extends JPanel {
         add(Box.createVerticalGlue());
         jLabel.setIcon(imageIcon);
         setBackground(Color.green);
+        jLabel.setText("some text");
     }
 
 }

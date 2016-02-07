@@ -209,11 +209,10 @@ public class AreaView extends JPanel {
 
 	public AreaView(Map newMap, Entity entityToFollow, Controller newController) {
 		map = newMap;
-		this.entityToFollow = entityToFollow;
-		setLayout(new GridLayout(0, 21));
-		setMinimumSize(new Dimension(600, 600));
-		setPreferredSize(new Dimension(600, 600));
-
+        this.entityToFollow = entityToFollow;
+		setLayout(new GridLayout(0, 21)); //lays the tiles from left to right
+        setMinimumSize(new Dimension(600, 524));
+        setPreferredSize(new Dimension(1100, 524));
 		addKeyListener(newController);
 
 		for (int i = 0; i < tileViews.length; ++i) {

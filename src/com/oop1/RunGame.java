@@ -42,6 +42,12 @@ public class RunGame implements Runnable {
         gameWindow.pack();
     }
 
+    public void loadGame() throws IOException {
+        System.out.println("Loading game");
+        GameState game = SaveManager.getInstance().loadGameState();
+        startGame(new Engine(game));
+    }
+
     public void startGame(Engine engine) {
         System.out.println("Starting game with engine " + engine);
         JPanel container = new JPanel();
@@ -52,8 +58,8 @@ public class RunGame implements Runnable {
         container.add(new StatusView(engine.getPlayer()));
         engine.beginGame();
         gameWindow.setContentPane(container);
-        gameWindow.setSize(1260, 660);
         gameWindow.setResizable(false);
+        gameWindow.pack();
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setVisible(true);
     }

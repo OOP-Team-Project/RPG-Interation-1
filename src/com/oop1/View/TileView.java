@@ -18,27 +18,10 @@ public class TileView extends JPanel {
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
+	private EntityView entityView;
 	public JLabel theLabel;
 
 	private String tileTerrain;
-
-	public TileView(Tile newTile){
-		theTile = newTile;
-		if(newTile == null){
-			return;
-		}
-		if(theTile.hasItem()){
-			//add(new ItemView(theTile.getItem()));
-			int i = 0;
-		}
-
-		if(theTile.hasDecal()){
-			add(new DecalView(theTile.getDecal()));
-		}
-
-		theLabel = new JLabel("!!!");
-		add(theLabel);
-	}
 
 	public TileView(boolean thing){	//Used to do blank tils.
 		tileTerrain = "Blank";
@@ -49,6 +32,40 @@ public class TileView extends JPanel {
 
 	public void setTile(Tile newTile){
 		theTile = newTile;
+	}
+
+	private void drawIconsOnTiles(){
+		if(theTile.hasItem()){
+			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+			setMaximumSize(new Dimension(60,60));
+			setPreferredSize(new Dimension(60,60));
+			add(new ItemView(theTile.getItem()));
+			add(Box.createVerticalGlue());
+		}
+
+		if(theTile.hasDecal()){
+			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+			setMaximumSize(new Dimension(60,60));
+			setPreferredSize(new Dimension(60,60));
+			add(new DecalView(theTile.getDecal()));
+			add(Box.createVerticalGlue());
+		}
+	}
+
+	public TileView(Tile newTile){
+		theTile = newTile;
+		drawIconsOnTiles();
+	}
+
+	public TileView(Tile newTile, String occupation){
+		theTile = newTile;
+		drawIconsOnTiles();
+
+		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		setMaximumSize(new Dimension(60,60));
+		setPreferredSize(new Dimension(60,60));
+		add(new EntityView(occupation));
+		add(Box.createVerticalGlue());
 	}
 
 	public void drawTile() { //pass Tile tile to this method
@@ -80,5 +97,4 @@ public class TileView extends JPanel {
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		g2.fillRect(0, 0, 60, 60);
 	}
-	
 }

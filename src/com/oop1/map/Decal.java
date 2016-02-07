@@ -13,10 +13,10 @@ public class Decal {
     private BufferedImage[][] currentDecal;
     private String currentString;
 
-    public static BufferedImage[][] SKULL_AND_CROSSBONES = load("../resources/SKULL_AND_CROSSBONES.png", 16, 16);
+    public static BufferedImage[][] SKULL_AND_CROSSBONES = load("../resources/SKULL_AND_CROSSBONES.png", 60, 60);
     public static BufferedImage[][] DUCK = load("duck.gif", 16, 16);
-    public static BufferedImage[][] RED_CROSS = load("../resources/RED_CROSS.png", 16, 16);
-    public static BufferedImage[][] GOLD_STAR = load("../resources/GOLD_STAR.png", 16, 16);
+    public static BufferedImage[][] RED_CROSS = load("../resources/RED_CROSS.png", 60, 60);
+    public static BufferedImage[][] GOLD_STAR = load("../resources/GOLD_STAR.png", 60, 60);
 
     public Decal(String newDecalName){
         currentString = newDecalName;

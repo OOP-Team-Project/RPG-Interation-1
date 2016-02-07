@@ -39,7 +39,7 @@ public class CharacterCreationView extends JPanel {
         headerLabel = new JLabel("",JLabel.CENTER );
         statusLabel = new JLabel("",JLabel.CENTER);
 
-        statusLabel.setSize(350,100);
+        statusLabel.setSize(800,600);
 
         headerLabel.setText("Select a class for your new character!");
 

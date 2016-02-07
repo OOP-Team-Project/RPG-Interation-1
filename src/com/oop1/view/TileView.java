@@ -17,6 +17,7 @@ public class TileView extends JPanel {
 	private EntityView entityView;
 	private Decal decal;
 	private BufferedImage currentTerrain;
+	private JLabel backgroundTexture;
 
 	public BufferedImage[][] mMOUNTAIN = decal.load("../resources/MOUNTAINS.png", 60, 60);
 	public BufferedImage[][] mWATER = decal.load("../resources/WATER.png", 60, 60);
@@ -30,6 +31,9 @@ public class TileView extends JPanel {
 		if (itemView != null) {
 			remove(itemView);
 		}
+		if(backgroundTexture != null) {
+			remove(backgroundTexture);
+		}
 		theTile = newTile;
 		drawIconsOnTiles();
 	}
@@ -38,6 +42,7 @@ public class TileView extends JPanel {
 		if (theTile == null)
 			return;
 
+		int zPosition = 0;	//For making sure the background is drawn last
 
 		switch (theTile.getTerrainType()) {
 			case WATER: setBackground(Color.BLUE); break;
@@ -55,27 +60,30 @@ public class TileView extends JPanel {
 		// I think the issue is here: we might need another variable
 		// type for the icon to move with the map
 			ImageIcon imageIcon = new ImageIcon(currentTerrain);
-			JLabel jLabel = new JLabel(imageIcon);
-			jLabel.setMaximumSize(new Dimension(60, 60));
-			jLabel.setPreferredSize(new Dimension(60, 60));
-			add(jLabel);
-			add(Box.createVerticalGlue());
+			backgroundTexture.setIcon(imageIcon);// = new JLabel(imageIcon);
+			backgroundTexture.setMaximumSize(new Dimension(60, 60));
+			backgroundTexture.setPreferredSize(new Dimension(60, 60));
+			add(backgroundTexture);
+			//add(Box.createVerticalGlue());
 			//jLabel.setIcon(imageIcon);
-			jLabel.setText("some text");
+			//jLabel.setText("some text")
+
 
 		if (theTile.hasItem()){
 			itemView = new ItemView(theTile.getItem());
 			add(itemView);
+			setComponentZOrder(backgroundTexture, ++zPosition);
 		}
-
 		if (theTile.hasDecal()){
 			decalView = new DecalView(new Decal("SKULL_AND_CROSSBONES"));
 			add(decalView);
+			setComponentZOrder(backgroundTexture, ++zPosition);
 		}
 	}
 
 	public TileView(Tile newTile){
 		setTile(newTile);
+		backgroundTexture = new JLabel();
 	}
 
 	public void setEntity(Entity entity) {
@@ -86,6 +94,7 @@ public class TileView extends JPanel {
 		if (entity != null) {
 			entityView = new EntityView(entity.getOccupation().printOccupation());
 			add(entityView);
+			setComponentZOrder(entityView, 0);
 		}
 	}
 }

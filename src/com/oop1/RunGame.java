@@ -11,6 +11,7 @@ import com.oop1.view.MainMenuView;
 import com.oop1.view.StatusView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class RunGame implements Runnable {
@@ -25,8 +26,8 @@ public class RunGame implements Runnable {
 
     public void run() {
         gameWindow = new JFrame("RPG Game");
-        gameWindow.setSize(800, 600);
-
+        gameWindow.setSize(1100, 524);
+        gameWindow.setMinimumSize(new Dimension(1350, 574));     //this makes the window stay large
         MainMenuView menuView = new MainMenuView(this);
 
         JPanel container = new JPanel();
@@ -41,6 +42,8 @@ public class RunGame implements Runnable {
         System.out.println("Opening character creation view");
         gameWindow.setContentPane(new CharacterCreationView(this));
         gameWindow.pack();
+        gameWindow.setMinimumSize(new Dimension(1350, 574));     //this makes the window stay large
+//        gameWindow.setPreferredSize(new Dimension(1100, 524));
     }
 
     public void loadGame() throws IOException {
@@ -87,6 +90,8 @@ public class RunGame implements Runnable {
         //TODO do more stuff and or make this conditional
         areaView.didUpdate();
         areaView.requestFocus();
+        gameWindow.validate();
         gameWindow.repaint();
+        //gameWindow.revalidate();
     }
 }

@@ -88,9 +88,11 @@ public class Engine {
         int dx = 0;
         int dy = 0;
 
-        for (Character c : controller.getPressedKeys()) {
 
-            switch (c.charValue()) {
+        Iterator<Character> characterIter = controller.getPressedKeys().iterator();
+        while (characterIter.hasNext()) {
+
+            switch (characterIter.next()) {
                 case '1':
                     dx++;
                     dy--;
@@ -122,6 +124,10 @@ public class Engine {
                 case '9':
                     dx--;
                     dy++;
+                    break;
+                default:
+                    dx = 0;
+                    dy = 0;
                     break;
             }
         }

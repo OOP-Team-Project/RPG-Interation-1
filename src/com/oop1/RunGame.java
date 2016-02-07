@@ -76,6 +76,16 @@ public class RunGame implements Runnable {
         startGame(new Engine(game, this));
     }
 
+    public void showMessage(boolean shouldEndGame) {
+        if (shouldEndGame) {
+            JOptionPane.showMessageDialog(gameWindow, "You died!");
+            System.exit(0);
+        }
+        else {
+            JOptionPane.showMessageDialog(gameWindow, "You lost a life");
+        }
+    }
+
     public void stateChanged(Engine engine){
         //TODO do more stuff and or make this conditional
         areaView.didUpdate();

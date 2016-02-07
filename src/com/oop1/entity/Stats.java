@@ -38,6 +38,8 @@ public class Stats {
     private double movementSpeed;
     private Occupation occupation;
 
+    private boolean livesLeftDecremented = false;
+
     /**
      * only allow construction of Stats via the StatsBuilder.
      */
@@ -88,10 +90,20 @@ public class Stats {
 
     }
 
+    public boolean decrementedLivesLeft() {
+        return livesLeftDecremented;
+    }
+
+    public void setDecrementedLivesLeft(boolean value) {
+        livesLeftDecremented = value;
+    }
+
     public void takeDamage(int amount) {
         currentLife -= amount;
-        if (currentLife < 0) {
-            currentLife = 0;
+        if (currentLife <= 0 && livesLeft > 0) {
+            livesLeft--;
+            livesLeftDecremented = true;
+            currentLife = getMaxLife();
         }
     }
 

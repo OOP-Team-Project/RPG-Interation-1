@@ -29,6 +29,7 @@ public class StatusView extends JPanel {
     private NumericStatusView mana;
     private StringStatusView  occupation;
     private InventoryView inventory;
+    private int inventorySize;
 
     public StatusView(Entity avatar) {
 
@@ -50,6 +51,8 @@ public class StatusView extends JPanel {
         mana.setForeground(MANA_COLOR);
 
         inventory = new InventoryView(avatar.getInventory());
+        inventorySize = avatar.getInventory().getAllItems().size();
+
         inventory.setBackground(STATUS_VIEW_BACKGROUND_COLOR.darker().darker());
 
         occupation = new StringStatusView("Occupation: " + avatar.getOccupation().toString(), HEALTH_MANA_BAR_WIDTH);
@@ -73,6 +76,13 @@ public class StatusView extends JPanel {
         add(Box.createVerticalStrut(OUTER_PADDING));
     }
 
+    private void repaintInventory(){
+        remove(inventory);
+        inventory = new InventoryView(avatar.getInventory());
+        inventory.setBackground(STATUS_VIEW_BACKGROUND_COLOR.darker().darker());
+        add(inventory);
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -82,5 +92,10 @@ public class StatusView extends JPanel {
 
         mana.setCurrentValue(avatar.getBaseStats().getCurrentMana());
         mana.setMaxValue(avatar.getBaseStats().getMaxMana());
+
+        if(avatar.getInventory().getAllItems().size() != inventorySize) {
+            repaintInventory();
+            inventorySize = avatar.getInventory().getAllItems().size();
+        }
     }
 }

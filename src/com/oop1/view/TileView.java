@@ -1,5 +1,6 @@
 package com.oop1.view;
 
+import com.oop1.entity.Entity;
 import com.oop1.map.Decal;
 import com.oop1.map.Tile;
 
@@ -11,6 +12,7 @@ public class TileView extends JPanel {
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
 	private ItemView itemView;
+	private EntityView entityView;
 
 	public void setTile(Tile newTile){
 		if (decalView != null) {
@@ -46,5 +48,16 @@ public class TileView extends JPanel {
 
 	public TileView(Tile newTile){
 		setTile(newTile);
+	}
+
+	public void setEntity(Entity entity) {
+		if (entityView != null) {
+			remove(entityView);
+			entityView = null;
+		}
+		if (entity != null) {
+			entityView = new EntityView(entity.getOccupation().printOccupation());
+			add(entityView);
+		}
 	}
 }

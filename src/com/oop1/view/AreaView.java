@@ -237,14 +237,20 @@ public class AreaView extends JPanel {
 		int y = getCenterY();
 		for (int i = 0; i < tileViews.length; ++i) {
 			for (int j = 0; j < tileViews[0].length; ++j) {
-
 				int xCoordinate = x + i - tileViews.length / 2;
 				int yCoordinate = y + j - tileViews[i].length / 2;
 				Tile tile = map.getTileAtCoordinates(xCoordinate, yCoordinate);
+
 				if (tile != null)
 					tileViews[i][j].setTile(tile);
 				else
 					tileViews[i][j].setTile(new Tile(TerrainType.BLANK));
+
+				if (entityToFollow.getLocation().equals(tile)) {
+					tileViews[i][j].setEntity(entityToFollow);
+				} else {
+					tileViews[i][j].setEntity(null);
+				}
 			}
 		}
 		repaint();

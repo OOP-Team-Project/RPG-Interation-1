@@ -24,6 +24,16 @@ public class InventoryView extends JPanel {
         list.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(e.getButton() == MouseEvent.BUTTON3){
+                    int index = list.locationToIndex(e.getPoint());
+                    Inventory inventory = InventoryView.this.inventory;
+                    TakeableItem item = inventory.getAllItems().get(index);
+                    if (inventory.getEquippedItems().contains(item)) {
+                        inventory.unequipItem(item);
+                    }
+                    inventory.dropItem(item);
+                    list.setListData(inventory.getAllItems().toArray());
+                }
                 if (e.getClickCount() == 2) {
                     int index = list.locationToIndex(e.getPoint());
                     Inventory inventory = InventoryView.this.inventory;
@@ -39,6 +49,7 @@ public class InventoryView extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
+
             }
 
             @Override

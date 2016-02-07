@@ -1,5 +1,7 @@
 package com.oop1.view;
 
+import com.oop1.engine.Controller;
+
 import com.oop1.RunGame;
 import com.oop1.engine.Engine;
 import com.oop1.engine.GameState;

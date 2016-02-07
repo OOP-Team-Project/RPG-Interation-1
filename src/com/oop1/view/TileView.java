@@ -1,98 +1,63 @@
-
-/*package com.oop1.view;
-
-import javax.swing.JPanel;
-import java.awt.Graphics;
-
-public class TileView extends JPanel {
-	
-	//method to draw a tile called by drawAreaView in AreaView class
-	public void drawTile() { //pass Tile tile to this method
-		
-		
-	}
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.drawRect(0, 0, 120, 120);
-	}
-	
-}
-*/
 package com.oop1.view;
 
-import java.awt.*;
-
+import com.oop1.entity.Entity;
 import com.oop1.map.Decal;
 import com.oop1.map.Tile;
-import com.oop1.view.DecalView;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class TileView extends JPanel {
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
-	public JLabel theLabel;
+	private ItemView itemView;
+	private EntityView entityView;
 
-	private String tileTerrain;
+	public void setTile(Tile newTile){
+		if (decalView != null) {
+			remove(decalView);
+		}
+		if (itemView != null) {
+			remove(itemView);
+		}
+		theTile = newTile;
+		drawIconsOnTiles();
+	}
+
+	private void drawIconsOnTiles(){
+		if (theTile == null)
+			return;
+
+		switch (theTile.getTerrainType()) {
+			case WATER: setBackground(Color.BLUE); break;
+			case GRASS: setBackground(Color.GREEN); break;
+			case MOUNTAIN: setBackground(Color.GRAY); break;
+		}
+
+		if (theTile.hasItem()){
+			itemView = new ItemView(theTile.getItem());
+			add(itemView);
+		}
+
+		if (theTile.hasDecal()){
+			decalView = new DecalView(new Decal("SKULL_AND_CROSSBONES"));
+			add(decalView);
+		}
+	}
 
 	public TileView(Tile newTile){
-		theTile = newTile;
+		setTile(newTile);
+	}
 
-		if(theTile.hasItem()){
-			//add(new ItemView(theTile.getItem()));
-			int i = 0;
+	public void setEntity(Entity entity) {
+		if (entityView != null) {
+			remove(entityView);
+			entityView = null;
 		}
-
-		if(theTile.hasDecal()){
-			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-			setMaximumSize(new Dimension(60,60));
-			setPreferredSize(new Dimension(60,60));
-			add(new DecalView(theTile.getDecal()));
-			add(Box.createVerticalGlue());
+		if (entity != null) {
+			entityView = new EntityView(entity.getOccupation().printOccupation());
+			add(entityView);
 		}
 	}
-
-	public TileView(boolean thing){	//Used to do blank tils.
-		tileTerrain = "Blank";
-
-		theLabel = new JLabel("!!!");
-		add(theLabel);
-	}
-
-	public void drawTile() { //pass Tile tile to this method
-
-	}
-
-	public void addLabel(JLabel newLabel){
-		//theLabel = newLabel;
-		//add(theLabel);
-	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		//based off tileTerrain set color
-		if(theTile != null)
-			tileTerrain = theTile.toString();
-		if (tileTerrain.equals("^")) {
-			g.setColor(Color.gray);
-		} else if (tileTerrain.equals("_")) {
-			g.setColor(Color.green);
-		} else if (tileTerrain.equals("~")){
-			g.setColor(Color.blue);
-		} else{
-			g.setColor(Color.black);
-		}
-
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		g.fillRect(0, 0, 60, 60);
-	}
-
 }

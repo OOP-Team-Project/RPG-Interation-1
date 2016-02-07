@@ -8,7 +8,8 @@ public enum TerrainType {
 
     MOUNTAIN(false),
     WATER(false),
-    GRASS(true);
+    GRASS(true),
+    BLANK(false);
 
     private boolean isPassable;
 
@@ -20,4 +21,12 @@ public enum TerrainType {
         return isPassable;
     }
 
+    public static TerrainType fromChar(char c) {
+        switch (c) {
+            case '_': return GRASS;
+            case '~': return WATER;
+            case '^': return MOUNTAIN;
+            default: return BLANK;
+        }
+    }
 }

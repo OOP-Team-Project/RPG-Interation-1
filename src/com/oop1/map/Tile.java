@@ -7,6 +7,7 @@ public class Tile {
     private Decal decal;
     private Item item;
     private TerrainType terrainType;
+    private int xLoc, yLoc;
 
 
     public Tile(TerrainType t){
@@ -62,5 +63,21 @@ public class Tile {
             return "_";
         else
             return "~";
+    }
+
+    public void setXLoc(int newX){
+        xLoc = newX;
+    }
+
+    public void setYLoc(int newY){
+        yLoc = newY;
+    }
+
+    public int getXLoc(){
+        return xLoc;
+    }
+
+    public int getYLoc(){
+        return yLoc;
     }
 }

@@ -51,10 +51,7 @@ public class StatusView extends JPanel {
         mana.setForeground(MANA_COLOR);
 
         inventory = new InventoryView(avatar.getInventory());
-        if(avatar.getInventory() != null)
-            inventorySize = avatar.getInventory().getAllItems().size();
-        else
-            inventorySize = 0;
+        inventorySize = avatar.getInventory().getAllItems().size();
 
         inventory.setBackground(STATUS_VIEW_BACKGROUND_COLOR.darker().darker());
 
@@ -96,7 +93,7 @@ public class StatusView extends JPanel {
         mana.setCurrentValue(avatar.getBaseStats().getCurrentMana());
         mana.setMaxValue(avatar.getBaseStats().getMaxMana());
 
-        if(avatar.getInventory() != null && avatar.getInventory().getAllItems().size() != inventorySize) {
+        if(avatar.getInventory().getAllItems().size() != inventorySize) {
             repaintInventory();
             inventorySize = avatar.getInventory().getAllItems().size();
         }

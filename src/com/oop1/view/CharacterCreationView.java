@@ -23,6 +23,9 @@ public class CharacterCreationView extends JPanel {
 
     private JLabel headerLabel;
     private JLabel statusLabel;
+    private JButton okButton;    //moved here to look similar to MainMenuView
+    private JButton submitButton;
+    private JButton cancelButton;
 
     RunGame delegate;
 
@@ -32,14 +35,14 @@ public class CharacterCreationView extends JPanel {
     }
 
     private void initializeMenu(){
-        JButton okButton;
-        JButton submitButton;
-        JButton cancelButton;
+//        JButton okButton;
+//        JButton submitButton;
+//        JButton cancelButton;
 
         headerLabel = new JLabel("",JLabel.CENTER );
         statusLabel = new JLabel("",JLabel.CENTER);
 
-        statusLabel.setSize(800,600);
+//        statusLabel.setSize(800,600);
 
         headerLabel.setText("Select a class for your new character!");
 

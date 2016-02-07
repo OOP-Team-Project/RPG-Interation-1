@@ -30,6 +30,7 @@ public class StatusView extends JPanel {
     private StringStatusView  occupation;
     private InventoryView inventory;
     private int inventorySize;
+    private boolean viewingInventory = true;
 
     public StatusView(Entity avatar) {
 
@@ -70,7 +71,7 @@ public class StatusView extends JPanel {
         add(Box.createVerticalStrut(INNER_PADDING));
 
         // the inventory will fill up the remaining space, so don't add glue after it
-        add(new StringStatusView("Inventory", HEALTH_MANA_BAR_WIDTH));
+        add(new StringStatusView("Inventory/Stats", HEALTH_MANA_BAR_WIDTH));
         add(inventory);
 
         add(Box.createVerticalStrut(OUTER_PADDING));
@@ -81,6 +82,15 @@ public class StatusView extends JPanel {
         inventory = new InventoryView(avatar.getInventory());
         inventory.setBackground(STATUS_VIEW_BACKGROUND_COLOR.darker().darker());
         add(inventory);
+        viewingInventory = true;
+    }
+
+    private void repaintStats(){
+        remove(inventory);
+        inventory = new InventoryView(avatar.getBaseStats());
+        inventory.setBackground(STATUS_VIEW_BACKGROUND_COLOR.darker().darker());
+        add(inventory);
+        viewingInventory = false;
     }
 
     @Override
@@ -93,8 +103,19 @@ public class StatusView extends JPanel {
         mana.setCurrentValue(avatar.getBaseStats().getCurrentMana());
         mana.setMaxValue(avatar.getBaseStats().getMaxMana());
 
+        if(avatar.getSwitchStatsView()){
+            avatar.setSwitchStatsView(false);
+            if(viewingInventory)
+                repaintStats();
+            else
+                repaintInventory();
+        }
+
         if(avatar.getInventory().getAllItems().size() != inventorySize) {
-            repaintInventory();
+            if(viewingInventory)
+                repaintInventory();
+            else
+                repaintStats();
             inventorySize = avatar.getInventory().getAllItems().size();
         }
     }

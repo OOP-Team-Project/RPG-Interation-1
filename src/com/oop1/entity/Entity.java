@@ -46,6 +46,10 @@ public class Entity {
      */
     private long minimumTimeBetweenMoves = 300;
 
+    private boolean viewingStats = false;
+
+    private float lastTime = 0;
+
     private char[] keyPresses = new char[10];   //Holds last 10 chars
 
     //Constructor for initial creation of entity
@@ -140,6 +144,21 @@ public class Entity {
         float nextThing = ((float) getModifiedStats().getMovementSpeed());
         long testingThing = ((long) ((float) firstThing/nextThing));
         return testingThing;
+    }
+
+    public void setSwitchStatsView(boolean viewing){
+        this.viewingStats = viewing;
+    }
+
+    public void setSwitchStatsView(boolean viewing, float time){
+        if(time - lastTime > 1000) {
+            this.viewingStats = viewing;
+            lastTime = time;
+        }
+    }
+
+    public boolean getSwitchStatsView(){
+        return viewingStats;
     }
 
     public void setMinimumTimeBetweenMoves(long minimumTimeBetweenMoves) {

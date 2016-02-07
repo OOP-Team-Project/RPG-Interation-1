@@ -82,6 +82,8 @@ public class TileView extends JPanel {
 	}
 
 	public TileView(Tile newTile){
+		setLayout(new BorderLayout());
+
 		setTile(newTile);
 		backgroundTexture = new JLabel();
 		backgroundIcon = new ImageIcon();

@@ -2,6 +2,7 @@ package com.oop1.engine;
 
 import com.oop1.RunGame;
 import com.oop1.entity.Entity;
+import com.oop1.items.TakeableItem;
 import com.oop1.map.AreaEffect;
 import com.oop1.map.Map;
 import com.oop1.map.Tile;
@@ -130,6 +131,9 @@ public class Engine {
                 case '9':
                     dx--;
                     dy++;
+                    break;
+                case '0':
+                    avatar.setSwitchStatsView(true, currentTick*DESIRED_GAME_TICK_LENGTH_MILLISECONDS);
                     break;
                 default:
                     dx = 0;

@@ -1,9 +1,14 @@
 package com.oop1.view;
 
 import com.oop1.entity.Inventory;
+import com.oop1.entity.Stats;
 import com.oop1.items.TakeableItem;
 
 import javax.swing.*;
+import javax.swing.plaf.ScrollBarUI;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.metal.MetalScrollBarUI;
+import javax.swing.plaf.synth.SynthScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,10 +22,19 @@ public class InventoryView extends JPanel {
 
         final JList list = new JList();
         if(inventory != null) {
+            setLayout(new BorderLayout());
+
             list.setListData(inventory.getAllItems().toArray());
             list.setCellRenderer(new CellRenderer());
             list.setBackground(new Color(0, 0, 0, 0));
-            add(list);
+
+            JScrollPane scrollPane= new JScrollPane(list);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setBackground(new Color(0,0,0,0));
+
+            scrollPane.getVerticalScrollBar().setUI(new CustomUI.funScrollBarUI());
+            add(scrollPane);
+            scrollPane.setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0), 3));
 
         list.addMouseListener(new MouseListener() {
             @Override
@@ -92,5 +106,34 @@ public class InventoryView extends JPanel {
             }
             return panel;
         }
+    }
+
+    private void makeStatLabels(String str){
+        JLabel label = new JLabel();
+        label.setText(str);
+        label.setBackground(new Color(0,0,0,0));
+        label.setForeground(StatusView.STATUS_VIEW_TEXT_COLOR.darker());
+        label.setFont(new Font("default", Font.BOLD, 12));
+        label.setForeground(Color.WHITE);
+        add(label);
+        setBackground(new Color(0,0,0,0));
+    }
+
+
+    public InventoryView(Stats stats) {
+        setLayout(new GridLayout(0,1));
+        makeStatLabels("  Level: " + stats.getCurrentLevel());
+        makeStatLabels("  Experience: " + stats.getExperience());
+        makeStatLabels("  Lives: " + stats.getLivesLeft());
+        makeStatLabels("  Offense: " + stats.getOffensiveRating());
+        makeStatLabels("  Defense: " + stats.getDefensiveRating());
+        makeStatLabels("  Armor: " + stats.getArmorRating());
+        makeStatLabels("  Strength: " + stats.getStrength());
+        makeStatLabels("  Agility: " + stats.getAgility());
+        makeStatLabels("  Intellect: " + stats.getIntellect());
+        makeStatLabels("  Hardiness: " + stats.getHardiness());
+        makeStatLabels("  Movement: " + stats.getMovementSpeed());
+        add(Box.createHorizontalGlue());
+
     }
 }

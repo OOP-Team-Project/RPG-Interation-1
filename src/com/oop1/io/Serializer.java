@@ -242,6 +242,7 @@ public class Serializer {
         String[] items = itemData.split("%");
         for(String str : items){
             String[] itemStats = str.split(";");
+            isEquippable = false;
             if(itemStats[1].substring(0,1).equals("E")){
                 isEquippable = true;
                 itemStats[1] = itemStats[1].substring((1));
@@ -251,6 +252,8 @@ public class Serializer {
             TakeableItem item = new TakeableItem(map.getTileAtCoordinates(x,y));
             if(isEquippable)
                 item.setEquippable(true);
+            else
+                item.setEquippable(false);
             item.setName(itemStats[0]);
             int strength = Integer.parseInt(itemStats[2]);
             int agility = Integer.parseInt(itemStats[3]);
@@ -374,6 +377,8 @@ public class Serializer {
             StatModifier statMod = new StatModifier(strength, agility, intellect, hardiness,movementSpeed, livesLeft);
             if (equippable)
                 item.setEquippable(true);
+            else
+                item.setEquippable(false);
             item.addStatModifier(statMod);
             newInventory.addItem(item);
             if (equipIt)

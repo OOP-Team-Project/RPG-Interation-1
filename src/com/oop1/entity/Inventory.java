@@ -82,8 +82,6 @@ public class Inventory {
     public String printForSave(){
         StringBuilder str = new StringBuilder();
         for (TakeableItem item : items) {
-            str.append(item.getName());
-            str.append(";");
             if(item.isEquippable())
                 str.append("E");
             str.append(item.getStatModifiers().get(0).getStrengthModifier());
@@ -100,8 +98,6 @@ public class Inventory {
             str.append("%\n");
         }
         for (TakeableItem item : equipment) {
-            str.append(item.getName());
-            str.append(";");
             str.append("EE");
             str.append(item.getStatModifiers().get(0).getStrengthModifier());
             str.append(";");

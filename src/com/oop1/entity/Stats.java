@@ -196,6 +196,24 @@ public class Stats {
         return hardiness * ARMOR_RATING_PER_HARDINESS;
     }
 
+    public void modifyStats(String instr, int strength, int agility, int intellect, int hardiness, int movementSpeed){
+        if(instr.equals("equip")) {
+            this.strength += strength;
+            this.agility += agility;
+            this.intellect += intellect;
+            this.hardiness += hardiness;
+            this.movementSpeed += movementSpeed;
+        }
+        else if(instr.equals("unequip")){
+            this.strength -= strength;
+            this.agility -= agility;
+            this.intellect -= intellect;
+            this.hardiness -= hardiness;
+            this.movementSpeed -= movementSpeed;
+        }
+
+    }
+
     public static class StatsBuilder {
         private int livesLeft = Integer.MIN_VALUE;
         private int agility = Integer.MIN_VALUE;

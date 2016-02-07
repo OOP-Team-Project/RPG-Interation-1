@@ -120,7 +120,7 @@ public class Engine {
                 case 'p': //open pause menu
                     if (isPaused == false) {
                         System.out.print("game paused!");
-                        runGame.mainMenu();
+                        runGame.pauseMenu();
                         isPaused = true;
                     }
             }

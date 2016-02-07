@@ -83,7 +83,7 @@ public class RunGame implements Runnable {
     }
 
     //opens up the main menu during game play
-    public void mainMenu() {
+    public void pauseMenu() {
         System.out.print("Opening pause menu!");
         gameWindow.setContentPane(new SaveMenuView(this));
         gameWindow.pack();

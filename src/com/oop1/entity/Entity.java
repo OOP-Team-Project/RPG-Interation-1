@@ -79,6 +79,8 @@ public class Entity {
     public Tile getLocation() { return location; }
 
     public boolean setLocation(Tile location) {
+        if(location == null)
+            return false;
         if(location.getTerrainType() == null)
             return false;
         TerrainType terrain = location.getTerrainType();

@@ -25,7 +25,7 @@ public class TileView extends JPanel {
 	public TileView(Tile newTile){
 		theTile = newTile;
 		if(newTile == null){
-
+			return;
 		}
 		if(theTile.hasItem()){
 			//add(new ItemView(theTile.getItem()));
@@ -64,16 +64,16 @@ public class TileView extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		//based off tileTerrain set color
-		if(theTile != null)
-			tileTerrain = theTile.toString();
-		if (tileTerrain.equals("^")) {
-			g.setColor(Color.gray);
-		} else if (tileTerrain.equals("_")) {
-			g.setColor(Color.green);
-		} else if (tileTerrain.equals("~")){
-			g.setColor(Color.blue);
-		} else{
-			g.setColor(Color.black);
+		switch (theTile.getTerrainType()) {
+			case MOUNTAIN:
+				g.setColor(Color.gray);
+				break;
+			case GRASS:
+				g.setColor(Color.green);
+				break;
+			case WATER:
+				g.setColor(Color.blue);
+				break;
 		}
 
 		this.setBorder(BorderFactory.createLineBorder(Color.black));

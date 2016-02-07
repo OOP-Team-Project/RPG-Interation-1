@@ -47,8 +47,11 @@ public class RunGame implements Runnable {
         System.out.println("Starting game with engine " + engine);
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-        container.add(new AreaView(engine.getCurrentMap(), engine.getPlayer(), new Controller(engine)));
+        Controller newController = new Controller();
+        engine.setController(newController);
+        container.add(new AreaView(engine.getCurrentMap(), engine.getPlayer(), newController));
         container.add(new StatusView(engine.getPlayer()));
+        engine.beginGame();
         gameWindow.setContentPane(container);
         gameWindow.setSize(1260, 660);
         gameWindow.setResizable(false);
@@ -59,6 +62,14 @@ public class RunGame implements Runnable {
     public void startNewGame(Occupation o) throws IOException {
         System.out.println("Starting new game");
         GameState game = SaveManager.getInstance().createNewGameState(o);
-        startGame(new Engine(game));
+        startGame(new Engine(game, this));
+    }
+
+    public void stateChanged(Engine engine){
+        //TODO do more stuff and or make this conditional
+        long startTime = System.currentTimeMillis();
+        gameWindow.repaint();
+        long endTime = System.currentTimeMillis();
+        System.out.println(startTime - endTime);
     }
 }

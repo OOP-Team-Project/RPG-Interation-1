@@ -8,7 +8,8 @@ public enum TerrainType {
 
     MOUNTAIN(false),
     WATER(false),
-    GRASS(true);
+    GRASS(true),
+    BLANK(false);
 
     private boolean isPassable;
 

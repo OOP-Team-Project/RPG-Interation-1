@@ -46,7 +46,8 @@ public class NumericStatusView extends JPanel {
         super.paintComponent(g);
         g.setColor(getBackground());
         g.fillRect(0, 0, getWidth(), getHeight());
-        double percentage = 0.5 + (double)(currentValue - minValue) / (maxValue - minValue);
+        //double percentage = 0.5 + (double)(currentValue - minValue) / (maxValue - minValue);
+        double percentage = (double)(currentValue - minValue) / (maxValue - minValue);
         g.setColor(getForeground());
         g.fillRect(0, 0, (int)(getWidth() * percentage), getHeight());
     }

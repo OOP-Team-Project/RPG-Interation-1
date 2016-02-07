@@ -44,7 +44,7 @@ public class Entity {
     /**
      * The number of ticks between moves that this character must wait.
      */
-    private long minimumTimeBetweenMoves = 6;
+    private long minimumTimeBetweenMoves = 15;
 
     private char[] keyPresses = new char[10];   //Holds last 10 chars
 

@@ -77,6 +77,8 @@ public class RunGame implements Runnable {
         //TODO do more stuff and or make this conditional
         areaView.didUpdate();
         areaView.requestFocus();
+        gameWindow.validate();
         gameWindow.repaint();
+        //gameWindow.revalidate();
     }
 }

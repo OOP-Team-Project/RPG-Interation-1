@@ -51,7 +51,7 @@ public class Sneak extends Occupation {
 
     @Override
     protected double getMovementSpeed() {
-        return 3;
+        return 6;
     }
 
     @Override

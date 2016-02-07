@@ -114,6 +114,10 @@ public class Engine {
                     dx--;
                     dy++;
                     break;
+                default:
+                    dx = 0;
+                    dy = 0;
+                    break;
             }
         }
 

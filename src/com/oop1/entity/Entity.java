@@ -44,7 +44,7 @@ public class Entity {
     /**
      * The number of ticks between moves that this character must wait.
      */
-    private long minimumTimeBetweenMoves = 15;
+    private long minimumTimeBetweenMoves = 300;
 
     private char[] keyPresses = new char[10];   //Holds last 10 chars
 
@@ -136,7 +136,10 @@ public class Entity {
     }
 
     public long getMinimumTimeBetweenMoves() {
-        return minimumTimeBetweenMoves;
+        float firstThing = ((float) minimumTimeBetweenMoves);
+        float nextThing = ((float) getModifiedStats().getMovementSpeed());
+        long testingThing = ((long) ((float) firstThing/nextThing));
+        return testingThing;
     }
 
     public void setMinimumTimeBetweenMoves(long minimumTimeBetweenMoves) {

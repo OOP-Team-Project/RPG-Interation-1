@@ -45,6 +45,7 @@ public class InventoryView extends JPanel {
                     }
                     list.setListData(inventory.getAllItems().toArray());
                 }
+                list.setListData(inventory.getAllItems().toArray());
             }
 
             @Override

@@ -2,7 +2,9 @@ package com.oop1.items;
 
 import com.oop1.entity.Entity;
 import com.oop1.map.Tile;
+import com.oop1.view.InventoryView;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class TakeableItem extends Item {
@@ -26,8 +28,8 @@ public class TakeableItem extends Item {
 
     @Override
     public void interact(Entity entity) {
-        loc.removeItem();
         entity.addToInventory(this);
+        loc.removeItem();
     }
 
     public void setEquippable(boolean b) {

@@ -118,6 +118,8 @@ public class Engine {
         }
 
         Tile moveToTile = map.getTileAtCoordinates(xLoc + dx, yLoc + dy);
+
+
         Iterator<AreaEffect> iter = map.getAreaEffects().iterator();
         while(iter.hasNext()){
             AreaEffect effect = iter.next();
@@ -128,9 +130,18 @@ public class Engine {
             }
         }
 
-        if (avatar.setLocation(moveToTile)) {
-            runGame.stateChanged(this);
-            avatar.setLastMoveTime(currentTick);
+        if(moveToTile != null) {
+            if (moveToTile.hasItem()) {
+                if (moveToTile.getItem().toString().equals("obstacle"))
+                    return;
+                moveToTile.getItem().interact(avatar);
+
+            }
+
+            if (avatar.setLocation(moveToTile)) {
+                runGame.stateChanged(this);
+                avatar.setLastMoveTime(currentTick);
+            }
         }
 
     }

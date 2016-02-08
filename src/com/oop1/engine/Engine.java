@@ -46,14 +46,15 @@ public class Engine {
         // tell the game thread to stop running
         isGameRunning = false;
 
-        // wait for the game thread to finish its last iteration
-        try {
-            gameThread.join();
-            // possibly prepare some sort of results or something down here.
-        } catch (InterruptedException e) {
-            System.err.println("Failed to get result of game due to an error.");
-            e.printStackTrace();
-        }
+//        commented out by john kaufmann not sure why but this just dont work.
+//        // wait for the game thread to finish its last iteration
+//        try {
+//            gameThread.join();
+//            // possibly prepare some sort of results or something down here.
+//        } catch (InterruptedException e) {
+//            System.err.println("Failed to get result of game due to an error.");
+//            e.printStackTrace();
+//        }
     }
 
     public void saveGame() {
@@ -78,10 +79,6 @@ public class Engine {
             avatar.getBaseStats().setDecrementedLivesLeft(false);
         }
 
-        if (avatar.getBaseStats().getLivesLeft() == 0) {
-            runGame.showMessage(true);
-        }
-
         if (currentTick - avatar.getLastMoveTime() <= avatar.getMinimumTimeBetweenMoves()) {
             return;
         }
@@ -94,6 +91,11 @@ public class Engine {
 
         int dx = 0;
         int dy = 0;
+
+        if (avatar.getBaseStats().getLivesLeft() == 0) {
+            runGame.showMessage(true);
+            endGame();
+        }
 
 
         Iterator<Character> characterIter = controller.getPressedKeys().iterator();

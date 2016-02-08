@@ -153,7 +153,14 @@ public class RunGame implements Runnable, WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) { //this is called when user hits close window button
+        //ensure game is running
+        try {
+            engine.endGame();
+        } catch (NullPointerException e1) {
+            return; //do not save a game that isn't running
+        }
 
+        //save game
         if (JOptionPane.showConfirmDialog(null, "Would you like to save?", "",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             trySave();

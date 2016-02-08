@@ -75,6 +75,7 @@ public class Entity {
      */
     public Stats getModifiedStats() {
         // TODO: implement this
+        int currentLife = baseStats.getCurrentLife();
         int strength = baseStats.getStrength();
         int agility = baseStats.getAgility();
         int intellect = baseStats.getIntellect();
@@ -88,6 +89,7 @@ public class Entity {
             movement += item.getStatModifiers().get(0).getMovementModifier();
         }
         Stats.StatsBuilder s = new Stats.StatsBuilder();
+        s.currentLife(currentLife);
         s.strength(strength);
         s.agility(agility);
         s.intellect(intellect);

@@ -80,8 +80,8 @@ public class SaveManager {
         return state;
     }
 
-    public GameState loadGameState() throws IOException {
-        GameState state = instance.loadGame("map1.txt");
+    public GameState loadGameState(String saveName) throws IOException {
+        GameState state = instance.loadGame(saveName);
 
         if(state.getAvatar().getInventory() != null)
             state.getAvatar().setInventory(state.getAvatar().getInventory());

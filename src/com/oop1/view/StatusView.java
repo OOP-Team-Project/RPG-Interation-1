@@ -41,7 +41,7 @@ public class StatusView extends JPanel {
         setForeground(STATUS_VIEW_TEXT_COLOR);
         setMaximumSize(new Dimension(HEALTH_MANA_BAR_WIDTH + 2 * OUTER_PADDING, 10000));
 
-        Stats s = avatar.getBaseStats();
+        Stats s = avatar.getModifiedStats();
 
         health = new NumericStatusView(s.getCurrentLife(), 0, s.getMaxLife());
         health.setActualSize(HEALTH_MANA_BAR_WIDTH, HEALTH_MANA_BAR_HEIGHT);
@@ -87,7 +87,7 @@ public class StatusView extends JPanel {
 
     private void repaintStats(){
         remove(inventory);
-        inventory = new InventoryView(avatar.getBaseStats());
+        inventory = new InventoryView(avatar.getModifiedStats());
         inventory.setBackground(STATUS_VIEW_BACKGROUND_COLOR.darker().darker());
         add(inventory);
         viewingInventory = false;
@@ -97,11 +97,11 @@ public class StatusView extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        health.setCurrentValue(avatar.getBaseStats().getCurrentLife());
-        health.setMaxValue(avatar.getBaseStats().getMaxLife());
+        health.setCurrentValue(avatar.getModifiedStats().getCurrentLife());
+        health.setMaxValue(avatar.getModifiedStats().getMaxLife());
 
-        mana.setCurrentValue(avatar.getBaseStats().getCurrentMana());
-        mana.setMaxValue(avatar.getBaseStats().getMaxMana());
+        mana.setCurrentValue(avatar.getModifiedStats().getCurrentMana());
+        mana.setMaxValue(avatar.getModifiedStats().getMaxMana());
 
         if(avatar.getSwitchStatsView()){
             avatar.setSwitchStatsView(false);

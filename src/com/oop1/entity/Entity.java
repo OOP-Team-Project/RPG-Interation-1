@@ -75,7 +75,28 @@ public class Entity {
      */
     public Stats getModifiedStats() {
         // TODO: implement this
-        return baseStats;
+        int strength = baseStats.getStrength();
+        int agility = baseStats.getAgility();
+        int intellect = baseStats.getIntellect();
+        int hardiness = baseStats.getHardiness();
+        double movement = baseStats.getMovementSpeed();
+        for(TakeableItem item : inventory.getEquippedItems()){
+            strength += item.getStatModifiers().get(0).getStrengthModifier();
+            agility += item.getStatModifiers().get(0).getAgilityModifier();
+            intellect += item.getStatModifiers().get(0).getIntellectModifier();
+            hardiness += item.getStatModifiers().get(0).getHardinessModifier();
+            movement += item.getStatModifiers().get(0).getMovementModifier();
+        }
+        Stats.StatsBuilder s = new Stats.StatsBuilder();
+        s.strength(strength);
+        s.agility(agility);
+        s.intellect(intellect);
+        s.hardiness(hardiness);
+        s.movementSpeed(movement);
+        s.occupation(occupation);
+
+        Stats retStats = s.build();
+        return retStats;
     }
 
     public void addToInventory(TakeableItem item) {

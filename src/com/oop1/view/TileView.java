@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class TileView extends JPanel {
+public class TileView extends JLayeredPane {
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
@@ -65,24 +65,30 @@ public class TileView extends JPanel {
 			backgroundTexture.setIcon(backgroundIcon);
 			backgroundTexture.setMaximumSize(new Dimension(60, 60));
 			backgroundTexture.setPreferredSize(new Dimension(60, 60));
-			add(backgroundTexture);
+			backgroundTexture.setBounds(0,0,60,60);
+			add(backgroundTexture, new Integer(0));
 		}
 
 
 		if (theTile.hasItem()){
 			itemView = new ItemView(theTile.getItem());
-			add(itemView);
-			setComponentZOrder(backgroundTexture, ++zPosition);
+			itemView.setBounds(0,0,60,60);
+			add(itemView, new Integer(++zPosition));
+			itemView.setOpaque(false);
+			setComponentZOrder(backgroundTexture, zPosition);
 		}
 		if (theTile.hasDecal()){
 			decalView = new DecalView(new Decal(theTile.whichDecal()));
-			add(decalView);
-			setComponentZOrder(backgroundTexture, ++zPosition);
+			decalView.setBounds(0,0,60,60);
+			add(decalView, ++zPosition);
+			decalView.setOpaque(false);
+			setComponentZOrder(backgroundTexture, zPosition);
 		}
 	}
 
 	public TileView(Tile newTile){
-		setLayout(new BorderLayout());
+
+		//setLayout(new BorderLayout());
 
 		setTile(newTile);
 		backgroundTexture = new JLabel();
@@ -96,8 +102,10 @@ public class TileView extends JPanel {
 		}
 		if (entity != null) {
 			entityView = new EntityView(entity.getOccupation().printOccupation());
-			add(entityView);
-			setComponentZOrder(entityView, 0);
+			entityView.setBounds(0,0,60,60);
+			entityView.setOpaque(false);
+			add(entityView, new Integer(getComponentCount()));
+			//setComponentZOrder(entityView, 0);
 		}
 	}
 }

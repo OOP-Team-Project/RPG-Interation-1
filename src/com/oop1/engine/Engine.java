@@ -179,6 +179,10 @@ public class Engine {
         controller = c;
     }
 
+    public GameState getState() {
+        return state;
+    }
+
     private class GameThread extends Thread {
 
         public void run() {

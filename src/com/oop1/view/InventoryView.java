@@ -120,9 +120,9 @@ public class InventoryView extends JPanel {
     }
 
 
-    public InventoryView(Stats stats) {
+    public InventoryView(Stats stats, Stats baseStats) {
         setLayout(new GridLayout(0,1));
-        makeStatLabels("  Level: " + stats.getCurrentLevel());
+        makeStatLabels("  Level: " + baseStats.getCurrentLevel());
         makeStatLabels("  Experience: " + stats.getExperience());
         makeStatLabels("  Lives: " + stats.getLivesLeft());
         makeStatLabels("  Offense: " + stats.getOffensiveRating());

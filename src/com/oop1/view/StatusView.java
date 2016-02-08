@@ -87,7 +87,7 @@ public class StatusView extends JPanel {
 
     private void repaintStats(){
         remove(inventory);
-        inventory = new InventoryView(avatar.getModifiedStats());
+        inventory = new InventoryView(avatar.getModifiedStats(), avatar.getBaseStats());
         inventory.setBackground(STATUS_VIEW_BACKGROUND_COLOR.darker().darker());
         add(inventory);
         viewingInventory = false;

@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class TileView extends JLayeredPane {
+public class TileView extends JPanel {
 
 	private Tile theTile;	//This is the tile that this view is responsible for viewing
 	private DecalView decalView;
@@ -19,9 +19,9 @@ public class TileView extends JLayeredPane {
 	private JLabel backgroundTexture;
 	private ImageIcon backgroundIcon;
 
-	public BufferedImage[][] mMOUNTAIN = decal.load("resources/MOUNTAINS.png", 60, 60);
-	public BufferedImage[][] mWATER = decal.load("resources/WATER.png", 60, 60);
-	public BufferedImage[][] mGRASS = decal.load("resources/GRASS.png", 60, 60);
+	public static BufferedImage[][] mMOUNTAIN = Decal.load("resources/MOUNTAINS.png", 60, 60);
+	public static BufferedImage[][] mWATER = Decal.load("resources/WATER.png", 60, 60);
+	public static BufferedImage[][] mGRASS = Decal.load("resources/GRASS.png", 60, 60);
 
 
 	public void setTile(Tile newTile){
@@ -60,36 +60,36 @@ public class TileView extends JLayeredPane {
 			case MOUNTAIN: currentTerrain = mMOUNTAIN[0][0]; break;
 		}
 
-		if(currentTerrain != null) {
-			backgroundIcon.setImage(currentTerrain);
-			backgroundTexture.setIcon(backgroundIcon);
-			backgroundTexture.setMaximumSize(new Dimension(60, 60));
-			backgroundTexture.setPreferredSize(new Dimension(60, 60));
-			backgroundTexture.setBounds(0,0,60,60);
-			add(backgroundTexture, new Integer(0));
-		}
-
-
 		if (theTile.hasItem()){
 			itemView = new ItemView(theTile.getItem());
 			itemView.setBounds(0,0,60,60);
-			add(itemView, new Integer(++zPosition));
+			add(itemView);
 			itemView.setOpaque(false);
-			setComponentZOrder(backgroundTexture, zPosition);
+			//setComponentZOrder(backgroundTexture, zPosition);
 		}
 		if (theTile.hasDecal()){
 			decalView = new DecalView(new Decal(theTile.whichDecal()));
 			decalView.setBounds(0,0,60,60);
-			add(decalView, ++zPosition);
+			add(decalView);
 			decalView.setOpaque(false);
-			setComponentZOrder(backgroundTexture, zPosition);
+			//setComponentZOrder(backgroundTexture, zPosition);
+		}
+
+		if(currentTerrain != null) {
+			backgroundIcon.setImage(currentTerrain);
+			backgroundTexture.setIcon(backgroundIcon);
+			//backgroundTexture.setMaximumSize(new Dimension(60, 60));
+			//backgroundTexture.setPreferredSize(new Dimension(60, 60));
+			backgroundTexture.setBounds(0,0,60,60);
+			add(backgroundTexture);
 		}
 	}
 
 	public TileView(Tile newTile){
 
-		//setLayout(new BorderLayout());
-
+		setLayout(new BorderLayout());
+		//setBounds(0,0, 60, 60);
+		setOpaque(true);
 		setTile(newTile);
 		backgroundTexture = new JLabel();
 		backgroundIcon = new ImageIcon();
@@ -104,8 +104,33 @@ public class TileView extends JLayeredPane {
 			entityView = new EntityView(entity.getOccupation().printOccupation());
 			entityView.setBounds(0,0,60,60);
 			entityView.setOpaque(false);
-			add(entityView, new Integer(getComponentCount()));
+			add(entityView);
+			remove(backgroundTexture);
+			add(backgroundTexture);
 			//setComponentZOrder(entityView, 0);
 		}
 	}
+
+	/*@Override
+	public void paint(Graphics g){
+		//paintComponents(g);
+		//super.paint(g);
+		//for(int i = 0; i < getComponentCount(); i++){
+		//	getComponent(i).paint(g);
+		//}
+		super.paintComponents(g);
+	}*/
+/*
+	@Override
+	public void paintComponents(Graphics g){
+		//for(int i = 0; i < getComponentCount(); i++){
+		//	getComponent(getComponentCount() - i - 1).paint(g);
+		//}
+		super.paintComponents(g);
+		//paintComponents(g);
+		//super.paint(g);
+	}
+*/
+
+
 }

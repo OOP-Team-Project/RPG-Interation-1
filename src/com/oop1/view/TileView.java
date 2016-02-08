@@ -18,6 +18,7 @@ public class TileView extends JPanel {
 	private Decal decal;
 	private JLabel backgroundTexture;
 	private ImageIcon backgroundIcon;
+	private JLayeredPane jLayeredPane;
 
 	public BufferedImage[][] mMOUNTAIN = decal.load("../resources/MOUNTAINS.png", 60, 60);
 	public BufferedImage[][] mWATER = decal.load("../resources/WATER.png", 60, 60);
@@ -26,13 +27,16 @@ public class TileView extends JPanel {
 
 	public void setTile(Tile newTile){
 		if (decalView != null) {
-			remove(decalView);
+			jLayeredPane.remove(decalView);
 		}
 		if (itemView != null) {
-			remove(itemView);
+			jLayeredPane.remove(itemView);
+		}
+		if (entityView != null){
+			jLayeredPane.remove(entityView);
 		}
 		if(backgroundTexture != null) {
-			remove(backgroundTexture);
+			jLayeredPane.remove(backgroundTexture);
 		}
 		theTile = newTile;
 		drawIconsOnTiles();
@@ -51,6 +55,7 @@ public class TileView extends JPanel {
 			default: setBackground(Color.BLACK); break;
 		}
 
+
 		// Displays the terrain types on the tiles
 		BufferedImage currentTerrain = null;
 
@@ -65,38 +70,65 @@ public class TileView extends JPanel {
 			backgroundTexture.setIcon(backgroundIcon);
 			backgroundTexture.setMaximumSize(new Dimension(60, 60));
 			backgroundTexture.setPreferredSize(new Dimension(60, 60));
-			add(backgroundTexture);
+			backgroundTexture.setBounds(0,0,60,60);
+			jLayeredPane.add(backgroundTexture, new Integer(zPosition++));
 		}
 
 
 		if (theTile.hasItem()){
 			itemView = new ItemView(theTile.getItem());
-			add(itemView);
-			setComponentZOrder(backgroundTexture, ++zPosition);
+			itemView.setBounds(0,0,60,60);
+			jLayeredPane.add(itemView, new Integer(zPosition++));
+			//setComponentZOrder(backgroundTexture, zPosition);
+//
+//			//Begin hackiest thing you've ever seen in your life.
+//			validate();
+//			repaint();
+//			//remove(itemView);
+//			validate();
+//			repaint();
+//			repaint();
+//			repaint();
+//			//add(itemView);
+//			validate();
+//			repaint();
+//			repaint();
+//			repaint();
+//			repaint();
+//			//setComponentZOrder(backgroundTexture, zPosition);
+//			repaint();
+//			//End Hackiest Thing you've ever seen in your life.
+
 		}
 		if (theTile.hasDecal()){
 			decalView = new DecalView(new Decal(theTile.whichDecal()));
-			add(decalView);
-			setComponentZOrder(backgroundTexture, ++zPosition);
+			decalView.setBounds(0,0,60,60);
+			jLayeredPane.add(decalView, new Integer(zPosition++));
+			//setComponentZOrder(backgroundTexture, zPosition);
 		}
 	}
 
 	public TileView(Tile newTile){
 		setLayout(new BorderLayout());	//Makes sure components take up the whole tile
+		jLayeredPane = new JLayeredPane();
 		backgroundTexture = new JLabel();
 		backgroundIcon = new ImageIcon();
 		setTile(newTile);
+		add(Box.createRigidArea(new Dimension(0, 10)));
+		add(jLayeredPane);
 	}
 
 	public void setEntity(Entity entity) {
 		if (entityView != null) {
-			remove(entityView);
+			jLayeredPane.remove(entityView);
 			entityView = null;
 		}
 		if (entity != null) {
 			entityView = new EntityView(entity.getOccupation().printOccupation());
-			add(entityView);
-			setComponentZOrder(entityView, 0);
+			entityView.setBounds(0,0,60,60);
+			jLayeredPane.add(entityView, jLayeredPane.getComponentCount() - 1);
+			//setComponentZOrder(entityView, 0);
 		}
+		//repaint();
 	}
 }

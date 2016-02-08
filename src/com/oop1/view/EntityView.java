@@ -13,15 +13,15 @@ public class EntityView extends JPanel {
 
     public EntityView(String occupation){
         Image image = null;
-        if (occupation.equals("SMASHER")) {
-            image = new ImageIcon("src/com/oop1/resources/SMASHER.png").getImage();
-        }
-        else if (occupation.equals("SNEAK")) {
-            image = new ImageIcon("src/com/oop1/resources/SNEAK.png").getImage();
-        }
-        else {
-            image = new ImageIcon("src/com/oop1/resources/SUMMONER.png").getImage();
-        }
+        try {
+            if (occupation.equals("SMASHER")) {
+                image = ImageIO.read(new File("resources/SMASHER.png"));
+            } else if (occupation.equals("SNEAK")) {
+                image = ImageIO.read(new File("resources/SNEAK.png"));
+            } else {
+                image = ImageIO.read(new File("resources/SUMMONER.png"));
+            }
+        }catch(IOException e){System.out.println("Couldn't load entity image");}
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         ImageIcon imageIcon = new ImageIcon(image);
         JLabel jLabel = new JLabel();

@@ -23,15 +23,16 @@ public class ItemView extends JPanel{
         this.item = item;
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         Image image = null;
-        if(item.toString().equals("oneShot"))
-            image = new ImageIcon("src/com/oop1/resources/ONE_SHOT.png").getImage();
-        else if(item.toString().equals("obstacle"))
-            image = new ImageIcon("src/com/oop1/resources/OBSTACLE.png").getImage();
-        else if(item.toString().equals("interactive"))
-            image = new ImageIcon("src/com/oop1/resources/INTERACTIVE.png").getImage();
-        else if(item.toString().equals("takeableItem"))
-            image = new ImageIcon("src/com/oop1/resources/TAKEABLE.png").getImage();
-
+        try {
+            if (item.toString().equals("oneShot"))
+                image = ImageIO.read(new File("resources/ONE_SHOT.png"));
+            else if (item.toString().equals("obstacle"))
+                image = ImageIO.read(new File("resources/OBSTACLE.png"));
+            else if (item.toString().equals("interactive"))
+                image = ImageIO.read(new File("resources/INTERACTIVE.png"));
+            else if (item.toString().equals("takeableItem"))
+                image = ImageIO.read(new File("resources/TAKEABLE.png"));
+        }catch(IOException e){System.out.println("Can't load item picture");}
         ImageIcon imageIcon = new ImageIcon(image);
         JLabel jLabel = new JLabel();
         jLabel.setMaximumSize(new Dimension(60,60));

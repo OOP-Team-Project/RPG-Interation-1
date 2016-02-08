@@ -16,9 +16,9 @@ public enum TerrainType {
     private Decal decal;        // used for load method
     private BufferedImage[][] currentTerrain;
 
-    public BufferedImage[][] mMOUNTAIN = decal.load("../resources/MOUNTAINS.png", 60, 60);
-    public BufferedImage[][] mWATER = decal.load("../resources/WATER.png", 60, 60);
-    public BufferedImage[][] mGRASS = decal.load("../resources/GRASS.png", 60, 60);
+    public BufferedImage[][] mMOUNTAIN = decal.load("resources/MOUNTAINS.png", 60, 60);
+    public BufferedImage[][] mWATER = decal.load("resources/WATER.png", 60, 60);
+    public BufferedImage[][] mGRASS = decal.load("resources/GRASS.png", 60, 60);
 
 
 

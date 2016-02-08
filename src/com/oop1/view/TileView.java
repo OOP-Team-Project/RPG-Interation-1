@@ -19,9 +19,9 @@ public class TileView extends JPanel {
 	private JLabel backgroundTexture;
 	private ImageIcon backgroundIcon;
 
-	public BufferedImage[][] mMOUNTAIN = decal.load("../resources/MOUNTAINS.png", 60, 60);
-	public BufferedImage[][] mWATER = decal.load("../resources/WATER.png", 60, 60);
-	public BufferedImage[][] mGRASS = decal.load("../resources/GRASS.png", 60, 60);
+	public BufferedImage[][] mMOUNTAIN = decal.load("resources/MOUNTAINS.png", 60, 60);
+	public BufferedImage[][] mWATER = decal.load("resources/WATER.png", 60, 60);
+	public BufferedImage[][] mGRASS = decal.load("resources/GRASS.png", 60, 60);
 
 
 	public void setTile(Tile newTile){
